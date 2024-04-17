@@ -1,0 +1,33 @@
+:root {
+    /* To be determined */
+    --primary-background-color:
+    --secondary-background-color:
+    --tertiary-background-color:
+
+    /* To be determined */
+    --primary-text-color:
+    --secondary-text-color:
+    --tertiary-text-color:
+
+    /* To be determined */
+    --primary-button-color:
+    --secondary-button-color:
+    --tertiary-button-color:
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--primary-color);
+    color: var(--primary-text-color);
+    font-family: 'Inter', sans-serif;
+}
+
+.base {
+    height: 100vh;
+    transition: all ease-in 0.3s;
+}

@@ -16,7 +16,12 @@ const painterDate = ref();
 <template>
 
     <div class="base base-container">
+      <div class="title">
+
+        <img src="/public/heart-solid-24.png" alt="Favorite icon">
         <h3>Information</h3>
+        <img src="/public/language.png" alt="Language Icon">
+      </div>
         <div class="container">
             <p>Information about the app</p>
         </div>
@@ -32,4 +37,15 @@ const painterDate = ref();
   color: var(--primary-text-color);
   background-color: var(--primary-background-color);
 }
+
+.title{
+  display: flex;
+  justify-content: space-between;
+}
+
+.title img{
+  width: 100%;
+  height: 100%;
+}
+
 </style>

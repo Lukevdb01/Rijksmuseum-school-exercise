@@ -1,18 +1,18 @@
 :root {
     /* To be determined */
-    --primary-background-color: black;
-    --secondary-background-color:
-    --tertiary-background-color:
+    --primary-background-color: #0B0B0B;
+    --secondary-background-color: #262626;
+    --tertiary-background-color: #0B0B0B;
 
     /* To be determined */
-    --primary-text-color:
-    --secondary-text-color:
-    --tertiary-text-color:
+    --primary-text-color: #ffff;
+    --secondary-text-color: #ffff;
+    --tertiary-text-color: #ffff;
 
     /* To be determined */
-    --primary-button-color:
-    --secondary-button-color:
-    --tertiary-button-color:
+    --primary-button-color: #ffff;
+    --secondary-button-color: #ffff;
+    --tertiary-button-color: #ffff;
 }
 
 * {

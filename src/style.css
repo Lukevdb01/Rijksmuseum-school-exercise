@@ -1,6 +1,6 @@
 :root {
     /* To be determined */
-    --primary-background-color:
+    --primary-background-color: black;
     --secondary-background-color:
     --tertiary-background-color:
 
@@ -22,7 +22,6 @@
 }
 
 body {
-    background-color: var(--primary-color);
     color: var(--primary-text-color);
     font-family: 'Inter', sans-serif;
 }

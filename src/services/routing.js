@@ -4,9 +4,13 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: '/sample',
-            component: () => import('../pages/sample.vue')
+            path: '/qr-app',
+            component: () => import('../pages/qr-scanner.vue')
         },
+        {
+            path: '/information',
+            component: () => import('../pages/information.vue')
+        }
     ],
 });
 

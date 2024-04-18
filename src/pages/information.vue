@@ -3,7 +3,7 @@ import TabBar from "../components/TabBar.vue";
 import {ref} from "vue";
 //Painting
 const paintingImg = ref();
-const paintingTitle = ref();
+const paintingTitle = ref('Information');
 const paintingDate = ref();
 const paintingInfo = ref();
 //painter
@@ -19,12 +19,11 @@ const painterDate = ref();
       <div class="title">
 
         <img src="/public/heart-solid-24.png" alt="Favorite icon">
-        <h3>Information</h3>
+        <h3>{{ paintingTitle }}</h3>
         <img src="/public/language.png" alt="Language Icon">
       </div>
         <div class="container">
-            <p>Information about the app</p>
-        </div>
+         </div>
     </div>
 </template>
 
@@ -41,11 +40,9 @@ const painterDate = ref();
 .title{
   display: flex;
   justify-content: space-between;
+  padding: 15px;
 }
 
-.title img{
-  width: 100%;
-  height: 100%;
-}
+
 
 </style>

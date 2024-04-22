@@ -1,8 +1,6 @@
 <script setup>
-import TabBar from "../components/TabBar.vue";
-import {ref} from "vue";
-
-
+import { useRouter } from "vue-router";
+const router = useRouter();
 </script>
 
 
@@ -12,7 +10,7 @@ import {ref} from "vue";
     <header>
 
       <div class="image-container">
-        <img class="paintingImg" :src="paintingImg" alt="">
+        <img class="paintingImg" :src="router.currentRoute.value.query.paintingImg" alt="">
         <div class="gradient-overlay"></div>
       </div>
 
@@ -22,7 +20,7 @@ import {ref} from "vue";
         <img src="/public/language.png" alt="Language Icon">
       </div>
 
-      <h4 class="paintingDate">{{paintingDate}}</h4>
+      <h4 class="paintingDate">{{ paintingDate }}</h4>
 
     </header>
     <div class="container">
@@ -31,28 +29,13 @@ import {ref} from "vue";
 </template>
 
 <script>
-import {ref} from "vue";
-
 export default {
-  name: "InfoPage",
-  props: {
-//Painting
-    paintingImg: Image,
-    paintingTitle: String,
-    paintingDate: String,
-    paintingInfo: String,
-//painter
-    painterImg: String,
-    painterName: String,
-    painterDate: String,
-  }
+  name: "info-page",
 }
 
 </script>
 
 <style scoped>
-
-
 .base-container {
   color: var(--primary-text-color);
   background-color: var(--primary-background-color);
@@ -64,12 +47,14 @@ export default {
   padding: 15px;
   position: absolute;
   z-index: 1;
-  width: 100vw;;
+  width: 100vw;
+  ;
 }
 
 .image-container {
   position: absolute;
-  overflow: hidden; /* Ensure the gradient doesn't overflow */
+  overflow: hidden;
+  /* Ensure the gradient doesn't overflow */
   width: 100vw;
 }
 
@@ -86,8 +71,5 @@ export default {
   background-image: linear-gradient(180deg, rgba(11, 11, 11, 0.00) 0%, #0B0B0B 100%);
 }
 
-.paintingDate{
-  
-}
-
+.paintingDate {}
 </style>

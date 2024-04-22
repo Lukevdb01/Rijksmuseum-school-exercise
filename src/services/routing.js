@@ -7,6 +7,10 @@ const router = createRouter({
             path: '/qr-app',
             component: () => import('../pages/qr-scanner.vue')
         },
+        {
+            path: '/info-page',
+            component: () => import('../pages/information.vue')
+        }
     ],
 });
 

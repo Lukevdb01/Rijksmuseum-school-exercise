@@ -14,6 +14,7 @@ import {ref} from "vue";
       <div class="image-container">
         <img class="paintingImg" :src="paintingImg" alt="">
         <div class="gradient-overlay"></div>
+        <h4 class="paintingDate">{{paintingDate}}</h4>
       </div>
 
       <div class="title">
@@ -22,7 +23,6 @@ import {ref} from "vue";
         <img src="/public/language.png" alt="Language Icon">
       </div>
 
-      <h4 class="paintingDate">{{paintingDate}}</h4>
 
     </header>
     <div class="container">
@@ -56,6 +56,7 @@ export default {
 .base-container {
   color: var(--primary-text-color);
   background-color: var(--primary-background-color);
+
 }
 
 .title {
@@ -87,7 +88,12 @@ export default {
 }
 
 .paintingDate{
-  
+  position: absolute;
+  top: 88%;
+  right: 15px;
+  z-index: 1;
+  font-weight: 400;
+
 }
 
 </style>

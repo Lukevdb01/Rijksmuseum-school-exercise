@@ -7,7 +7,7 @@
     <div class="base base-container">
         <h3>scan the qr code</h3>
         <div class="container">
-            <p v-if="error" class="error">{{ error }}</p>
+            <p v-if="result" class="result">{{ result }}</p>
             <div class="base flex-image-qr">
                 <qrcode-stream @error="onError" @detect="onDetect" @decode="onDecode" class="qr-stream"></qrcode-stream>
             </div>
@@ -20,7 +20,6 @@
 export default {
     data() {
         return {
-            error: '',
             content: '',
             result: '',
         }
@@ -30,26 +29,29 @@ export default {
     methods: {
         async onError(promise) {
             try {
-                const {capabilities} = await promise
+                const {capabilities} = await promise;
             } catch (error) {
                 if (error.name === 'NotAllowedError') {
-                    this.error = 'user denied camera access permission';
+                    alert('user denied camera access permission');
                 } else if (error.name === 'NotFoundError') {
-                    this.error = 'no suitable camera device installed';
+                    alert('no suitable camera device installed');
                 } else if (error.name === 'NotSupportedError') {
-                    this.error = 'page is not served over HTTPS (or localhost)';
+                    alert('page is not served over HTTPS (or localhost)');
                 } else if (error.name === 'NotReadableError') {
-                    this.error = 'maybe camera is already in use';
+                    alert('maybe camera is already in use');
                 } else if (error.name === 'OverconstrainedError') {
-                    this.error = 'did you request the front camera although there is none?';
+                    alert('did you request the front camera although there is none?');
                 } else if (error.name === 'StreamApiNotSupportedError') {
-                    this.error = 'browser seems to be lacking features';
+                    alert('browser seems to be lacking features');
                 }
             }
         },
         onDetect(codes) {
             this.result = JSON.stringify(codes.map((code) => code.rawValue));
+            
+
         },
+
         onDecode(content) {
             console.log(content);
             this.content = content;
@@ -60,11 +62,13 @@ export default {
 
 <style scoped>
     .base-container {
+        background: var(--primary-background-color);
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         padding-top: calc(1rem + 1vw);
+        color: var(--primary-text-color);
     }
 
     .container {

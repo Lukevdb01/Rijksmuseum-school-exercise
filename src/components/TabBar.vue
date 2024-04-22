@@ -1,13 +1,13 @@
 <template>
     <nav>
         <a href="/favorites" class="tab">
-            favorite
+            <img src="/heart.png" alt="Favorite Icon">
         </a>
-        <a href="/qr-scanner" class="tab">
-            qr-scanner
+        <a href="/qr-app" class="tab">
+            <img src="/qr-app.png" alt="QR Code Icon">
         </a>
         <a href="/" class="tab">
-            home
+            <img src="/book.png" alt="Book Icon">
         </a>
     </nav>
 </template>
@@ -33,5 +33,10 @@ export default {
         align-items: center;
         width: 30%;
         height: 100%;
+    }
+
+    .tab img {
+        width: 40%;
+        height: auto;
     }
 </style>

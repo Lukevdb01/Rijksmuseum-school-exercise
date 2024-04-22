@@ -37,9 +37,12 @@ const onDetect = async (codes) => {
     const painting = {
         img: response.artObject.webImage.url,
         title: response.artObject.title,
+        description: response.artObject.description,
+        date: response.artObject.dating.presentingDate,
+
     }
 
-    router.push({ path: '/info-page', query: { paintingImg: painting.img } });
+    router.push({ path: '/info-page', query: { img: painting.img, title: painting.title, description: painting.description, date: painting.date } });
 }
 </script>
 

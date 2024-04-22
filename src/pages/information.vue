@@ -10,17 +10,17 @@ const router = useRouter();
     <header>
 
       <div class="image-container">
-        <img class="paintingImg" :src="router.currentRoute.value.query.paintingImg" alt="">
+        <img class="paintingImg" :src="router.currentRoute.value.query.img" alt="">
         <div class="gradient-overlay"></div>
       </div>
 
       <div class="title">
         <img src="/public/heart-solid-24.png" alt="Favorite icon">
-        <h3>{{ paintingTitle }}</h3>
+        <h3>{{ router.currentRoute.value.query.title }}</h3>
         <img src="/public/language.png" alt="Language Icon">
       </div>
 
-      <h4 class="paintingDate">{{ paintingDate }}</h4>
+      <h4 class="paintingDate">{{ router.currentRoute.value.query.date }}</h4>
 
     </header>
     <div class="container">

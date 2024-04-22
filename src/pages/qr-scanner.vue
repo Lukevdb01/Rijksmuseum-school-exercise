@@ -1,6 +1,38 @@
 <script setup>
     import TabBar from '../components/TabBar.vue'
+    import {apiProvider} from '../providers/api';
     import { QrcodeStream } from 'vue-qrcode-reader';
+    import { ref } from 'vue';
+
+    let result = null;
+
+    const onError = async(error) => {
+        try {
+        const {capabilities} = await promise;
+        } catch (error) {
+            if (error.name === 'NotAllowedError') {
+                alert('user denied camera access permission');
+            } else if (error.name === 'NotFoundError') {
+                alert('no suitable camera device installed');
+            } else if (error.name === 'NotSupportedError') {
+                alert('page is not served over HTTPS (or localhost)');
+            } else if (error.name === 'NotReadableError') {
+                alert('maybe camera is already in use');
+            } else if (error.name === 'OverconstrainedError') {
+                alert('did you request the front camera although there is none?');
+            } else if (error.name === 'StreamApiNotSupportedError') {
+                alert('browser seems to be lacking features');
+            }
+        }
+    }
+
+    const onDetect= async(codes) => {
+        result = JSON.stringify(codes.map((code) => code.rawValue));
+
+        const base_url = "https://www.rijksmuseum.nl/api/nl/collection/" + codes.map((code) => code.rawValue) + "?key=" + import.meta.env.VITE_RIJKSDATA_API_KEY;
+        const response = await apiProvider.get(base_url);
+        console.log(response);
+    }
 </script>
 
 <template>
@@ -9,7 +41,7 @@
         <div class="container">
             <p v-if="result" class="result">{{ result }}</p>
             <div class="base flex-image-qr">
-                <qrcode-stream @error="onError" @detect="onDetect" @decode="onDecode" class="qr-stream"></qrcode-stream>
+                <qrcode-stream @error="onError" @detect="onDetect" class="qr-stream"></qrcode-stream>
             </div>
             <TabBar />
         </div>
@@ -18,45 +50,7 @@
 
 <script>
 export default {
-    data() {
-        return {
-            content: '',
-            result: '',
-        }
-    },
-
     components: { QrcodeStream },
-    methods: {
-        async onError(promise) {
-            try {
-                const {capabilities} = await promise;
-            } catch (error) {
-                if (error.name === 'NotAllowedError') {
-                    alert('user denied camera access permission');
-                } else if (error.name === 'NotFoundError') {
-                    alert('no suitable camera device installed');
-                } else if (error.name === 'NotSupportedError') {
-                    alert('page is not served over HTTPS (or localhost)');
-                } else if (error.name === 'NotReadableError') {
-                    alert('maybe camera is already in use');
-                } else if (error.name === 'OverconstrainedError') {
-                    alert('did you request the front camera although there is none?');
-                } else if (error.name === 'StreamApiNotSupportedError') {
-                    alert('browser seems to be lacking features');
-                }
-            }
-        },
-        onDetect(codes) {
-            this.result = JSON.stringify(codes.map((code) => code.rawValue));
-            
-
-        },
-
-        onDecode(content) {
-            console.log(content);
-            this.content = content;
-        },
-    }
 }
 </script>
 

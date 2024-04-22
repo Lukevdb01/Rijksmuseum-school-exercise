@@ -1,15 +1,8 @@
 <script setup>
 import TabBar from "../components/TabBar.vue";
 import {ref} from "vue";
-//Painting
-const paintingImg = ref();
-const paintingTitle = ref('Information');
-const paintingDate = ref();
-const paintingInfo = ref();
-//painter
-const painterImg = ref();
-const painterName = ref();
-const painterDate = ref();
+
+
 </script>
 
 
@@ -23,11 +16,28 @@ const painterDate = ref();
         <img src="/public/language.png" alt="Language Icon">
       </div>
         <div class="container">
-         </div>
+          <img class="paintingImg" :src="paintingImg" alt="">
+        </div>
     </div>
 </template>
 
 <script>
+import {ref} from "vue";
+
+export default {
+  name: "InfoPage",
+  props:{
+//Painting
+    paintingImg: Image,
+    paintingTitle: String,
+    paintingDate: String,
+    paintingInfo: String,
+//painter
+    painterImg: String,
+    painterName: String,
+    painterDate: String,
+  }
+}
 
 </script>
 
@@ -41,6 +51,14 @@ const painterDate = ref();
   display: flex;
   justify-content: space-between;
   padding: 15px;
+  }
+
+.paintingImg{
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 

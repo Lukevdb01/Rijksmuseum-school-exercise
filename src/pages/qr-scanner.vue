@@ -44,6 +44,21 @@ const onDetect = async (codes) => {
 
     router.push({ path: '/info-page', query: { img: painting.img, title: painting.title, description: painting.description, date: painting.date } });
 }
+
+const getPaintingBySearch = async (search) => {
+    const base_url = "https://www.rijksmuseum.nl/api/nl/collection?key=" + import.meta.env.VITE_RIJKSDATA_API_KEY + "&q=" + search;
+    const response = await apiProvider.get(base_url);
+    console.log(response);
+
+    const painting = {
+        img: response.artObjects[0].webImage.url,
+        title: response.artObjects[0].title,
+        description: response.artObjects[0].description,
+    }
+
+    router.push({ path: '/info-page', query: { img: painting.img, title: painting.title, description: painting.description } });
+}
+
 </script>
 
 <template>
@@ -53,6 +68,10 @@ const onDetect = async (codes) => {
             <p v-if="result" class="result">{{ result }}</p>
             <div class="base flex-image-qr">
                 <qrcode-stream @error="onError" @detect="onDetect" class="qr-stream"></qrcode-stream>
+            </div>
+            <div class="search">
+                <p>Or enter a painting name</p>
+                <input type="text" v-model="search" placeholder="Search for a painting" @keyup.enter="getPaintingBySearch(search)">
             </div>
             <TabBar />
         </div>
@@ -102,5 +121,25 @@ export default {
 .qr-stream {
     width: 100%;
     height: 100%;
+}
+
+.search {
+    display: flex;
+    color: white;
+    flex-direction: column;
+    justify-content: center;
+    gap: calc(0.5rem + 0.5vw);
+    width: 100%;
+}
+
+.search input {
+    width: 100%;
+    padding: calc(0.5rem + 0.5vw);
+    border-radius: calc(0.5rem + 0.5vw);
+    border: white 2px solid;
+    background-color: var(--primary-background-color);
+    color: var(--primary-text-color);
+    font-size: calc(1rem + 0.5vw);
+    text-align: center;
 }
 </style>

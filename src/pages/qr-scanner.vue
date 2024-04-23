@@ -1,15 +1,17 @@
 <script setup>
+import { ref } from 'vue';
+import { useRouter } from "vue-router";
+import { QrcodeStream } from 'vue-qrcode-reader';
+
 import TabBar from '../components/TabBar.vue'
 import { apiProvider } from '../providers/api';
-import { QrcodeStream } from 'vue-qrcode-reader';
-import { useRouter } from "vue-router";
 
 const router = useRouter();
-let result = null;
+const search = ref('');
 
 const onError = async (error) => {
     try {
-        const { capabilities } = await promise;
+        await promise;
     } catch (error) {
         if (error.name === 'NotAllowedError') {
             alert('user denied camera access permission');
@@ -28,50 +30,23 @@ const onError = async (error) => {
 }
 
 const onDetect = async (codes) => {
-    result = JSON.stringify(codes.map((code) => code.rawValue));
-
     const base_url = "https://www.rijksmuseum.nl/api/nl/collection/" + codes.map((code) => code.rawValue) + "?key=" + import.meta.env.VITE_RIJKSDATA_API_KEY;
-    const response = await apiProvider.get(base_url);
-    console.log(response);
-
-    const painting = {
-        img: response.artObject.webImage.url,
-        title: response.artObject.title,
-        description: response.artObject.description,
-        date: response.artObject.dating.presentingDate,
-
-    }
-
-    router.push({ path: '/info-page', query: { img: painting.img, title: painting.title, description: painting.description, date: painting.date } });
+    const response = await apiProvider.get(base_url).artObject;
+    router.push({ path: '/info-page', query: { img: response.webImage.url, title: response.title, description: response.description, date: response.dating.presentingDate } });
 }
-
-const getPaintingBySearch = async (search) => {
-    const base_url = "https://www.rijksmuseum.nl/api/nl/collection?key=" + import.meta.env.VITE_RIJKSDATA_API_KEY + "&q=" + search;
-    const response = await apiProvider.get(base_url);
-    console.log(response);
-
-    const painting = {
-        img: response.artObjects[0].webImage.url,
-        title: response.artObjects[0].title,
-        description: response.artObjects[0].description,
-    }
-
-    router.push({ path: '/info-page', query: { img: painting.img, title: painting.title, description: painting.description } });
-}
-
 </script>
 
 <template>
     <div class="base base-container">
         <h3>scan the qr code</h3>
         <div class="container">
-            <p v-if="result" class="result">{{ result }}</p>
             <div class="base flex-image-qr">
                 <qrcode-stream @error="onError" @detect="onDetect" class="qr-stream"></qrcode-stream>
             </div>
             <div class="search">
                 <p>Or enter a painting name</p>
-                <input type="text" v-model="search" placeholder="Search for a painting" @keyup.enter="getPaintingBySearch(search)">
+                <input type="text" v-model="search" placeholder="Search for a painting"
+                    @keyup.enter="router.push({ path: '/search', query: { keyword: search } })">
             </div>
             <TabBar />
         </div>

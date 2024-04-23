@@ -12,7 +12,7 @@ const router = useRouter();
       <div class="image-container">
         <img class="paintingImg" :src="router.currentRoute.value.query.img" alt="">
         <div class="gradient-overlay"></div>
-        <h4 class="paintingDate">{{paintingDate}}</h4>
+        <h4 class="paintingDate">{{router.currentRoute.value.query.date}}</h4>
       </div>
 
       <div class="title">

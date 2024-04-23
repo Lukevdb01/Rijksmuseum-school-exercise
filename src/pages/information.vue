@@ -12,6 +12,7 @@ const router = useRouter();
       <div class="image-container">
         <img class="paintingImg" :src="router.currentRoute.value.query.img" alt="">
         <div class="gradient-overlay"></div>
+        <h4 class="paintingDate">{{paintingDate}}</h4>
       </div>
 
       <div class="title">
@@ -20,7 +21,7 @@ const router = useRouter();
         <img src="/public/language.png" alt="Language Icon">
       </div>
 
-      <h4 class="paintingDate">{{ router.currentRoute.value.query.date }}</h4>
+
 
     </header>
     <div class="container">
@@ -39,6 +40,7 @@ export default {
 .base-container {
   color: var(--primary-text-color);
   background-color: var(--primary-background-color);
+
 }
 
 .title {
@@ -71,5 +73,14 @@ export default {
   background-image: linear-gradient(180deg, rgba(11, 11, 11, 0.00) 0%, #0B0B0B 100%);
 }
 
-.paintingDate {}
+
+.paintingDate{
+  position: absolute;
+  top: 88%;
+  right: 15px;
+  z-index: 1;
+  font-weight: 400;
+
+}
+
 </style>

@@ -7,8 +7,8 @@ const router = useRouter();
 <template>
 
   <div class="base base-container">
-    <header>
 
+    <header>
       <div class="image-container">
         <img class="paintingImg" :src="router.currentRoute.value.query.img" alt="">
         <div class="gradient-overlay"></div>
@@ -20,10 +20,16 @@ const router = useRouter();
         <h3>{{ router.currentRoute.value.query.title }}</h3>
         <img src="/public/language.png" alt="Language Icon">
       </div>
-
-
-
     </header>
+    <main>
+      <h4 class="title-main"> {{router.currentRoute.value.query.namePainter}}</h4>
+      <div class="dateOfPainter">
+        <p>{{router.currentRoute.value.query.DatePainterBorn}}</p>
+        <p>-</p>
+        <p>{{router.currentRoute.value.query.DatePainterDeath}}</p>
+      </div>
+    </main>
+
     <div class="container">
     </div>
   </div>
@@ -40,21 +46,21 @@ export default {
 .base-container {
   color: var(--primary-text-color);
   background-color: var(--primary-background-color);
-
 }
 
 .title {
   display: flex;
   justify-content: space-between;
-  padding: 15px;
+  padding: 15px 20px;
   position: absolute;
   z-index: 1;
   width: 100vw;
-  ;
+  top: 0;
+
 }
 
 .image-container {
-  position: absolute;
+  position: relative;
   overflow: hidden;
   /* Ensure the gradient doesn't overflow */
   width: 100vw;
@@ -77,10 +83,23 @@ export default {
 .paintingDate{
   position: absolute;
   top: 88%;
-  right: 15px;
+  right: 20px;
   z-index: 1;
   font-weight: 400;
+}
 
+main{
+  padding: 20px;
+}
+
+.dateOfPainter{
+  float: right;
+  display: flex;
+  gap: 10px;
+}
+
+.title-main{
+  display: inline;
 }
 
 </style>

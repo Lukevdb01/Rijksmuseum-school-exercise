@@ -31,7 +31,8 @@ const onError = async (error) => {
 
 const onDetect = async (codes) => {
     const base_url = "https://www.rijksmuseum.nl/api/nl/collection/" + codes.map((code) => code.rawValue) + "?key=" + import.meta.env.VITE_RIJKSDATA_API_KEY;
-    const response = await apiProvider.get(base_url).artObject;
+    let response = await apiProvider.get(base_url);
+    response = response.artObject;
     router.push({ path: '/info-page', query: { img: response.webImage.url, title: response.title, description: response.description, date: response.dating.presentingDate } });
 }
 </script>

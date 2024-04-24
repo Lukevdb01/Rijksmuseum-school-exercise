@@ -6,7 +6,7 @@ const router = useRouter();
 
 <template>
 
-  <div class="base base-container">
+  <div class="base base-container" >
 
     <header>
       <div class="image-container">
@@ -28,6 +28,12 @@ const router = useRouter();
         <p>-</p>
         <p>{{router.currentRoute.value.query.DatePainterDeath}}</p>
       </div>
+
+      <p id="description">{{router.currentRoute.value.query.description}}</p>
+
+      <div class="button-container">
+      <button>Learn More</button>
+      </div>
     </main>
 
     <div class="container">
@@ -47,6 +53,8 @@ export default {
   color: var(--primary-text-color);
   background-color: var(--primary-background-color);
 }
+
+
 
 .title {
   display: flex;
@@ -100,6 +108,37 @@ main{
 
 .title-main{
   display: inline;
+}
+
+#description{
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 3rem 0 3rem;
+}
+
+.button-container{
+  display: flex;
+  justify-content: center;
+}
+
+button{
+  align-self: center;
+  color: #0B0B0B;
+  background-color: white;
+  border: 5px solid white;
+  padding: 0.5rem 6rem;
+  border-radius: 7px;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all ease-in 0.6s;
+  cursor: pointer;
+}
+
+button:hover{
+  color: white;
+  background-color: #0B0B0B;
+  border: 5px solid white;
+
 }
 
 </style>

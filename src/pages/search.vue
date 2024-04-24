@@ -25,7 +25,7 @@ const imageItemPressed = async (object) => {
     query: {
       img: response.webImage.url,
       title: response.title,
-      description: response.description,
+      description: response.label.description,
       date: response.dating.presentingDate,
       namePainter: response.principalMakers[0].name,
       DatePainterBorn: response.principalMakers[0].dateOfBirth,

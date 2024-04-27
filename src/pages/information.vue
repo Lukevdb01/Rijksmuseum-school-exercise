@@ -1,6 +1,21 @@
 <script setup>
+import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
+
 const router = useRouter();
+const collection = ref([]);
+
+const favorItem = async(data) => {
+    collection.value.push(data);
+
+    localStorage.setItem('favorite', JSON.stringify(collection.value));
+
+
+}
+
+onMounted(async () => {
+    collection.value = JSON.parse(localStorage.getItem('favorite'));
+});
 </script>
 
 
@@ -16,7 +31,7 @@ const router = useRouter();
       </div>
 
       <div class="title">
-        <img src="/public/heart-solid-24.png" alt="Favorite icon">
+        <button @click="favorItem(router.currentRoute.value.query)">Favorite</button>
         <h3>{{ router.currentRoute.value.query.title }}</h3>
         <img src="/public/language.png" alt="Language Icon">
       </div>

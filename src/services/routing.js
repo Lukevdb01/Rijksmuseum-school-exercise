@@ -14,6 +14,10 @@ const router = createRouter({
         {
             path: '/search',
             component: () => import('../pages/search.vue')
+        },
+        {
+            path: '/favorites',
+            component: () => import('../pages/favorite.vue')
         }
     ],
 });

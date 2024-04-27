@@ -88,7 +88,7 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: calc(1rem + 1vw);
+  padding: calc(0.5rem + 0.5vw);
   gap: calc(1rem + 1vw);
   color: black;
 }

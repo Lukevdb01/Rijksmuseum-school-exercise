@@ -1,53 +1,71 @@
 <script setup>
-import { onMounted, ref } from "vue";
-import { useRouter } from "vue-router";
+import {onMounted, ref} from "vue";
+import {useRouter} from "vue-router";
 
 const router = useRouter();
 const collection = ref([]);
 
-const favorItem = async(data) => {
-    collection.value.push(data);
+const favorItem = async (data) => {
+  collection.value.push(data);
 
-    localStorage.setItem('favorite', JSON.stringify(collection.value));
+  localStorage.setItem('favorite', JSON.stringify(collection.value));
 
 
 }
 
+
+
 onMounted(async () => {
-    collection.value = JSON.parse(localStorage.getItem('favorite'));
+  collection.value = JSON.parse(localStorage.getItem('favorite'));
 });
+
+// JavaScript to toggle the dropdown
+function toggleDropdown() {
+ const dropdownContent = document.getElementById("dropdownContent");
+ dropdownContent.style.display = dropdownContent.style.display === "none" ? "block" : "none";
+}
 </script>
 
 
 <template>
 
-  <div class="base base-container" >
+  <div class="base base-container">
 
     <header>
       <div class="image-container">
         <img class="paintingImg" :src="router.currentRoute.value.query.img" alt="">
         <div class="gradient-overlay"></div>
-        <h4 class="paintingDate">{{router.currentRoute.value.query.date}}</h4>
+        <h4 class="paintingDate">{{ router.currentRoute.value.query.date }}</h4>
       </div>
 
       <div class="title">
-        <button @click="favorItem(router.currentRoute.value.query)">Favorite</button>
+
+        <img id="Heart" src="/public/heart-solid-24.png" @click="favorItem(router.currentRoute.value.query)"
+             alt="Favorite icon">
         <h3>{{ router.currentRoute.value.query.title }}</h3>
-        <img src="/public/language.png" alt="Language Icon">
+
+        <div>
+          <img id="Language" src="/public/language.png" alt="Language Icon" @click="toggleDropdown">
+          <div id="dropdownContent">
+            <img src="/public/united-kingdom-flag-icon-png-8.png" alt="">
+            <img src="/public/dutch.png" alt="">
+          </div>
+        </div>
+
       </div>
     </header>
     <main>
-      <h4 class="title-main"> {{router.currentRoute.value.query.namePainter}}</h4>
+      <h4 class="title-main"> {{ router.currentRoute.value.query.namePainter }}</h4>
       <div class="dateOfPainter">
-        <p>{{router.currentRoute.value.query.DatePainterBorn}}</p>
+        <p>{{ router.currentRoute.value.query.DatePainterBorn }}</p>
         <p>-</p>
-        <p>{{router.currentRoute.value.query.DatePainterDeath}}</p>
+        <p>{{ router.currentRoute.value.query.DatePainterDeath }}</p>
       </div>
 
-      <p id="description">{{router.currentRoute.value.query.description}}</p>
+      <p id="description">{{ router.currentRoute.value.query.description }}</p>
 
       <div class="button-container">
-      <button>Learn More</button>
+        <button>Learn More</button>
       </div>
     </main>
 
@@ -68,7 +86,6 @@ export default {
   color: var(--primary-text-color);
   background-color: var(--primary-background-color);
 }
-
 
 
 .title {
@@ -103,7 +120,7 @@ export default {
 }
 
 
-.paintingDate{
+.paintingDate {
   position: absolute;
   top: 88%;
   right: 20px;
@@ -111,32 +128,32 @@ export default {
   font-weight: 400;
 }
 
-main{
+main {
   padding: 20px;
 }
 
-.dateOfPainter{
+.dateOfPainter {
   float: right;
   display: flex;
   gap: 10px;
 }
 
-.title-main{
+.title-main {
   display: inline;
 }
 
-#description{
+#description {
   font-weight: 500;
   font-size: 1rem;
   padding: 3rem 0 3rem;
 }
 
-.button-container{
+.button-container {
   display: flex;
   justify-content: center;
 }
 
-button{
+button {
   align-self: center;
   color: #0B0B0B;
   background-color: white;
@@ -149,11 +166,34 @@ button{
   cursor: pointer;
 }
 
-button:hover{
+button:hover {
   color: white;
   background-color: #0B0B0B;
   border: 5px solid white;
-
 }
+
+#Heart {
+  cursor: pointer;
+}
+
+#dropdownContent {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+  right: 8px;
+  padding: 2px;
+  transition: all ease-in 0.6s;
+}
+
+#dropdownContent img {
+  text-decoration: none;
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+
+
 
 </style>

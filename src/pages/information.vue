@@ -1,18 +1,30 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
+import {language, setLanguage} from "../providers/api.js";
 
 const router = useRouter();
 const collection = ref([]);
+
+const synth = window.speechSynthesis;
+
 
 const favorItem = async (data) => {
   collection.value.push(data);
 
   localStorage.setItem('favorite', JSON.stringify(collection.value));
-
-
 }
 
+function changeLanguageEnglish() {
+  setLanguage('en');
+  console.log(language); // This will now log 'en'
+  window.history.back();
+}
+
+function changeLanguageDutch() {
+  setLanguage('nl')
+  window.history.back();
+}
 
 
 onMounted(async () => {
@@ -21,8 +33,8 @@ onMounted(async () => {
 
 // JavaScript to toggle the dropdown
 function toggleDropdown() {
- const dropdownContent = document.getElementById("dropdownContent");
- dropdownContent.style.display = dropdownContent.style.display === "none" ? "block" : "none";
+  const dropdownContent = document.getElementById("dropdownContent");
+  dropdownContent.style.display = dropdownContent.style.display === "none" ? "flex" : "none";
 }
 </script>
 
@@ -47,8 +59,9 @@ function toggleDropdown() {
         <div>
           <img id="Language" src="/public/language.png" alt="Language Icon" @click="toggleDropdown">
           <div id="dropdownContent">
-            <img src="/public/united-kingdom-flag-icon-png-8.png" alt="">
-            <img src="/public/dutch.png" alt="">
+            <img src="/public/united-kingdom-flag-icon-png-8.png" alt="" @click="changeLanguageEnglish">
+            <img src="/public/dutch.png" alt="" @click="changeLanguageDutch">
+            <img src="/public/speaker.png" alt="">
           </div>
         </div>
 
@@ -180,20 +193,22 @@ button:hover {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   z-index: 1;
-  right: 8px;
+  right: 13px;
   padding: 2px;
   transition: all ease-in 0.6s;
+  flex-direction: column;
+  gap: 5px;
+
 }
 
 #dropdownContent img {
   text-decoration: none;
   display: block;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
 }
-
 
 
 </style>

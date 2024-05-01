@@ -2,11 +2,12 @@
 import {ref, onMounted} from 'vue';
 import {useRouter} from 'vue-router';
 import {apiProvider} from '../providers/api';
+import {language} from "../providers/api.js";
 
 const router = useRouter();
 
 const getPaintingInformation = async (input) => {
-  const base_url = "https://www.rijksmuseum.nl/api/nl/collection?key=" + import.meta.env.VITE_RIJKSDATA_API_KEY + "&q=" + input;
+  const base_url = `https://www.rijksmuseum.nl/api/${language}/collection?key=` + import.meta.env.VITE_RIJKSDATA_API_KEY + "&q=" + input;
   const response = await apiProvider.get(base_url);
 
   if (response.length === 0) {
@@ -17,8 +18,10 @@ const getPaintingInformation = async (input) => {
   }
 }
 
+
+
 const imageItemPressed = async (object) => {
-  const base_url = "https://www.rijksmuseum.nl/api/nl/collection/" + object.objectNumber + "?key=" + import.meta.env.VITE_RIJKSDATA_API_KEY;
+  const base_url = `https://www.rijksmuseum.nl/api/${language}/collection/` + object.objectNumber + "?key=" + import.meta.env.VITE_RIJKSDATA_API_KEY;
   let response = await apiProvider.get(base_url);
   response = response.artObject;
   router.push({path: '/info-page',

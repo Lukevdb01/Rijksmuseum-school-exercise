@@ -2,6 +2,7 @@
 import {ref} from 'vue';
 import {useRouter} from "vue-router";
 import {QrcodeStream} from 'vue-qrcode-reader';
+import {language} from "../providers/api.js";
 
 import TabBar from '../components/TabBar.vue'
 import {apiProvider} from '../providers/api';
@@ -29,8 +30,9 @@ const onError = async (error) => {
   }
 }
 
+
 const onDetect = async (codes) => {
-  const base_url = "https://www.rijksmuseum.nl/api/nl/collection/" + codes.map((code) => code.rawValue) + "?key=" + import.meta.env.VITE_RIJKSDATA_API_KEY;
+  const base_url = `https://www.rijksmuseum.nl/api/${language}/collection/` + codes.map((code) => code.rawValue) + "?key=" + import.meta.env.VITE_RIJKSDATA_API_KEY;
   let response = await apiProvider.get(base_url);
   response = response.artObject;
   router.push({path: '/info-page',

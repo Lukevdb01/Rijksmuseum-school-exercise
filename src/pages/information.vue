@@ -26,6 +26,33 @@ function changeLanguageDutch() {
   window.history.back();
 }
 
+let isSpeaking = false;
+let utterance;
+
+function speechTalk() {
+  if (isSpeaking) {
+    speechSynthesis.cancel();
+    isSpeaking = false;
+  } else {
+    if (language === 'nl') {
+      const title = "Titel  " + router.currentRoute.value.query.title;
+      const gemaaktDoor = "Gemaakt door  " + router.currentRoute.value.query.namePainter + " Gemaakt in  " + router.currentRoute.value.query.date;
+      const descriptie = "descriptie  " + router.currentRoute.value.query.description;
+      utterance = new SpeechSynthesisUtterance(title + gemaaktDoor + descriptie);
+      utterance.lang = 'nl-NL'; // Set language to Dutch (Netherlands)
+
+    } else if (language === 'en') {
+      const title = "Title  " + router.currentRoute.value.query.title;
+      const gemaaktDoor = "made by  " + router.currentRoute.value.query.namePainter + " made in  " + router.currentRoute.value.query.date;
+      const descriptie = "description  " + router.currentRoute.value.query.description;
+      utterance = new SpeechSynthesisUtterance(title + gemaaktDoor + descriptie);
+      utterance.lang = 'en-US'; // Set language to English (United States)
+
+    }
+    speechSynthesis.speak(utterance);
+    isSpeaking = true;
+  }
+}
 
 onMounted(async () => {
   collection.value = JSON.parse(localStorage.getItem('favorite'));
@@ -61,7 +88,7 @@ function toggleDropdown() {
           <div id="dropdownContent">
             <img src="/public/united-kingdom-flag-icon-png-8.png" alt="" @click="changeLanguageEnglish">
             <img src="/public/dutch.png" alt="" @click="changeLanguageDutch">
-            <img src="/public/speaker.png" alt="">
+            <img src="/public/speaker.png" alt="" @click="speechTalk">
           </div>
         </div>
 

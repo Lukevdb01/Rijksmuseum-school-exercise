@@ -2,7 +2,7 @@
 import {ref} from 'vue';
 import {useRouter} from "vue-router";
 import {QrcodeStream} from 'vue-qrcode-reader';
-import {language} from "../providers/api.js";
+import {language} from "../providers/helper.js";
 
 import TabBar from '../components/TabBar.vue'
 import {apiProvider} from '../providers/api';
@@ -32,18 +32,9 @@ const onError = async (error) => {
 
 
 const onDetect = async (codes) => {
-  const base_url = `https://www.rijksmuseum.nl/api/${language}/collection/` + codes.map((code) => code.rawValue) + "?key=" + import.meta.env.VITE_RIJKSDATA_API_KEY;
-  let response = await apiProvider.get(base_url);
-  response = response.artObject;
   router.push({path: '/info-page',
     query: {
-      img: response.webImage.url,
-      title: response.title,
-      description: response.label.description,
-      date: response.dating.presentingDate,
-      namePainter: response.principalMakers[0].name,
-      DatePainterBorn: response.principalMakers[0].dateOfBirth,
-      DatePainterDeath: response.principalMakers[0].dateOfDeath
+      id: codes.map((code) => code.rawValue)
     }
   });
 }

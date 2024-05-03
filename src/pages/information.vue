@@ -1,30 +1,21 @@
 <script setup>
-import {onMounted, ref} from "vue";
+import {ref, onMounted} from "vue";
 import {useRouter} from "vue-router";
-import {language, setLanguage} from "../providers/api.js";
+import DropDown from "../components/DropDown.vue";
+import {apiProvider} from "../providers/api.js";
 
 const router = useRouter();
 const collection = ref([]);
+const apiData = ref(null);
 
 const synth = window.speechSynthesis;
-
-
 const favorItem = async (data) => {
   collection.value.push(data);
 
   localStorage.setItem('favorite', JSON.stringify(collection.value));
 }
 
-function changeLanguageEnglish() {
-  setLanguage('en');
-  console.log(language); // This will now log 'en'
-  window.history.back();
-}
 
-function changeLanguageDutch() {
-  setLanguage('nl')
-  window.history.back();
-}
 
 let isSpeaking = false;
 let utterance;
@@ -35,7 +26,7 @@ function speechTalk() {
     isSpeaking = false;
   } else {
     if (language === 'nl') {
-      const title = "Titel  " + router.currentRoute.value.query.title;
+      const title = "Titel  " + response.artObject.title;
       const gemaaktDoor = "Gemaakt door  " + router.currentRoute.value.query.namePainter + " Gemaakt in  " + router.currentRoute.value.query.date;
       const descriptie = "descriptie  " + router.currentRoute.value.query.description;
       utterance = new SpeechSynthesisUtterance(title + gemaaktDoor + descriptie);
@@ -54,63 +45,68 @@ function speechTalk() {
   }
 }
 
-onMounted(async () => {
-  collection.value = JSON.parse(localStorage.getItem('favorite'));
-});
+const fetchData = async (lang) => {
+  try {
+    const response = await apiProvider.get(`https://www.rijksmuseum.nl/api/${lang ? lang : localStorage.getItem('language')}/collection/${router.currentRoute.value.query.id}?key=${import.meta.env.VITE_RIJKSDATA_API_KEY}`);
 
-// JavaScript to toggle the dropdown
-function toggleDropdown() {
-  const dropdownContent = document.getElementById("dropdownContent");
-  dropdownContent.style.display = dropdownContent.style.display === "none" ? "flex" : "none";
+    if(response && response.artObject) {
+      apiData.value = response.artObject;
+      console.log(response.artObject);
+    } else {
+      error.value = 'No data found';
+    }
+  } catch (error) {
+    error.value = 'Error fetching data: ' + error.message;
+    console.error(error);
+    alert(error);
+  }
+};
+
+const handleLanguageChange = (newLanguage) => {
+  fetchData(newLanguage);
 }
+
+onMounted(() => {
+  collection.value = JSON.parse(localStorage.getItem('favorite')) || [];
+  fetchData();
+});
 </script>
 
 
 <template>
-
   <div class="base base-container">
 
     <header>
       <div class="image-container">
-        <img class="paintingImg" :src="router.currentRoute.value.query.img" alt="">
+        <img class="paintingImg" :src="apiData ? apiData.webImage.url : ''" alt="">
         <div class="gradient-overlay"></div>
-        <h4 class="paintingDate">{{ router.currentRoute.value.query.date }}</h4>
+        <h4 class="paintingDate">{{ apiData ? apiData.dating.presentingDate : ''  }}</h4>
       </div>
 
       <div class="title">
 
         <img id="Heart" src="/public/heart-solid-24.png" @click="favorItem(router.currentRoute.value.query)"
              alt="Favorite icon">
-        <h3>{{ router.currentRoute.value.query.title }}</h3>
+        <h3>{{ apiData ? apiData.title : '' }}</h3>
 
-        <div>
-          <img id="Language" src="/public/language.png" alt="Language Icon" @click="toggleDropdown">
-          <div id="dropdownContent">
-            <img src="/public/united-kingdom-flag-icon-png-8.png" alt="" @click="changeLanguageEnglish">
-            <img src="/public/dutch.png" alt="" @click="changeLanguageDutch">
-            <img src="/public/speaker.png" alt="" @click="speechTalk">
-          </div>
-        </div>
+        <DropDown @languageChanged="handleLanguageChange"/>
 
       </div>
     </header>
     <main>
-      <h4 class="title-main"> {{ router.currentRoute.value.query.namePainter }}</h4>
+      <h4 class="title-main"> {{ apiData ? apiData.principalMakers[0].name : '' }}</h4>
       <div class="dateOfPainter">
-        <p>{{ router.currentRoute.value.query.DatePainterBorn }}</p>
+        <p>{{ apiData ? apiData.principalMakers[0].dateOfBirth : '' }}</p>
         <p>-</p>
-        <p>{{ router.currentRoute.value.query.DatePainterDeath }}</p>
+        <p>{{ apiData ? apiData.principalMakers[0].dateOfDeath : ''  }}</p>
       </div>
 
-      <p id="description">{{ router.currentRoute.value.query.description }}</p>
+      <p id="description">{{ apiData ? apiData.label.description : ''  }}</p>
 
       <div class="button-container">
         <button>Learn More</button>
       </div>
     </main>
-
-    <div class="container">
-    </div>
   </div>
 </template>
 

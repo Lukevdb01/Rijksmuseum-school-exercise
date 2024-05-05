@@ -8,41 +8,10 @@ const router = useRouter();
 const collection = ref([]);
 const apiData = ref(null);
 
-const synth = window.speechSynthesis;
 const favorItem = async (data) => {
   collection.value.push(data);
 
   localStorage.setItem('favorite', JSON.stringify(collection.value));
-}
-
-
-
-let isSpeaking = false;
-let utterance;
-
-function speechTalk() {
-  if (isSpeaking) {
-    speechSynthesis.cancel();
-    isSpeaking = false;
-  } else {
-    if (language === 'nl') {
-      const title = "Titel  " + response.artObject.title;
-      const gemaaktDoor = "Gemaakt door  " + router.currentRoute.value.query.namePainter + " Gemaakt in  " + router.currentRoute.value.query.date;
-      const descriptie = "descriptie  " + router.currentRoute.value.query.description;
-      utterance = new SpeechSynthesisUtterance(title + gemaaktDoor + descriptie);
-      utterance.lang = 'nl-NL'; // Set language to Dutch (Netherlands)
-
-    } else if (language === 'en') {
-      const title = "Title  " + router.currentRoute.value.query.title;
-      const gemaaktDoor = "made by  " + router.currentRoute.value.query.namePainter + " made in  " + router.currentRoute.value.query.date;
-      const descriptie = "description  " + router.currentRoute.value.query.description;
-      utterance = new SpeechSynthesisUtterance(title + gemaaktDoor + descriptie);
-      utterance.lang = 'en-US'; // Set language to English (United States)
-
-    }
-    speechSynthesis.speak(utterance);
-    isSpeaking = true;
-  }
 }
 
 const fetchData = async (lang) => {
@@ -62,13 +31,13 @@ const fetchData = async (lang) => {
   }
 };
 
-const handleLanguageChange = (newLanguage) => {
-  fetchData(newLanguage);
+const handleLanguageChange = async (newLanguage) => {
+  await fetchData(newLanguage);
 }
 
-onMounted(() => {
+onMounted(async () => {
+  await fetchData();
   collection.value = JSON.parse(localStorage.getItem('favorite')) || [];
-  fetchData();
 });
 </script>
 
@@ -86,22 +55,20 @@ onMounted(() => {
       <div class="title">
 
         <img id="Heart" src="/public/heart-solid-24.png" @click="favorItem(router.currentRoute.value.query)"
-             alt="Favorite icon">
-        <h3>{{ apiData ? apiData.title : '' }}</h3>
-
-        <DropDown @languageChanged="handleLanguageChange"/>
+          alt="Favorite icon">
+          <h3>{{ apiData?.title || '' }}</h3>
+          <DropDown @languageChanged="handleLanguageChange" :head_title="apiData?.title || ''" :namePainter="apiData?.principalMakers[0]?.name || ''" :description="apiData?.label?.description || ''" :date="apiData?.dating?.presentingDate || ''"/>
 
       </div>
     </header>
     <main>
-      <h4 class="title-main"> {{ apiData ? apiData.principalMakers[0].name : '' }}</h4>
-      <div class="dateOfPainter">
-        <p>{{ apiData ? apiData.principalMakers[0].dateOfBirth : '' }}</p>
+      <h4 class="title-main">{{ apiData?.principalMakers[0]?.name || '' }}</h4>
+    <div class="dateOfPainter">
+        <p>{{ apiData?.principalMakers[0]?.dateOfBirth || '' }}</p>
         <p>-</p>
-        <p>{{ apiData ? apiData.principalMakers[0].dateOfDeath : ''  }}</p>
-      </div>
-
-      <p id="description">{{ apiData ? apiData.label.description : ''  }}</p>
+        <p>{{ apiData?.principalMakers[0]?.dateOfDeath || '' }}</p>
+    </div>
+    <p id="description">{{ apiData?.label?.description || '' }}</p>
 
       <div class="button-container">
         <button>Learn More</button>
@@ -113,6 +80,9 @@ onMounted(() => {
 <script>
 export default {
   name: "info-page",
+  components: {
+    DropDown,
+  },
 }
 
 </script>

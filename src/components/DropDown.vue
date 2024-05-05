@@ -1,26 +1,22 @@
 <script setup>
 
+import { defineProps } from 'vue';
 import {useRouter} from "vue-router";
-import {language, setLanguage} from "../providers/helper.js";
 let isSpeaking = false;
 let utterance = null;
 
 const router = useRouter();
+// Define propValue as a prop
+const props = defineProps({
+  head_title: String,
+  namePainter: String,
+  date: String,
+  description: String,
+});
 
 function toggleDropdown() {
   const dropdownContent = document.getElementById("dropdownContent");
   dropdownContent.style.display = dropdownContent.style.display === "none" ? "flex" : "none";
-}
-
-function changeLanguageEnglish() {
-  setLanguage('en');
-  localStorage.setItem('language', 'en');
-  console.log(language); // This will now log 'en'
-}
-
-function changeLanguageDutch() {
-  setLanguage('nl')
-  localStorage.setItem('language', 'nl');
 }
 
 function speechTalk() {
@@ -28,17 +24,17 @@ function speechTalk() {
     speechSynthesis.cancel();
     isSpeaking = false;
   } else {
-    if (language === 'nl') {
-      const title = "Titel  " + router.currentRoute.value.query.title;
-      const gemaaktDoor = "Gemaakt door  " + router.currentRoute.value.query.namePainter + " Gemaakt in  " + router.currentRoute.value.query.date;
-      const descriptie = "descriptie  " + router.currentRoute.value.query.description;
+    if (localStorage.getItem('language') === 'nl') {
+      const title = "Titel  " + props.head_title;
+      const gemaaktDoor = "Gemaakt door  " + props.namePainter + " Gemaakt in  " + props.date;
+      const descriptie = "descriptie  " + props.description;
       utterance = new SpeechSynthesisUtterance(title + gemaaktDoor + descriptie);
       utterance.lang = 'nl-NL'; // Set language to Dutch (Netherlands)
 
-    } else if (language === 'en') {
-      const title = "Title  " + router.currentRoute.value.query.title;
-      const gemaaktDoor = "made by  " + router.currentRoute.value.query.namePainter + " made in  " + router.currentRoute.value.query.date;
-      const descriptie = "description  " + router.currentRoute.value.query.description;
+    } else if (localStorage.getItem('language') === 'en') {
+      const title = "Title  " + props.head_title;
+      const gemaaktDoor = "made by  " + props.namePainter + " made in  " + props.date;
+      const descriptie = "description  " + props.description;
       utterance = new SpeechSynthesisUtterance(title + gemaaktDoor + descriptie);
       utterance.lang = 'en-US'; // Set language to English (United States)
 

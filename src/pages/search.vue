@@ -17,8 +17,6 @@ const getPaintingInformation = async (input) => {
   }
 }
 
-
-
 const imageItemPressed = async (object) => {
   router.push({path: '/info-page',
     query: {

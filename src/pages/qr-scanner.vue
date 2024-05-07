@@ -2,10 +2,7 @@
 import {ref} from 'vue';
 import {useRouter} from "vue-router";
 import {QrcodeStream} from 'vue-qrcode-reader';
-import {language} from "../providers/helper.js";
-
 import TabBar from '../components/TabBar.vue'
-import {apiProvider} from '../providers/api';
 
 const router = useRouter();
 const search = ref('');
@@ -29,7 +26,6 @@ const onError = async (error) => {
     }
   }
 }
-
 
 const onDetect = async (codes) => {
   router.push({path: '/info-page',

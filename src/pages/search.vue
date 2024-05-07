@@ -4,14 +4,13 @@ import {useRouter} from 'vue-router';
 import {apiProvider} from '../providers/api';
 
 const router = useRouter();
+const objects = ref([]);
 
 const getPaintingInformation = async (input) => {
   const base_url = `https://www.rijksmuseum.nl/api/${localStorage.getItem('language')}/collection?key=` + import.meta.env.VITE_RIJKSDATA_API_KEY + "&q=" + input;
   const response = await apiProvider.get(base_url);
-
   if (response.length === 0) {
     alert("No painting found with that name");
-    return;
   } else {
     return response.artObjects;
   }
@@ -24,8 +23,6 @@ const imageItemPressed = async (object) => {
     }
   });
 }
-
-const objects = ref([]);
 
 onMounted(async () => {
   objects.value = await getPaintingInformation(router.currentRoute.value.query.keyword);

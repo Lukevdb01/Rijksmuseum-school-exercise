@@ -1,5 +1,7 @@
 <script setup>
-import InfoPage from './pages/information.vue';
+if(localStorage.getItem('language') === null) {
+  localStorage.setItem('language', 'en');
+}
 </script>
 
 <template>

@@ -1,12 +1,6 @@
 <script setup>
-
 import { defineProps } from 'vue';
-import {useRouter} from "vue-router";
-let isSpeaking = false;
-let utterance = null;
 
-const router = useRouter();
-// Define propValue as a prop
 const props = defineProps({
   head_title: String,
   namePainter: String,
@@ -20,27 +14,21 @@ function toggleDropdown() {
 }
 
 function speechTalk() {
-  if (isSpeaking) {
+  if (speechSynthesis.speaking) {
     speechSynthesis.cancel();
-    isSpeaking = false;
   } else {
-    if (localStorage.getItem('language') === 'nl') {
-      const title = "Titel  " + props.head_title;
-      const gemaaktDoor = "Gemaakt door  " + props.namePainter + " Gemaakt in  " + props.date;
-      const descriptie = "descriptie  " + props.description;
-      utterance = new SpeechSynthesisUtterance(title + gemaaktDoor + descriptie);
+    const language = localStorage.getItem('language');
+    if (language === 'nl') {
+      let utterance = new SpeechSynthesisUtterance(`Titel ${props.head_title} Gemaakt door ${props.namePainter} gemaakt in ${props.date} beschijving ${props.description}`);
       utterance.lang = 'nl-NL'; // Set language to Dutch (Netherlands)
-
-    } else if (localStorage.getItem('language') === 'en') {
-      const title = "Title  " + props.head_title;
-      const gemaaktDoor = "made by  " + props.namePainter + " made in  " + props.date;
-      const descriptie = "description  " + props.description;
-      utterance = new SpeechSynthesisUtterance(title + gemaaktDoor + descriptie);
+      speechSynthesis.speak(utterance);
+    } else if (language === 'en') {
+      let utterance = new SpeechSynthesisUtterance(`Title ${props.head_title} Made by ${props.namePainter} made in ${props.date} description ${props.description}`);
       utterance.lang = 'en-US'; // Set language to English (United States)
-
+      speechSynthesis.speak(utterance);
+    } else {
+      console.error('Unsupported language:', language);
     }
-    speechSynthesis.speak(utterance);
-    isSpeaking = true;
   }
 }
 </script>
@@ -61,10 +49,9 @@ export default {
     name: 'Dropdown',
     methods: {
         switchLanguage(newLanguage) {
-            localStorage.setItem('language', newLanguage);
-            this.$emit('languageChanged', newLanguage);
-        }
-        
+          localStorage.setItem('language', newLanguage);
+          this.$emit('languageChanged', newLanguage);
+        }     
     }
 }
 </script>

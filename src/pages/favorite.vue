@@ -1,19 +1,11 @@
 <script setup>
 import { useRouter } from "vue-router";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref } from "vue";
 import TabBar from '../components/TabBar.vue';
 import { apiProvider } from '../providers/api';
 
 const router = useRouter();
 const objects = ref([]);
-
-const imageItemPressed = async (id) => {
-    router.push({path: '/info-page',
-        query: {
-            id: id,
-        }
-    });
-}
 
 const fetchData = async (object) => {
   try {
@@ -21,20 +13,17 @@ const fetchData = async (object) => {
     if(response && response.artObject) {
       objects.value.push(response.artObject);
     } else {
-      error.value = 'No data found';
+      alert('No data found');
     }
   } catch (error) {
-    error.value = 'Error fetching data: ' + error.message;
-    console.error(error);
-    alert(error);
+    alert('Error fetching data: ' + error.message);
   }
 };
 
 onMounted(async () => {
     JSON.parse(localStorage.getItem('favorite')).forEach(async (object) => {
         await fetchData(object);
-    });
-    
+    }); 
 });
 </script>
 
@@ -42,7 +31,7 @@ onMounted(async () => {
     <div class="container">
             <h1>Favorite</h1>
             <ul>
-                <li v-for="(item, index) in objects" :key="index" @click="imageItemPressed(item.objectNumber)">
+                <li v-for="(item, index) in objects" :key="index" @click="router.push({path: '/info-page', query: {id: item.objectNumber,} })">
                     <div class="content">
                         <div>
                             <h2>{{ item.title }}</h2>
@@ -57,10 +46,6 @@ onMounted(async () => {
     </div>
 </template>
   
-<script>
-
-</script>
-
 <style scoped>
 .container {
     display: flex;

@@ -10,24 +10,20 @@ const apiData = ref(null);
 
 const favorItem = async (data) => {
   collection.value.push(data);
-
   localStorage.setItem('favorite', JSON.stringify(collection.value));
 }
 
-const fetchData = async (lang) => {
+const fetchData = async () => {
   try {
-    const response = await apiProvider.get(`https://www.rijksmuseum.nl/api/${lang ? lang : localStorage.getItem('language')}/collection/${router.currentRoute.value.query.id}?key=${import.meta.env.VITE_RIJKSDATA_API_KEY}`);
-
+    const response = await apiProvider.get(`https://www.rijksmuseum.nl/api/${localStorage.getItem('language')}/collection/${router.currentRoute.value.query.id}?key=${import.meta.env.VITE_RIJKSDATA_API_KEY}`);
     if(response && response.artObject) {
       apiData.value = response.artObject;
       console.log(response.artObject);
     } else {
-      error.value = 'No data found';
+      alert('No data found');
     }
   } catch (error) {
-    error.value = 'Error fetching data: ' + error.message;
-    console.error(error);
-    alert(error);
+    alert('Error fetching data: ' + error.message);
   }
 };
 
@@ -51,14 +47,11 @@ onMounted(async () => {
         <div class="gradient-overlay"></div>
         <h4 class="paintingDate">{{ apiData ? apiData.dating.presentingDate : ''  }}</h4>
       </div>
-
       <div class="title">
-
         <img id="Heart" src="/public/heart-solid-24.png" @click="favorItem(router.currentRoute.value.query)"
           alt="Favorite icon">
           <h3>{{ apiData?.title || '' }}</h3>
           <DropDown @languageChanged="handleLanguageChange" :head_title="apiData?.title || ''" :namePainter="apiData?.principalMakers[0]?.name || ''" :description="apiData?.label?.description || ''" :date="apiData?.dating?.presentingDate || ''"/>
-
       </div>
     </header>
     <main>
@@ -69,7 +62,6 @@ onMounted(async () => {
         <p>{{ apiData?.principalMakers[0]?.dateOfDeath || '' }}</p>
     </div>
     <p id="description">{{ apiData?.label?.description || '' }}</p>
-
       <div class="button-container">
         <button>Learn More</button>
       </div>
@@ -84,7 +76,6 @@ export default {
     DropDown,
   },
 }
-
 </script>
 
 <style scoped>
@@ -92,7 +83,6 @@ export default {
   color: var(--primary-text-color);
   background-color: var(--primary-background-color);
 }
-
 
 .title {
   display: flex;
@@ -124,7 +114,6 @@ export default {
   height: 100%;
   background-image: linear-gradient(180deg, rgba(11, 11, 11, 0.00) 0%, #0B0B0B 100%);
 }
-
 
 .paintingDate {
   position: absolute;
@@ -202,6 +191,4 @@ button:hover {
   width: 30px;
   height: 30px;
 }
-
-
 </style>

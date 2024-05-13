@@ -1,7 +1,7 @@
 <script setup>
-import {ref, onMounted} from 'vue';
-import {useRouter} from 'vue-router';
-import {apiProvider} from '../providers/api';
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import { apiProvider } from '../providers/api';
 
 const router = useRouter();
 const objects = ref([]);
@@ -17,7 +17,8 @@ const getPaintingInformation = async (input) => {
 }
 
 const imageItemPressed = async (object) => {
-  router.push({path: '/info-page',
+  router.push({
+    path: '/info-page',
     query: {
       id: object.objectNumber
     }

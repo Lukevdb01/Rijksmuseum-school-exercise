@@ -1,8 +1,8 @@
 <script setup>
-import {ref, onMounted} from "vue";
-import {useRouter} from "vue-router";
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import DropDown from "../components/DropDown.vue";
-import {apiProvider} from "../providers/api.js";
+import { apiProvider } from "../providers/api.js";
 
 const router = useRouter();
 const collection = ref([]);
@@ -16,7 +16,7 @@ const favorItem = async (data) => {
 const fetchData = async () => {
   try {
     const response = await apiProvider.get(`https://www.rijksmuseum.nl/api/${localStorage.getItem('language')}/collection/${router.currentRoute.value.query.id}?key=${import.meta.env.VITE_RIJKSDATA_API_KEY}`);
-    if(response && response.artObject) {
+    if (response && response.artObject) {
       apiData.value = response.artObject;
       console.log(response.artObject);
     } else {
@@ -45,23 +45,25 @@ onMounted(async () => {
       <div class="image-container">
         <img class="paintingImg" :src="apiData ? apiData.webImage.url : ''" alt="">
         <div class="gradient-overlay"></div>
-        <h4 class="paintingDate">{{ apiData ? apiData.dating.presentingDate : ''  }}</h4>
+        <h4 class="paintingDate">{{ apiData ? apiData.dating.presentingDate : '' }}</h4>
       </div>
       <div class="title">
         <img id="Heart" src="/public/heart-solid-24.png" @click="favorItem(router.currentRoute.value.query)"
           alt="Favorite icon">
-          <h3>{{ apiData?.title || '' }}</h3>
-          <DropDown @languageChanged="handleLanguageChange" :head_title="apiData?.title || ''" :namePainter="apiData?.principalMakers[0]?.name || ''" :description="apiData?.label?.description || ''" :date="apiData?.dating?.presentingDate || ''"/>
+        <h3>{{ apiData?.title || '' }}</h3>
+        <DropDown @languageChanged="handleLanguageChange" :head_title="apiData?.title || ''"
+          :namePainter="apiData?.principalMakers[0]?.name || ''" :description="apiData?.label?.description || ''"
+          :date="apiData?.dating?.presentingDate || ''" />
       </div>
     </header>
     <main>
       <h4 class="title-main">{{ apiData?.principalMakers[0]?.name || '' }}</h4>
-    <div class="dateOfPainter">
+      <div class="dateOfPainter">
         <p>{{ apiData?.principalMakers[0]?.dateOfBirth || '' }}</p>
         <p>-</p>
         <p>{{ apiData?.principalMakers[0]?.dateOfDeath || '' }}</p>
-    </div>
-    <p id="description">{{ apiData?.label?.description || '' }}</p>
+      </div>
+      <p id="description">{{ apiData?.label?.description || '' }}</p>
       <div class="button-container">
         <button>Learn More</button>
       </div>

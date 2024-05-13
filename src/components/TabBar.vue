@@ -19,24 +19,24 @@ export default {
 </script>
 
 <style scoped>
-    nav {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        width: 100%;
-        height: 10%;
-    }
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+}
 
-    .tab {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 30%;
-        height: 100%;
-    }
+.tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 100%;
+}
 
-    .tab img {
-        width: 40%;
-        height: auto;
-    }
+.tab img {
+    width: 40%;
+    height: auto;
+}
 </style>

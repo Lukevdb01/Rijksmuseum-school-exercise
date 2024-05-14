@@ -4,6 +4,10 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
+            path: '/',
+            component: () => import('../pages/homepage.vue')
+        },
+        {
             path: '/qr-app',
             component: () => import('../pages/qr-scanner.vue')
         },
@@ -18,6 +22,10 @@ const router = createRouter({
         {
             path: '/favorites',
             component: () => import('../pages/favorite.vue')
+        },
+        {
+            path: '/:pathMatch(.*)*',
+            component: () => import('../pages/404.vue')
         }
     ],
 });

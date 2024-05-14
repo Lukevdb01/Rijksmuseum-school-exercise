@@ -57,7 +57,7 @@ onMounted(async () => {
                     <img src="/heart-solid-24.png">
                     <a @click="shareLink(item.objectNumber)"><img src="/share.png" alt="Share Icon"></a>
                 </div>
-                <img :src="item.webImage.url" alt="painting">
+                <img :src="item.webImage.url" alt="painting" id="imgPainting">
             </li>
         </ul>
         <TabBar />
@@ -102,6 +102,10 @@ ul {
     height: 34px;
 }
 
+#imgPainting{
+  border-radius: 10px;
+}
+
 li {
     color: var(--primary-text-color);
     height: 100px;
@@ -113,6 +117,5 @@ img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 1rem;
 }
 </style>

@@ -2,44 +2,14 @@
 import { useRouter } from "vue-router";
 import { onMounted, ref } from "vue";
 import TabBar from '../components/TabBar.vue';
-import { apiProvider } from '../providers/api';
+import { helper } from "../providers/helper";
 
 const router = useRouter();
 const objects = ref([]);
 
-const fetchData = async (object) => {
-    try {
-        const response = await apiProvider.get(`https://www.rijksmuseum.nl/api/${localStorage.getItem('language')}/collection/${object.id}?key=${import.meta.env.VITE_RIJKSDATA_API_KEY}`);
-        if (response && response.artObject) {
-            objects.value.push(response.artObject);
-        } else {
-            alert('No data found');
-        }
-    } catch (error) {
-        alert('Error fetching data: ' + error.message);
-    }
-};
-
-function shareLink(id) {
-  const link = `https://rijksmuseum.lukevdbroek.nl/info-page?id=${id}`;
-
-  if (navigator.share) {
-    navigator.share({
-      title: 'Title of the shared content',
-      text: 'Description of the shared content',
-      url: link,
-    })
-    .then(() => console.log('Successful share'))
-    .catch((error) => console.log('Error sharing:', error));
-  } else {
-    // Fallback for browsers that do not support the Web Share API
-    alert("Your browser doesn't support the Web Share API");
-  }
-}
-
 onMounted(async () => {
     JSON.parse(localStorage.getItem('favorite')).forEach(async (object) => {
-        await fetchData(object);
+        objects.value.push(await helper.fetchData(object.id));
     });
 });
 </script>
@@ -55,7 +25,7 @@ onMounted(async () => {
                         <p>{{ item.principalMakers[0]?.name }}</p>
                     </div>
                     <img src="/heart-solid-24.png">
-                    <a @click="shareLink(item.objectNumber)"><img src="/share.png" alt="Share Icon"></a>
+                    <a @click="shareLink(`https://rijksmuseum.lukevdbroek.nl/info-page?id=${objectNumber.id}`, "Shared from rijksmuseum", "Press this link and you can see the information :)")"><img src="/share.png" alt="Share Icon"></a>
                 </div>
                 <img :src="item.webImage.url" alt="painting" id="imgPainting">
             </li>

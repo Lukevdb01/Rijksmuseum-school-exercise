@@ -2,7 +2,7 @@
 import {ref, onMounted} from "vue";
 import {useRouter} from "vue-router";
 import DropDown from "../components/DropDown.vue";
-import {apiProvider} from "../providers/api.js";
+import {helper} from "../providers/helper.js";
 
 const router = useRouter();
 const collection = ref([]);
@@ -13,26 +13,12 @@ const favorItem = async (data) => {
   localStorage.setItem('favorite', JSON.stringify(collection.value));
 }
 
-const fetchData = async () => {
-  try {
-    const response = await apiProvider.get(`https://www.rijksmuseum.nl/api/${localStorage.getItem('language')}/collection/${router.currentRoute.value.query.id}?key=${import.meta.env.VITE_RIJKSDATA_API_KEY}`);
-    if (response && response.artObject) {
-      apiData.value = response.artObject;
-      console.log(response.artObject);
-    } else {
-      alert('No data found');
-    }
-  } catch (error) {
-    alert('Error fetching data: ' + error.message);
-  }
-};
-
 const handleLanguageChange = async (newLanguage) => {
   await fetchData(newLanguage);
 }
 
 onMounted(async () => {
-  await fetchData();
+  apiData.value = await helper.fetchData();
   collection.value = JSON.parse(localStorage.getItem('favorite')) || [];
 });
 

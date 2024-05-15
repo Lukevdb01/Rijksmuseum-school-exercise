@@ -14,11 +14,11 @@ const favorItem = async (data) => {
 }
 
 const handleLanguageChange = async (newLanguage) => {
-  await fetchData(newLanguage);
+  apiData.value = await helper.fetchData(router.currentRoute.value.query.id);
 }
 
 onMounted(async () => {
-  apiData.value = await helper.fetchData();
+  apiData.value = await helper.fetchData(router.currentRoute.value.query.id);
   collection.value = JSON.parse(localStorage.getItem('favorite')) || [];
 });
 

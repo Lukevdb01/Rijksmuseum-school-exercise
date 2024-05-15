@@ -25,7 +25,7 @@ onMounted(async () => {
                         <p>{{ item.principalMakers[0]?.name }}</p>
                     </div>
                     <img src="/heart-solid-24.png">
-                    <a @click="shareLink(`https://rijksmuseum.lukevdbroek.nl/info-page?id=${objectNumber.id}`, 'Shared from rijksmuseum application', 'Press on this link to see the painting information')"><img src="/share.png" alt="Share Icon"></a>
+                    <a @click="helper.shareLink(`https://rijksmuseum.lukevdbroek.nl/info-page?id=${item.objectNumber}`, 'Shared from rijksmuseum application', 'Press on this link to see the painting information')"><img src="/share.png" alt="Share Icon"></a>
                 </div>
                 <img :src="item.webImage.url" alt="painting" id="imgPainting">
             </li>

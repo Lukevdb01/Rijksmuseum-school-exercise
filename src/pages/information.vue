@@ -61,6 +61,10 @@ onMounted(async () => {
         <button>Learn More</button>
       </div>
     </main>
+    <nav>
+      <img src="/arrow-back.svg" alt="back" @click="router.back()">
+      <h1>temporary</h1>
+    </nav>
   </div>
 </template>
 
@@ -74,6 +78,18 @@ export default {
 </script>
 
 <style scoped>
+nav {
+  background-color: var(--tertiary-background-color);
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
+}
+
+nav img {
+  width: 38px;
+  height: 38px;
+}
 
 
 .base-container {

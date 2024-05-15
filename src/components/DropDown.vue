@@ -64,7 +64,8 @@ export default {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   z-index: 1;
   right: 13px;
-  padding: 2px;
+  padding: 6px;
+  border-radius: 5px;
   transition: all ease-in 0.6s;
   flex-direction: column;
   gap: 5px;

@@ -10,8 +10,8 @@
         <input type="text" v-model="search" placeholder="Search for a painting"
                @keyup.enter="router.push({ path: '/search', query: { keyword: search } })">
       </div>
-      <TabBar/>
     </div>
+    <TabBar/>
   </div>
 </template>
 
@@ -47,10 +47,11 @@ export default {
 .base-container {
   background: var(--primary-background-color);
   display: flex;
+  height: 100vh;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top: calc(1rem + 1vw);
+  padding: calc(0.5rem + 0.5vw);
   color: var(--primary-text-color);
 }
 

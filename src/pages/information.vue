@@ -35,15 +35,12 @@ onMounted(async () => {
         <div class="gradient-overlay"></div>
         <div id="bottomHeader">
           <h4 class="paintingDate">{{ apiData ? apiData.dating.presentingDate : '' }}</h4>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 304 384">
-            <path fill="currentColor"
-                  d="M43 235v64h64v42H0V235h43zM0 149V43h107v42H43v64H0zm256 150v-64h43v106H192v-42h64zM192 43h107v106h-43V85h-64V43z"/>
-          </svg>
+          <img src="/fullscreen.svg" alt="">
         </div>
 
       </div>
       <div class="title">
-        <img id="Heart" src="/public/heart-solid-24.png" @click="favorItem(router.currentRoute.value.query)"
+        <img id="Heart" src="/heart.svg" @click="favorItem(router.currentRoute.value.query)"
              alt="Favorite icon">
         <h3>{{ apiData?.title || '' }}</h3>
         <DropDown @languageChanged="handleLanguageChange" :head_title="apiData?.title || ''"

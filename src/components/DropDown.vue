@@ -35,11 +35,11 @@ function speechTalk() {
 
 <template>
   <div>
-    <img id="Language" src="/language.png" alt="Language Icon" @click="toggleDropdown">
+    <img id="Language" src="/translate.svg" alt="Language Icon" @click="toggleDropdown">
     <div id="dropdownContent">
-      <img src="/united-kingdom-flag-icon-png-8.png" alt="" @click="switchLanguage('en')">
-      <img src="/dutch.png" alt="" @click="switchLanguage('nl')">
-      <img src="/speaker.png" alt="" @click="speechTalk">
+      <img src="/united-kingdom.svg" alt="" @click="switchLanguage('en')">
+      <img src="/netherlands.svg" alt="" @click="switchLanguage('nl')">
+      <img src="/speaker.svg" alt="" @click="speechTalk">
     </div>
   </div>
 </template>

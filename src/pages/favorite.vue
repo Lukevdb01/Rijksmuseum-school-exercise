@@ -24,8 +24,8 @@ onMounted(async () => {
                         <h2 @click="router.push({ path: '/info-page', query: { id: item.objectNumber, } })">{{ item.title }}</h2>
                         <p>{{ item.principalMakers[0]?.name }}</p>
                     </div>
-                    <img src="/heart-solid-24.png">
-                    <a @click="helper.shareLink(`https://rijksmuseum.lukevdbroek.nl/info-page?id=${item.objectNumber}`, 'Shared from rijksmuseum application', 'Press on this link to see the painting information')"><img src="/share.png" alt="Share Icon"></a>
+                    <img src="/heart.svg">
+                    <a @click="helper.shareLink(`https://rijksmuseum.lukevdbroek.nl/info-page?id=${item.objectNumber}`, 'Shared from rijksmuseum application', 'Press on this link to see the painting information')"><img src="/share.svg" alt="Share Icon"></a>
                 </div>
                 <img :src="item.webImage.url" alt="painting" id="imgPainting">
             </li>

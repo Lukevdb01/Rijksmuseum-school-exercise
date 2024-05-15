@@ -1,13 +1,13 @@
 <template>
     <nav>
         <a href="/favorites" class="tab">
-            <img src="/heart.png" alt="Favorite Icon">
+            <img src="/heart.svg" alt="Favorite Icon">
         </a>
         <a href="/qr-app" class="tab">
-            <img src="/qr-app.png" alt="QR Code Icon">
+            <img src="/qr-code.svg" alt="QR Code Icon">
         </a>
         <a href="/" class="tab">
-            <img src="/book.png" alt="Book Icon">
+            <img src="/home.svg" alt="Book Icon">
         </a>
     </nav>
 </template>

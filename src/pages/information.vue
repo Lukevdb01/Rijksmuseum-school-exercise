@@ -49,17 +49,10 @@ function dissappearImg(){
         <div class="gradient-overlay"></div>
         <div id="bottomHeader">
           <h4 class="paintingDate">{{ apiData ? apiData.dating.presentingDate : '' }}</h4>
-<<<<<<< HEAD
           <div @click="imgBiggerPainting()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 304 384"  >
-            <path  fill="currentColor"
-                  d="M43 235v64h64v42H0V235h43zM0 149V43h107v42H43v64H0zm256 150v-64h43v106H192v-42h64zM192 43h107v106h-43V85h-64V43z" /> 
-          </svg> </div>
-=======
           <img src="/fullscreen.svg" alt="">
->>>>>>> 0aeb0e18ea7ecb8ddbbabc153ded7dfd35d19558
         </div>
-
+        </div>
       </div>
       <div class="title">
         <img id="Heart" src="/heart.svg" @click="favorItem(router.currentRoute.value.query)"

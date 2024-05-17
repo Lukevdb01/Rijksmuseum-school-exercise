@@ -1,4 +1,5 @@
 <script setup>
+
 import {ref, onMounted} from "vue";
 import {useRouter} from "vue-router";
 import DropDown from "../components/DropDown.vue";
@@ -36,23 +37,37 @@ onMounted(async () => {
   collection.value = JSON.parse(localStorage.getItem('favorite')) || [];
 });
 
+const imgPainting = document.getElementById("imgDisappear")
+const backgroundColorDisappear = document.getElementById("backgroundDisappear")
+function imgBiggerPainting() {
+  imgPainting.display.visible;
+  backgroundColorDisappear.display.visible;
+  alert('hello')
+}
+
+function dissappearImg(){
+  imgPainting.display.hidden;
+  backgroundColorDisappear.display.hidden;
+}
 
 </script>
 
 
 <template>
   <div class="base base-container">
-
+    <img :src="apiData ? apiData.webImage.url : ''" alt="" id="imgDisappear" >
+    <div id="backgroundDisappear" @click="dissappearImg"></div>
     <header>
       <div class="image-container">
-        <img class="paintingImg" :src="apiData ? apiData.webImage.url : ''" alt="" id="paintingImg" @click="">
+        <img class="paintingImg" :src="apiData ? apiData.webImage.url : ''" alt="" id="paintingImg" >
         <div class="gradient-overlay"></div>
         <div id="bottomHeader">
           <h4 class="paintingDate">{{ apiData ? apiData.dating.presentingDate : '' }}</h4>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 304 384">
-            <path fill="currentColor"
-                  d="M43 235v64h64v42H0V235h43zM0 149V43h107v42H43v64H0zm256 150v-64h43v106H192v-42h64zM192 43h107v106h-43V85h-64V43z"/>
-          </svg>
+          <div @click="imgBiggerPainting()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 304 384"  >
+            <path  fill="currentColor"
+                  d="M43 235v64h64v42H0V235h43zM0 149V43h107v42H43v64H0zm256 150v-64h43v106H192v-42h64zM192 43h107v106h-43V85h-64V43z" /> 
+          </svg> </div>
         </div>
 
       </div>
@@ -119,6 +134,22 @@ export default {
 
 .paintingImg {
   width: 100vw;
+}
+
+#imgDisappear{
+  position: absolute;
+  width: 100%;
+  z-index: 4;
+  display: none;
+}
+
+#backgroundDisappear{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  background-color: var(--primary-background-color);
+  display: none;
 }
 
 .gradient-overlay {

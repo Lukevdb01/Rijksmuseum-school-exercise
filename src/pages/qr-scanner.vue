@@ -1,41 +1,3 @@
-<script setup>
-import {ref} from 'vue';
-import {useRouter} from "vue-router";
-import {QrcodeStream} from 'vue-qrcode-reader';
-import TabBar from '../components/TabBar.vue'
-
-const router = useRouter();
-const search = ref('');
-
-const onError = async (error) => {
-  try {
-    await promise;
-  } catch (error) {
-    if (error.name === 'NotAllowedError') {
-      alert('user denied camera access permission');
-    } else if (error.name === 'NotFoundError') {
-      alert('no suitable camera device installed');
-    } else if (error.name === 'NotSupportedError') {
-      alert('page is not served over HTTPS (or localhost)');
-    } else if (error.name === 'NotReadableError') {
-      alert('maybe camera is already in use');
-    } else if (error.name === 'OverconstrainedError') {
-      alert('did you request the front camera although there is none?');
-    } else if (error.name === 'StreamApiNotSupportedError') {
-      alert('browser seems to be lacking features');
-    }
-  }
-}
-
-const onDetect = async (codes) => {
-  router.push({path: '/info-page',
-    query: {
-      id: codes.map((code) => code.rawValue)
-    }
-  });
-}
-</script>
-
 <template>
   <div class="base base-container">
     <h3>scan the qr code</h3>
@@ -48,10 +10,32 @@ const onDetect = async (codes) => {
         <input type="text" v-model="search" placeholder="Search for a painting"
                @keyup.enter="router.push({ path: '/search', query: { keyword: search } })">
       </div>
-      <TabBar/>
     </div>
+    <TabBar/>
   </div>
 </template>
+
+<script setup>
+import {ref} from 'vue';
+import {useRouter} from "vue-router";
+import {QrcodeStream} from 'vue-qrcode-reader';
+import TabBar from '../components/TabBar.vue'
+
+const router = useRouter();
+const search = ref('');
+
+const onError = async (error) => {
+  console.error('QR Code Scanner Error:', error);
+}
+
+const onDetect = async (codes) => {
+  router.push({path: '/info-page',
+    query: {
+      id: codes.map((code) => code.rawValue)
+    }
+  });
+}
+</script>
 
 <script>
 export default {
@@ -63,10 +47,11 @@ export default {
 .base-container {
   background: var(--primary-background-color);
   display: flex;
+  height: 100vh;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top: calc(1rem + 1vw);
+  padding: calc(0.5rem + 0.5vw);
   color: var(--primary-text-color);
 }
 

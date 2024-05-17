@@ -3,7 +3,7 @@
 import {ref, onMounted} from "vue";
 import {useRouter} from "vue-router";
 import DropDown from "../components/DropDown.vue";
-import {apiProvider} from "../providers/api.js";
+import {helper} from "../providers/helper.js";
 
 const router = useRouter();
 const collection = ref([]);
@@ -14,26 +14,12 @@ const favorItem = async (data) => {
   localStorage.setItem('favorite', JSON.stringify(collection.value));
 }
 
-const fetchData = async () => {
-  try {
-    const response = await apiProvider.get(`https://www.rijksmuseum.nl/api/${localStorage.getItem('language')}/collection/${router.currentRoute.value.query.id}?key=${import.meta.env.VITE_RIJKSDATA_API_KEY}`);
-    if (response && response.artObject) {
-      apiData.value = response.artObject;
-      console.log(response.artObject);
-    } else {
-      alert('No data found');
-    }
-  } catch (error) {
-    alert('Error fetching data: ' + error.message);
-  }
-};
-
 const handleLanguageChange = async (newLanguage) => {
-  await fetchData(newLanguage);
+  apiData.value = await helper.fetchData(router.currentRoute.value.query.id);
 }
 
 onMounted(async () => {
-  await fetchData();
+  apiData.value = await helper.fetchData(router.currentRoute.value.query.id);
   collection.value = JSON.parse(localStorage.getItem('favorite')) || [];
 });
 
@@ -63,16 +49,20 @@ function dissappearImg(){
         <div class="gradient-overlay"></div>
         <div id="bottomHeader">
           <h4 class="paintingDate">{{ apiData ? apiData.dating.presentingDate : '' }}</h4>
+<<<<<<< HEAD
           <div @click="imgBiggerPainting()">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 304 384"  >
             <path  fill="currentColor"
                   d="M43 235v64h64v42H0V235h43zM0 149V43h107v42H43v64H0zm256 150v-64h43v106H192v-42h64zM192 43h107v106h-43V85h-64V43z" /> 
           </svg> </div>
+=======
+          <img src="/fullscreen.svg" alt="">
+>>>>>>> 0aeb0e18ea7ecb8ddbbabc153ded7dfd35d19558
         </div>
 
       </div>
       <div class="title">
-        <img id="Heart" src="/public/heart-solid-24.png" @click="favorItem(router.currentRoute.value.query)"
+        <img id="Heart" src="/heart.svg" @click="favorItem(router.currentRoute.value.query)"
              alt="Favorite icon">
         <h3>{{ apiData?.title || '' }}</h3>
         <DropDown @languageChanged="handleLanguageChange" :head_title="apiData?.title || ''"
@@ -93,6 +83,10 @@ function dissappearImg(){
         <button>Learn More</button>
       </div>
     </main>
+    <nav>
+      <img src="/arrow-back.svg" alt="back" @click="router.back()">
+      <h1>temporary</h1>
+    </nav>
   </div>
 </template>
 
@@ -106,6 +100,18 @@ export default {
 </script>
 
 <style scoped>
+nav {
+  background-color: var(--tertiary-background-color);
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
+}
+
+nav img {
+  width: 38px;
+  height: 38px;
+}
 
 
 .base-container {

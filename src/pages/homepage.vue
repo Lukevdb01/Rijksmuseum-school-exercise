@@ -1,40 +1,38 @@
 <template>
-    <main>
-        <div class="content">
-            <h1>Homepage</h1>
-            <button @click="router.push('/qr-app')">Go to QR App</button>
-        </div>
-    </main>
+    <div class="container">
+        <h1>Homepage</h1>
+        <main>
+            <p>Welcome to the homepage</p>
+        </main>
+        <TabBar />
+    </div>
 </template>
 
 <script setup>
 import { useRouter } from 'vue-router';
+import TabBar from '../components/TabBar.vue';
 const router = useRouter();
 </script>
 
 <style scoped>
-main {
+.container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    background: var(--primary-background-color);
     height: 100vh;
+    padding: calc(0.5rem + 0.5vw);
 }
 
-.content {
+.container h1 {
+    padding-bottom: 15px;
+    color: var(--primary-text-color);
     text-align: center;
 }
 
-.content button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #e02121;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-h1 {
-    color: #2147e0;
+main {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>

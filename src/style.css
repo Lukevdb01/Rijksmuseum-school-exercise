@@ -4,7 +4,7 @@
     /* To be determined */
     --primary-background-color: #0B0B0B;
     --secondary-background-color: #262626;
-    --tertiary-background-color: #0B0B0B;
+    --tertiary-background-color: #363636;
 
     /* To be determined */
     --primary-text-color: #ffff;
@@ -25,7 +25,7 @@
     font-optical-sizing: auto;
     font-style: normal;
     font-variation-settings:
-            "slnt" 0;
+    "slnt" 0;
 }
 
 body {

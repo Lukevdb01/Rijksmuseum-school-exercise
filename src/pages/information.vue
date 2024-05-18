@@ -23,17 +23,15 @@ onMounted(async () => {
   collection.value = JSON.parse(localStorage.getItem('favorite')) || [];
 });
 
-const imgPainting = document.getElementById("imgDisappear")
-const backgroundColorDisappear = document.getElementById("backgroundDisappear")
-function imgBiggerPainting() {
-  imgPainting.display.visible;
-  backgroundColorDisappear.display.visible;
-  alert('hello')
-}
 
-function dissappearImg(){
-  imgPainting.display.hidden;
-  backgroundColorDisappear.display.hidden;
+
+function imgSeeBetter() {
+  const gradientElement = document.getElementById('gradient');
+  if (gradientElement.style.display === 'none' || gradientElement.style.display === '') {
+    gradientElement.style.display = 'block';
+  } else {
+    gradientElement.style.display = 'none';
+  }
 }
 
 </script>
@@ -41,17 +39,13 @@ function dissappearImg(){
 
 <template>
   <div class="base base-container">
-    <img :src="apiData ? apiData.webImage.url : ''" alt="" id="imgDisappear" >
-    <div id="backgroundDisappear" @click="dissappearImg"></div>
     <header>
       <div class="image-container">
         <img class="paintingImg" :src="apiData ? apiData.webImage.url : ''" alt="" id="paintingImg" >
-        <div class="gradient-overlay"></div>
+        <div class="gradient-overlay" id="gradient"></div>
         <div id="bottomHeader">
           <h4 class="paintingDate">{{ apiData ? apiData.dating.presentingDate : '' }}</h4>
-          <div @click="imgBiggerPainting()">
-          <img src="/fullscreen.svg" alt="">
-        </div>
+          <a @click="imgSeeBetter"><img src="/eye.svg" alt=""></a>
         </div>
       </div>
       <div class="title">
@@ -112,7 +106,9 @@ nav img {
 
 }
 
-
+#gradient{
+  animation: ease-in 1s;
+}
 .title {
   display: flex;
   justify-content: space-between;
@@ -135,12 +131,6 @@ nav img {
   width: 100vw;
 }
 
-#imgDisappear{
-  position: absolute;
-  width: 100%;
-  z-index: 4;
-  display: none;
-}
 
 #backgroundDisappear{
   position: absolute;

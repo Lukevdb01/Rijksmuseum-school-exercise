@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { apiProvider } from '../providers/api';
+import { helper } from '../providers/helper';
 
 const router = useRouter();
 const objects = ref([]);
@@ -17,10 +18,18 @@ const getPaintingInformation = async (input) => {
 }
 
 const imageItemPressed = async (object) => {
+  const response = await helper.fetchData(object.objectNumber);
   router.push({
     path: '/info-page',
     query: {
-      id: object.objectNumber
+      id: object.objectNumber,
+      title: response.title,
+      description: response.label.description,
+      image: response.webImage.url,
+      date: response.dating.presentingDate,
+      name: response.principalMakers[0].name,
+      birthDate: response.principalMakers[0].dateOfBirth,
+      deathDate: response.principalMakers[0].dateOfDeath,
     }
   });
 }

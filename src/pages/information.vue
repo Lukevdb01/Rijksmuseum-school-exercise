@@ -10,7 +10,10 @@ const collection = ref([]);
 const apiData = ref(null);
 
 const favorItem = async (data) => {
-  collection.value.push(data);
+  let object = {
+    id: data.id
+  }
+  collection.value.push(object);
   localStorage.setItem('favorite', JSON.stringify(collection.value));
 }
 

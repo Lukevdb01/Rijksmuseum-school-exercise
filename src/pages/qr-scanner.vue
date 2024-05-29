@@ -20,6 +20,7 @@ import {ref} from 'vue';
 import {useRouter} from "vue-router";
 import {QrcodeStream} from 'vue-qrcode-reader';
 import TabBar from '../components/TabBar.vue'
+import {helper} from "../providers/helper.js";
 
 const router = useRouter();
 const search = ref('');
@@ -29,9 +30,17 @@ const onError = async (error) => {
 }
 
 const onDetect = async (codes) => {
+  let response = await helper.fetchData(codes.map((code) => code.rawValue));
   router.push({path: '/info-page',
     query: {
-      id: codes.map((code) => code.rawValue)
+      id: response.objectNumber,
+      title: response.title,
+      description: response.label.description,
+      image: response.webImage.url,
+      date: response.dating.presentingDate,
+      name: response.principalMakers[0].name,
+      birthDate: response.principalMakers[0].dateOfBirth,
+      deathDate: response.principalMakers[0].dateOfDeath,
     }
   });
 }

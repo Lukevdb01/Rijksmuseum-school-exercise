@@ -98,6 +98,10 @@ nav {
   align-items: center;
 }
 
+main {
+  background-color: var(--primary-background-color);
+}
+
 nav img {
   width: 38px;
   height: 38px;

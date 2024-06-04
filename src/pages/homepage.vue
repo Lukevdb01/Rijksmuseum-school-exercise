@@ -17,7 +17,7 @@
                     <h1>gebruik de app</h1>
                     <p>Gemaakt door Luke van den Broek & Samed Bozaslan</p>
                 </div>
-                <h1>sintlucas</h1>
+                <h1 class="sponsor">sintlucas</h1>
             </div>
         </section>
         <section class="card-page">
@@ -159,6 +159,7 @@ main {
 }
 
 .card-page div {
+    display: flex;
     width: 100%;
     display: flex;
     height: 100%;
@@ -243,5 +244,31 @@ footer {
     text-align: center;
     padding: 0.5rem;
     width: 100%;
+}
+
+@media (max-width: 768px) {
+    .nav-button-box {
+        display: none;
+    }
+    
+    .sponsor {
+        display: none;
+    }
+
+    .creators h1 {
+        font-size: 1.15rem;
+    }
+
+    .creators p {
+        font-size: 0.85rem;
+    }
+
+    .card-page div {
+        flex-direction: column;
+    }
+
+    .featured-page {
+        text-align: center;
+    }
 }
 </style>

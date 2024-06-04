@@ -5,7 +5,7 @@
                 <a class="head-button" href="/camera">Probeer de app!</a>
                 <div class="nav-button-box">
                     <a>Language</a>
-                    <a>Inloggen</a>
+                    <a href="/login">Inloggen</a>
                 </div>
             </nav>
             <div class="hero-content margin-lr">
@@ -63,6 +63,44 @@
     </main>
 </template>
 
+<script setup>
+import { useHead } from '@vueuse/head';
+
+useHead({
+    title: 'Homepage',
+    meta: [
+        {
+            name: 'description',
+            content: 'Gebruik nu onze web-app om de kunst te ontdekken! Gemaakt door Luke van den Broek & Samed Bozaslan.'
+        },
+        {
+            name: 'keywords',
+            content: 'web-app, kunst, ontdekken, Luke van den Broek, Samed Bozaslan, Sintlucas, LNME Media & Design, 2024, Rijksmuseum, innovatief, project, technologie, process, leermoment, school, project groei, fancy frameworks, project, opdracht'
+        },
+        {
+            property: 'og:title',
+            content: 'Rijksmeum | Ontdek de kunst met onze innovatieve web-app!'
+        },
+        {
+            property: 'og:description',
+            content: 'Gebruik nu onze web-app om de kunst te ontdekken! Gemaakt door Luke van den Broek & Samed Bozaslan.'
+        },
+        {
+            property: 'og:type',
+            content: 'website'
+        },
+        {
+            property: 'og:url',
+            content: 'https://www.rijksmuseum.lukevdbroek.nl/'
+        },
+        {
+            property: 'og:image',
+            content: 'https://www.awesomewebdevelopment.com/images/og-image.jpg'
+        }
+    ]
+});
+</script>
+
 <style scoped>
 nav {
     display: flex;
@@ -85,6 +123,12 @@ nav {
 .nav-button-box {
     display: flex;
     gap: 3rem;
+}
+
+.nav-button-box a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
 }
 
 main {
@@ -250,7 +294,7 @@ footer {
     .nav-button-box {
         display: none;
     }
-    
+
     .sponsor {
         display: none;
     }

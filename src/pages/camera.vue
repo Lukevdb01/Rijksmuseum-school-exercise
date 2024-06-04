@@ -1,16 +1,16 @@
 <template>
   <div class="base base-container">
 
-    <div class="container">
-      <div class="base flex-image-qr">
-        <qrcode-stream @error="onError" @detect="onDetect" class="qr-stream"></qrcode-stream>
-      </div>
-      <div class="search">
-        <p>Or enter a painting name</p>
-        <input type="text" v-model="search" placeholder="Search for a painting"
-               @keyup.enter="router.push({ path: '/search', query: { keyword: search } })">
-      </div>
+  <div class="container">
+    <div class="base flex-image-qr">
+      <qrcode-stream @error="onError" @detect="onDetect" class="qr-stream"></qrcode-stream>
     </div>
+    <div class="search">
+      <p>Or enter a painting name</p>
+      <input type="text" v-model="search" placeholder="Search for a painting"
+             @keyup.enter="router.push({ path: '/search', query: { keyword: search } })">
+    </div>
+  </div>
   </div>
   <TabBar/>
 </template>
@@ -31,8 +31,7 @@ const onError = async (error) => {
 
 const onDetect = async (codes) => {
   let response = await helper.fetchData(codes.map((code) => code.rawValue));
-  router.push({
-    path: '/info-page',
+  router.push({path: '/info-page',
     query: {
       id: response.objectNumber,
       title: response.title,

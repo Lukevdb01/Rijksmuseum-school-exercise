@@ -26,6 +26,10 @@ const router = createRouter({
         {
             path: '/:pathMatch(.*)*',
             component: () => import('../pages/404.vue')
+        },
+        {
+            path: '/camera',
+            component: () => import('../pages/camera.vue')
         }
     ],
 });

@@ -2,7 +2,7 @@
     <main>
         <section class="landing-page">
             <nav class="padding-lrtb">
-                <a class="head-button" href="/camera">Probeer de app!</a>
+                <a class="head-button" href="/qr-app">Probeer de app!</a>
                 <div class="nav-button-box">
                     <a>Language</a>
                     <a href="/login">Inloggen</a>

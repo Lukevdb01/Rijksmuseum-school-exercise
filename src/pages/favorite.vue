@@ -30,8 +30,9 @@ onMounted(async () => {
                 <img :src="item.webImage.url" alt="painting" id="imgPainting">
             </li>
         </ul>
-        <TabBar />
     </div>
+  <TabBar />
+
 </template>
 
 <style scoped>

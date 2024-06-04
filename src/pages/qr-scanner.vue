@@ -2,6 +2,7 @@
   <div class="base base-container">
     <img src="/public/background.jpg" alt="background image" id="backgroundImg">
     <div id="navbarHome">
+
       <img src="/public/camera.svg" alt="Camera Icon" class="iconsForLogo" @click="cameraShow">
       <div>
         <img src="/public/rijksmuseum-logo.png" class="logoRijksmuseum" alt="Logo rijksmuseum">
@@ -28,11 +29,14 @@ import {helper} from "../providers/helper.js";
 
 const router = useRouter();
 const search = ref('');
-const cameraCont = document.getElementById("container")
 
-function cameraShow(){
-  cameraCont.display = 'block';
-  console.log('hello');
+function cameraShow() {
+  const cameraCont = document.getElementById('container');
+  if (cameraCont.style.display === 'none' || cameraCont.style.display === '') {
+    cameraCont.style.display = 'block';
+  } else {
+    cameraCont.style.display = 'none';
+  }
 }
 
 const onError = async (error) => {

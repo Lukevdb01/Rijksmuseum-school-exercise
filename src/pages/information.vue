@@ -1,9 +1,9 @@
 <script setup>
 
-import {ref, onMounted} from "vue";
-import {useRouter} from "vue-router";
+import { ref, onBeforeMount } from "vue";
+import { useRouter } from "vue-router";
 import DropDown from "../components/DropDown.vue";
-import {helper} from "../providers/helper.js";
+import { helper } from "../providers/helper.js";
 
 const router = useRouter();
 const collection = ref([]);
@@ -21,7 +21,7 @@ const handleLanguageChange = async (newLanguage) => {
   apiData.value = await helper.fetchData(router.currentRoute.value.query.id);
 }
 
-onMounted(async () => {
+onBeforeMount(async () => {
   apiData.value = await helper.fetchData(router.currentRoute.value.query.id);
   collection.value = JSON.parse(localStorage.getItem('favorite')) || [];
 });
@@ -44,31 +44,29 @@ function imgSeeBetter() {
   <div class="base base-container">
     <header>
       <div class="image-container">
-        <img class="paintingImg" :src="apiData ? apiData.webImage.url : ''" alt="" id="paintingImg" >
+        <img class="paintingImg" :src="apiData.webImage.url" alt="" id="paintingImg">
         <div class="gradient-overlay" id="gradient"></div>
         <div id="bottomHeader">
-          <h4 class="paintingDate">{{ apiData ? apiData.dating.presentingDate : '' }}</h4>
+          <h4 class="paintingDate">{{ apiData.dating.presentingDate }}</h4>
           <a @click="imgSeeBetter"><img src="/eye.svg" alt=""></a>
         </div>
       </div>
       <div class="title">
-        <img id="Heart" src="/heart.svg" @click="favorItem(router.currentRoute.value.query)"
-             alt="Favorite icon">
-        <h3>{{ apiData?.title || '' }}</h3>
-        <DropDown @languageChanged="handleLanguageChange" :head_title="apiData?.title || ''"
-                  :namePainter="apiData?.principalMakers[0]?.name || ''"
-                  :description="apiData?.label?.description || ''"
-                  :date="apiData?.dating?.presentingDate || ''"/>
+        <img id="Heart" src="/heart.svg" @click="favorItem(router.currentRoute.value.query)" alt="Favorite icon">
+        <h3>{{ apiData.title }}</h3>
+        <DropDown @languageChanged="handleLanguageChange" :head_title="apiData.title"
+          :namePainter="apiData.principalMakers[0].name" :description="apiData.label.description"
+          :date="apiData.dating.presentingDate" />
       </div>
     </header>
     <main>
-      <h4 class="title-main">{{ apiData?.principalMakers[0]?.name || '' }}</h4>
+      <h4 class="title-main">{{ apiData.principalMakers[0].name }}</h4>
       <div class="dateOfPainter">
-        <p>{{ apiData?.principalMakers[0]?.dateOfBirth || '' }}</p>
+        <p>{{ apiData.principalMakers[0].dateOfBirth }}</p>
         <p>-</p>
-        <p>{{ apiData?.principalMakers[0]?.dateOfDeath || '' }}</p>
+        <p>{{ apiData.principalMakers[0].dateOfDeath }}</p>
       </div>
-      <p id="description">{{ apiData?.label?.description || '' }}</p>
+      <p id="description">{{ apiData.label.description }}</p>
       <div class="button-container">
         <button>Learn More</button>
       </div>
@@ -113,9 +111,10 @@ nav img {
 
 }
 
-#gradient{
+#gradient {
   animation: ease-in 1s;
 }
+
 .title {
   display: flex;
   justify-content: space-between;
@@ -139,7 +138,7 @@ nav img {
 }
 
 
-#backgroundDisappear{
+#backgroundDisappear {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -159,7 +158,7 @@ nav img {
 
 
 
-#bottomHeader{
+#bottomHeader {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;

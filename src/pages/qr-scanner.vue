@@ -7,7 +7,7 @@
       <div>
         <img src="/public/rijksmuseum-logo.png" class="logoRijksmuseum" alt="Logo rijksmuseum">
       </div>
-      <img src="/public/search.svg" alt="search icon" class="iconsForLogo">
+      <a href="/search"> <img src="/public/search.svg" alt="search icon" class="iconsForLogo" > </a>
     </div>
 
     <TabBar/>
@@ -93,6 +93,8 @@ export default {
   display: flex;
   justify-content: center;
 }
+
+
 
 #backgroundImg{
 position: absolute;

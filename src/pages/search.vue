@@ -1,11 +1,12 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUpdated } from 'vue';
 import { useRouter } from 'vue-router';
 import { apiProvider } from '../providers/api';
 import { helper } from '../providers/helper';
 
 const router = useRouter();
 const objects = ref([]);
+const search = ref('');
 
 const getPaintingInformation = async (input) => {
   const base_url = `https://www.rijksmuseum.nl/api/${localStorage.getItem('language')}/collection?key=` + import.meta.env.VITE_RIJKSDATA_API_KEY + "&q=" + input;
@@ -34,12 +35,24 @@ const imageItemPressed = async (object) => {
   });
 }
 
+const handleSearch = () => {
+  router.push({ path: '/search', query: { keyword: search.value } }).then(() => {
+    window.location.reload();
+  });
+};
+
 onMounted(async () => {
+  objects.value = await getPaintingInformation(router.currentRoute.value.query.keyword);
+});
+
+onUpdated(async () => {
   objects.value = await getPaintingInformation(router.currentRoute.value.query.keyword);
 });
 </script>
 
+
 <template>
+  <div class="base base-container">
   <nav>
     <img src="/arrow-back.svg" alt="back" @click="router.back()">
     <h1>Search results</h1>
@@ -53,15 +66,18 @@ onMounted(async () => {
       </div>
     </li>
   </ul>
+    <div class="search">
+    <input type="text" v-model="search" placeholder="Search for a painting"
+           @keyup.enter="handleSearch">
+    </div>
+  </div>
 </template>
 
-<script>
-export default {
-  name: 'Search',
-}
-</script>
-
 <style scoped>
+.base-container{
+  background-color: var(--primary-background-color);
+}
+
 nav {
   background-color: var(--tertiary-background-color);
   display: flex;
@@ -111,5 +127,27 @@ h3 {
 p {
   margin: 1rem 0;
   font-size: 1rem;
+}
+
+.search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(0.5rem + 0.5vw);
+  width: 100%;
+  position: fixed;
+  bottom: 20px;
+  align-items: center;
+}
+
+.search input {
+  width: 90%;
+  padding: calc(0.5rem + 0.5vw);
+  border-radius: calc(0.5rem + 0.5vw);
+  border: white 2px solid;
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color);
+  font-size: calc(1rem + 0.5vw);
+  text-align: left;
 }
 </style>

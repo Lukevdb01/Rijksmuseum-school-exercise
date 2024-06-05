@@ -23,11 +23,13 @@
 
 <style>
 .login-container {
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: #e2e2e2;
+    width: 100%;
 }
 
 .login-box {

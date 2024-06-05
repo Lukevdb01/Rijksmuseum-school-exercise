@@ -54,15 +54,15 @@ onUpdated(async () => {
 <template>
   <div class="base base-container">
   <nav>
-    <img src="/arrow-back.svg" alt="back" @click="router.back()">
-    <h1>Search results</h1>
+   <a href="/qr-app"> <img src="/camera.svg" alt="back"></a>
+    <h1>SEARCH</h1>
+    <a href="/qr-app"><img id="homeButton" src="/home.svg" alt="" ></a>
   </nav>
   <ul>
     <li v-for="(object, index) in objects" :key="index" @click="imageItemPressed(object)">
       <img :src="object.webImage.url" alt="painting">
       <div class="hero-text">
         <h3>{{ object.title }}</h3>
-        <p>{{ object.description }}</p>
       </div>
     </li>
   </ul>
@@ -79,16 +79,26 @@ onUpdated(async () => {
 }
 
 nav {
-  background-color: var(--tertiary-background-color);
   display: flex;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 10px 20px;
   align-items: center;
 }
 
 nav img {
-  width: 38px;
-  height: 38px;
+  width: auto;
+  height: 30px;
+  background-color: var(--primary-background-color);
+
+}
+
+nav a{
+  background-color: var(--primary-background-color);
+
+}
+
+#homeButton{
+  height: 29px;
 }
 
 ul {
@@ -101,32 +111,24 @@ ul {
 }
 
 li {
-  margin: 1rem;
-  padding: 1rem;
-  border-radius: 1rem;
+  margin: 20px;
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  background-color: var(--secondary-background-color);
-  gap: 20px;
+  gap: 4px;
+
 }
 
 img {
-  width: 35%;
-  height: auto;
+  width: 85vw;
+  height: 20vh;
   object-fit: cover;
-  border-radius: 1rem;
-}
+  box-shadow: 0 4px 20px 0 rgba(255, 255, 255, 0.11);}
 
 h3 {
-  margin: 1rem 0;
+  margin: 0.5rem 0 0 0;
   font-size: 1.5rem;
-}
-
-p {
-  margin: 1rem 0;
-  font-size: 1rem;
 }
 
 .search {
@@ -138,15 +140,17 @@ p {
   position: fixed;
   bottom: 20px;
   align-items: center;
+
 }
 
 .search input {
   width: 90%;
-  padding: calc(0.5rem + 0.5vw);
-  border-radius: calc(0.5rem + 0.5vw);
-  border: white 2px solid;
-  background-color: var(--primary-background-color);
-  color: var(--primary-text-color);
+  padding: calc(0.8rem + 0.5vw);
+  border-radius: 0.4375rem;
+  background-color: var(--secondary-background-color);
+  color: #ffff;
+  border-style: none;
+
   font-size: calc(1rem + 0.5vw);
   text-align: left;
 }

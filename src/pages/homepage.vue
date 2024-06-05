@@ -4,12 +4,12 @@
             <nav class="padding-lrtb">
                 <a class="head-button" href="/qr-app">Probeer de app!</a>
                 <div class="nav-button-box">
-                    <a>Language</a>
+                    <a href="/">Language</a>
                     <a href="/login">Inloggen</a>
                 </div>
             </nav>
             <div class="hero-content margin-lr">
-                <img src="/rijksmuseum-logo.png" alt="Logo" />
+                <img src="/rijksmuseum-logo.webp" alt="Logo" />
                 <h2>Ontdek de kunst met onze innovatieve web-app!</h2>
             </div>
             <div class="page-overlay margin-lrtb">
@@ -138,7 +138,7 @@ main {
 .landing-page {
     position: relative;
     /* Add this line */
-    background-image: url('/background.jpg');
+    background-image: url('/background.webp');
     height: 100%;
     width: 100%;
     background-size: cover;
@@ -246,22 +246,22 @@ main {
 }
 
 #card-a {
-    background-image: url('cards/head_img_card_one.webp');
+    background-image: url('/head_img_card_one.webp');
     background-size: cover;
 }
 
 #card-b {
-    background-image: url('cards/head_img_card_two.webp');
+    background-image: url('/head_img_card_two.webp');
     background-size: cover;
 }
 
 #card-c {
-    background-image: url('cards/head_img_card_three.webp');
+    background-image: url('/head_img_card_three.webp');
     background-size: cover;
 }
 
 #card-d {
-    background-image: url('cards/head_img_card_four.webp');
+    background-image: url('/head_img_card_four.webp');
     background-size: cover;
 }
 
@@ -272,7 +272,7 @@ main {
     height: 50vh;
     text-transform: uppercase;
     font-size: x-large;
-    background-image: url('cards/bottom_img_one.webp');
+    background-image: url('/bottom_img_one.webp');
     background-size: cover;
     background-blend-mode: darken;
     background-color: rgba(0, 0, 0, 0.1);

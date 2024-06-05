@@ -1,11 +1,11 @@
 <template>
   <div class="base base-container">
-    <img src="/public/background.jpg" alt="background image" id="backgroundImg">
+    <img src="/public/background.webp" alt="background image" id="backgroundImg">
     <div id="navbarHome">
 
       <img src="/public/camera.svg" alt="Camera Icon" class="iconsForLogo" @click="cameraShow">
       <div>
-        <img src="/public/rijksmuseum-logo.png" class="logoRijksmuseum" alt="Logo rijksmuseum">
+        <img src="/public/rijksmuseum-logo.webp" class="logoRijksmuseum" alt="Logo rijksmuseum">
       </div>
       <a href="/search"> <img src="/public/search.svg" alt="search icon" class="iconsForLogo" > </a>
     </div>

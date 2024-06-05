@@ -10,7 +10,7 @@
             </nav>
             <div class="hero-content margin-lr">
                 <img src="/rijksmuseum-logo.png" alt="Logo" />
-                <h3>Ontdek de kunst met onze innovatieve web-app!</h3>
+                <h2>Ontdek de kunst met onze innovatieve web-app!</h2>
             </div>
             <div class="page-overlay margin-lrtb">
                 <div class="creators">
@@ -25,14 +25,14 @@
                 <div id="card-a" class="card">
                     <div class="content padding-lrtb">
                         <p class="category">project</p>
-                        <h3>de opdracht</h3>
+                        <h2>de opdracht</h2>
                         <p>wat was de opdracht precies</p>
                     </div>
                 </div>
                 <div id="card-b" class="card">
                     <div class="content padding-lrtb">
                         <p class="category">fancy frameworks</p>
-                        <h3>de technolgie</h3>
+                        <h2>de technolgie</h2>
                         <p>wat hebben we allemaal gebruikt</p>
                     </div>
                 </div>
@@ -41,14 +41,14 @@
                 <div id="card-c" class="card">
                     <div class="content padding-lrtb">
                         <p class="category">project groei</p>
-                        <h3>het process</h3>
+                        <h2>het process</h2>
                         <p>De stappen die we hebben gemaakt</p>
                     </div>
                 </div>
                 <div id="card-d" class="card">
                     <div class="content padding-lrtb">
                         <p class="category">school</p>
-                        <h3>Het leermoment</h3>
+                        <h2>Het leermoment</h2>
                         <p>wat hebben we precies geleerd</p>
                     </div>
                 </div>
@@ -177,9 +177,11 @@ main {
 
 .hero-content img {
     width: 100%;
+    max-width: 100vw;
+    height: auto;
 }
 
-.hero-content h3 {
+.hero-content h2 {
     font-size: 1.5rem;
 }
 
@@ -229,7 +231,7 @@ main {
     text-align: start;
 }
 
-.content h3 {
+.content h2 {
     font-size: 1.5rem;
     text-transform: uppercase;
 }
@@ -244,22 +246,22 @@ main {
 }
 
 #card-a {
-    background-image: url('https://www.rijksmuseum.nl/assets/a2e2047a-5dd8-457f-afe6-c63adf0328b3?w=1920&h=984&fx=5461&fy=2439&format=webp&c=331fdc8fff01d39e8884c8904b77215c82e31fe59bfac1888fdd58d858e12e71');
+    background-image: url('cards/head_img_card_one.webp');
     background-size: cover;
 }
 
 #card-b {
-    background-image: url('https://www.rijksmuseum.nl/assets/12489e0c-62ac-4d5b-83cb-f42474dd7099?w=1920&h=984&fx=1506&fy=930&format=webp&c=496e015aa732219fd47503a349cd4de89bad23400b2942f79fc7804a73cbeebd');
+    background-image: url('cards/head_img_card_two.webp');
     background-size: cover;
 }
 
 #card-c {
-    background-image: url('https://lh3.googleusercontent.com/J-mxAE7CPu-DXIOx4QKBtb0GC4ud37da1QK7CzbTIDswmvZHXhLm4Tv2-1H3iBXJWAW_bHm7dMl3j5wv_XiWAg55VOM=s0');
+    background-image: url('cards/head_img_card_three.webp');
     background-size: cover;
 }
 
 #card-d {
-    background-image: url('https://www.rijksmuseum.nl/assets/69e6627c-70df-4ca7-8e41-f40988aa4f76?w=640&h=640&x=1575&y=1551&cropWidth=6703&cropHeight=3938&format=webp&c=62bb9e5415e1167987f49ae908174d2e78292debdf79726b0cf33ecccc50357d');
+    background-image: url('cards/head_img_card_four.webp');
     background-size: cover;
 }
 
@@ -270,7 +272,7 @@ main {
     height: 50vh;
     text-transform: uppercase;
     font-size: x-large;
-    background-image: url('https://lh4.ggpht.com/EFduiiHM_14H6k2ZqQSqQBCA1CnJ5hiUj67yPprUJ9mbEVyltRmRKGwTGH28zFU51wqN9VEJxNobBXnkUI4JMKDfdJ7_=w1920');
+    background-image: url('cards/bottom_img_one.webp');
     background-size: cover;
     background-blend-mode: darken;
     background-color: rgba(0, 0, 0, 0.1);

@@ -30,6 +30,10 @@ const router = createRouter({
         {
             path: '/camera',
             component: () => import('../pages/camera.vue')
+        },
+        {
+            path: '/login',
+            component: () => import('../pages/login.vue')
         }
     ],
 });

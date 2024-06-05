@@ -54,7 +54,7 @@ onUpdated(async () => {
 <template>
   <div class="base base-container">
   <nav>
-   <a href="/qr-app"> <img src="/camera.svg" alt="back"></a>
+   <a href="/qr-app?camera=active"> <img src="/camera.svg" alt="back"></a>
     <h1>SEARCH</h1>
     <a href="/qr-app"><img id="homeButton" src="/home.svg" alt="" ></a>
   </nav>

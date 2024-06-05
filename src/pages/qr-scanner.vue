@@ -3,7 +3,7 @@
     <img src="/public/background.webp" alt="background image" id="backgroundImg">
     <div id="navbarHome">
 
-      <img src="/public/camera.svg" alt="Camera Icon" class="iconsForLogo" @click="cameraShow">
+      <img src="/public/camera.svg" alt="Camera Icon" class="iconsForLogo" @click="toggleCamera">
       <div>
         <img src="/public/rijksmuseum-logo.webp" class="logoRijksmuseum" alt="Logo rijksmuseum">
       </div>
@@ -11,32 +11,36 @@
     </div>
 
     <TabBar/>
-  <div id="container">
-    <div class="base flex-image-qr">
-      <qrcode-stream @error="onError" @detect="onDetect" class="qr-stream"></qrcode-stream>
+
+    <div id="container" v-show="isCameraActive">
+      <div class="base flex-image-qr">
+        <qrcode-stream v-if="isCameraActive" @error="onError" @detect="onDetect" class="qr-stream"></qrcode-stream>
+      </div>
     </div>
-  </div>
+
   </div>
 
 </template>
 
 <script setup>
-import {ref} from 'vue';
-import {useRouter} from "vue-router";
-import {QrcodeStream} from 'vue-qrcode-reader';
-import TabBar from '../components/TabBar.vue'
-import {helper} from "../providers/helper.js";
+import { ref, onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import { QrcodeStream } from 'vue-qrcode-reader';
+import TabBar from '../components/TabBar.vue';
+import { helper } from "../providers/helper.js";
 
 const router = useRouter();
-const search = ref('');
+const route = useRoute();
+const isCameraActive = ref(false);
 
-function cameraShow() {
-  const cameraCont = document.getElementById('container');
-  if (cameraCont.style.display === 'none' || cameraCont.style.display === '') {
-    cameraCont.style.display = 'block';
-  } else {
-    cameraCont.style.display = 'none';
-  }
+function toggleCamera() {
+  isCameraActive.value = !isCameraActive.value;
+  updateCameraStateInUrl(isCameraActive.value);
+}
+
+function updateCameraStateInUrl(isActive) {
+  const query = { ...route.query, camera: isActive ? 'active' : undefined };
+  router.push({ query });
 }
 
 const onError = async (error) => {
@@ -45,7 +49,8 @@ const onError = async (error) => {
 
 const onDetect = async (codes) => {
   let response = await helper.fetchData(codes.map((code) => code.rawValue));
-  router.push({path: '/info-page',
+  router.push({
+    path: '/info-page',
     query: {
       id: response.objectNumber,
       title: response.title,
@@ -58,6 +63,12 @@ const onDetect = async (codes) => {
     }
   });
 }
+
+onMounted(() => {
+  if (route.query.camera === 'active') {
+    isCameraActive.value = true;
+  }
+});
 </script>
 
 <script>
@@ -110,7 +121,6 @@ position: absolute;
 }
 
 #container {
-  display: none;
   position: absolute;
   margin: auto;
   width: 100%;

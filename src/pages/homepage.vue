@@ -328,7 +328,7 @@ footer {
     width: 100%;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .nav-button-box {
         display: none;
     }
@@ -338,7 +338,9 @@ footer {
     }
 
     .creators h1 {
+        width: 100%;
         font-size: 1.15rem;
+        text-align: left;
     }
 
     .creators p {
@@ -352,5 +354,68 @@ footer {
     .featured-page {
         text-align: center;
     }
+}
+
+@media screen and (max-width: 1024px) {
+    .page-overlay {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .creators {
+        align-items: center;
+    }
+
+    .creators h1 {
+        font-size: 1.15rem;
+    }
+
+    .creators p {
+        font-size: 0.85rem;
+    }
+
+    .sponsor {
+        display: none;
+    }
+
+    .card-page div {
+        flex-direction: column;
+    }
+
+    .featured-page {
+        text-align: center;
+    }
+
+    .margin-lr {
+        margin: 0 calc(1rem + 1vw);
+}
+
+
+.padding-lrt {
+    padding: calc(0.5rem + 0.5vw) calc(2rem + 3vw) 0;
+}
+
+.padding-lr {
+    padding: 0 calc(1.5rem + 2.5vw);
+}
+
+.padding-lrtb {
+    padding: calc(1.5rem + 2.5vw);
+}
+.landing-page nav {
+    padding-left: calc(1rem + 1vw);
+    padding-bottom: calc(0.5rem + 0.5vw);
+}
+.content {
+    padding: 0;
+    padding-left: calc(1rem + 1vw);
+    padding-bottom: calc(1rem + 1vw);
+}
+
+.page-overlay {
+    padding: calc(1rem + 1vw);
+    padding-left: calc(1rem + 1vw);
+    padding-bottom: calc(0.5rem + 0.5vw);
+}
 }
 </style>

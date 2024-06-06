@@ -1,7 +1,7 @@
 <template>
     <main>
         <section class="landing-page">
-            <nav class="padding-lrtb">
+            <nav>
                 <a class="head-button" href="/qr-app">Probeer de app!</a>
                 <div class="nav-button-box">
                     <a href="/">Language</a>
@@ -12,50 +12,55 @@
                 <img src="/rijksmuseum-logo.webp" alt="Logo" />
                 <h2>Ontdek de kunst met onze innovatieve web-app!</h2>
             </div>
-            <div class="page-overlay margin-lrtb">
+            <div class="page-overlay">
                 <div class="creators">
                     <h1>gebruik de app</h1>
                     <p>Gemaakt door Luke van den Broek & Samed Bozaslan</p>
                 </div>
-                <h1 class="sponsor">sintlucas</h1>
+                <h1 class="sponsor">s<span>i</span>ntlucas</h1>
             </div>
         </section>
         <section class="card-page">
             <div>
-                <div id="card-a" class="card">
-                    <div class="content padding-lrtb">
+                <div class="card">
+                    <div class="content">
                         <p class="category">project</p>
                         <h2>de opdracht</h2>
                         <p>wat was de opdracht precies</p>
                     </div>
+                    <img src="/head_img_card_one.webp" alt="head_img_card_one" />
                 </div>
-                <div id="card-b" class="card">
-                    <div class="content padding-lrtb">
+                <div class="card">
+                    <div class="content">
                         <p class="category">fancy frameworks</p>
-                        <h2>de technolgie</h2>
+                        <h2>de technologie</h2>
                         <p>wat hebben we allemaal gebruikt</p>
                     </div>
+                    <img src="/head_img_card_two.webp" alt="head_img_card_two" />
                 </div>
             </div>
             <div>
-                <div id="card-c" class="card">
-                    <div class="content padding-lrtb">
+                <div class="card">
+                    <div class="content">
                         <p class="category">project groei</p>
                         <h2>het process</h2>
                         <p>De stappen die we hebben gemaakt</p>
                     </div>
+                    <img src="/head_img_card_three.webp" alt="head_img_card_three" />
                 </div>
-                <div id="card-d" class="card">
-                    <div class="content padding-lrtb">
+                <div class="card">
+                    <div class="content">
                         <p class="category">school</p>
                         <h2>Het leermoment</h2>
                         <p>wat hebben we precies geleerd</p>
                     </div>
+                    <img src="/head_img_card_four.webp" alt="head_img_card_four" />
                 </div>
             </div>
         </section>
         <section class="featured-page">
             <h1>wie hebben het project gemaakt</h1>
+            <img src="/bottom_img_one.webp" alt="head_img_card_three" />
         </section>
         <footer>
             <p>© 2024 LNME Media & Design | Samed Bozaslan</p>
@@ -112,10 +117,11 @@ nav {
 }
 
 .head-button {
+    border-radius: 2px;
     color: white;
     text-decoration: none;
-    font-size: 1.25rem;
-    padding: 0.5rem 2rem;
+    font-size: 17px;
+    padding: calc(1.563rem - 0.5rem) 20px;
     font-weight: bold;
     background-color: #D55140;
 }
@@ -147,6 +153,10 @@ main {
     /* Adjust the opacity as needed */
 }
 
+.landing-page nav {
+    padding: calc(0.5rem + 0.5vw) calc(2.5rem + 3.5vw) calc(0.15rem + 0.15rem) calc(2.5rem + 3.5vw);
+}
+
 .page-overlay {
     position: absolute;
     bottom: 0;
@@ -155,6 +165,8 @@ main {
     display: flex;
     width: auto;
     align-items: end;
+    padding: calc(2.5rem + 3.5vw) calc(2.5rem + 3.5vw) 0 calc(2.5rem + 3.5vw);
+    margin-bottom: calc(1.75rem + 1.75vw);
     justify-content: space-between;
 }
 
@@ -162,7 +174,10 @@ main {
     text-transform: uppercase;
     font-size: 1.5rem;
     color: white;
+}
 
+.page-overlay h1 span {
+    text-transform: none;
 }
 
 .creators {
@@ -186,15 +201,23 @@ main {
 }
 
 .margin-lr {
-    margin: 0 calc(1rem + 1vw);
+    margin: 0 calc(2.5rem + 3.5vw);
 }
 
 .margin-lrtb {
     margin: calc(1rem + 1vw);
 }
 
+.padding-lrt {
+    padding: calc(1rem + 1vw) calc(2.5rem + 3.5vw) 0;
+}
+
+.padding-lr {
+    padding: 0 calc(2.5rem + 3.5vw);
+}
+
 .padding-lrtb {
-    padding: calc(1rem + 1vw);
+    padding: calc(2.5rem + 3.5vw);
 }
 
 .card-page {
@@ -212,17 +235,37 @@ main {
 }
 
 .card {
+    position: relative;
     display: flex;
     width: 100%;
     height: 100%;
     align-items: end;
-    background-blend-mode: darken;
     background-color: rgba(0, 0, 0, 0.1);
+    background-size: 150px 150px;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    z-index: -1;
+    transition: transform 0.6s ease-in-out;
+}
+
+.card:hover img {
+    transform: scale(1.05)
+
 }
 
 .content {
     display: flex;
     flex-direction: column;
+    padding: calc(1rem + 1vw) calc(2.5rem + 3.5vw) calc(1.75rem + 1.75vw);
     color: white;
     width: 100%;
     height: 100%;
@@ -245,38 +288,31 @@ main {
     background-color: white;
 }
 
-#card-a {
-    background-image: url('/head_img_card_one.webp');
-    background-size: cover;
-}
-
-#card-b {
-    background-image: url('/head_img_card_two.webp');
-    background-size: cover;
-}
-
-#card-c {
-    background-image: url('/head_img_card_three.webp');
-    background-size: cover;
-}
-
-#card-d {
-    background-image: url('/head_img_card_four.webp');
-    background-size: cover;
-}
-
 .featured-page {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 50vh;
     text-transform: uppercase;
     font-size: x-large;
-    background-image: url('/bottom_img_one.webp');
-    background-size: cover;
-    background-blend-mode: darken;
     background-color: rgba(0, 0, 0, 0.1);
     color: white;
+    overflow: hidden;
+}
+
+.featured-page img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    z-index: -1;
+    transition: transform 0.6s ease-in-out;
+}
+
+.featured-page:hover img {
+    transform: scale(1.05)
 }
 
 footer {

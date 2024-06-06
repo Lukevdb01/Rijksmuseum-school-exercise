@@ -328,7 +328,7 @@ footer {
     width: 100%;
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 890px) {
     .nav-button-box {
         display: none;
     }
@@ -337,17 +337,14 @@ footer {
         display: none;
     }
 
-    .page-overlay {
-        margin-bottom: calc(0.5rem + 0.5vw);
-    }
-
     .creators h1 {
         width: 100%;
         font-size: 1.15rem;
-        text-align: left;
+        text-align: center;
     }
 
     .creators p {
+        text-align: center;
         font-size: 0.85rem;
     }
 
@@ -369,7 +366,7 @@ footer {
 }
 }
 
-@media screen and (max-width: 1024px) {
+@media (max-width: 1024px) {
     .page-overlay {
         flex-direction: column;
         align-items: center;

@@ -337,6 +337,10 @@ footer {
         display: none;
     }
 
+    .page-overlay {
+        margin-bottom: calc(0.5rem + 0.5vw);
+    }
+
     .creators h1 {
         width: 100%;
         font-size: 1.15rem;
@@ -354,6 +358,15 @@ footer {
     .featured-page {
         text-align: center;
     }
+
+    .head-button {
+    font-size: 15px;
+    padding: calc(1.25rem - 0.5rem) 20px;
+}
+
+.hero-content h2 {
+    font-size: 1.25rem;
+}
 }
 
 @media screen and (max-width: 1024px) {

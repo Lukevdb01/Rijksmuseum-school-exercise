@@ -3,23 +3,57 @@
         <div class="login-box">
             <img src="/rijksmuseum-logo-black.webp" alt="Logo" />
             <form>
-                <input type="text" id="email" placeholder="Email" />
-                <input type="password" id="password" placeholder="Password" />
-                <button type="submit" class="login-button">Login</button>
-                <div class="button-box">
-                    <a>
-                        <img src="/github_logo.svg">
-                        <p>Sign in with github</p>
-                    </a>
-                    <a>
-                        <img src="/google_logo.svg">
-                        <p>Sign in with google</p>
-                    </a>
-                </div>
+                <input type="text" id="email" placeholder="Email" v-model="email" />
+                <input type="password" id="password" placeholder="Password" v-model="password" />
+                <button type="submit">Login</button>
+                <button type="submit" id="signInButton"  @click="register" >sign up</button>
+
+              <div class="button-box">
+                <a>
+                  <img src="/github_logo.svg" alt="">
+                  <p>Sign in with github</p>
+                </a>
+                <a>
+
+                  <img src="/google_logo.svg" @click="signInWithGoogle" alt="">
+                  <p>Sign in with google</p>
+                </a>
+              </div>
             </form>
         </div>
     </div>
 </template>
+
+<script setup>
+import { ref } from "vue";
+import {useRouter } from "vue-router";
+
+import {getAuth, createUserWithEmailAndPassword} from "firebase/auth"
+const email = ref("");
+const password = ref("")
+const router = useRouter();
+
+const register = () => {
+  createUserWithEmailAndPassword(getAuth(), email.value, password.value)
+      .then((data) => {
+        console.log("successfully registered!")
+        router.push("/homepage")
+      })
+      .catch((error) => {
+        console.log(error.code);
+        alert(error.message);
+      });
+
+
+
+}
+
+const signInWithGoogle = () => {
+
+}
+
+
+</script>
 
 <style>
 .login-container {
@@ -38,7 +72,7 @@
     flex-direction: column;
     justify-content: space-between;
     width: 500px;
-    height: 350px;
+    height: 380px;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 15px;
@@ -96,7 +130,13 @@
 .button-box a img {
     width: 32px;
     height: auto;
+
 }
+
+#signInButton{
+  margin-top: 10px;
+}
+
 
 @media screen and (max-width: 600px) {
     .login-box {

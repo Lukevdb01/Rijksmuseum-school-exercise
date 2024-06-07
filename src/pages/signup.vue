@@ -1,11 +1,11 @@
 <template>
   <div class="login-container">
     <div class="login-box">
-      <img src="/rijksmuseum-logo-black.webp" alt="Logo" />
+      <img src="/rijksmuseum-logo-black.webp" alt="Logo"/>
       <form>
-        <input type="text" id="email" placeholder="Email" v-model="email" />
-        <input type="password" id="password" placeholder="Password" v-model="password" />
-        <button type="submit" @click="register" >sign up</button>
+        <input type="text" id="email" placeholder="Email" v-model="email"/>
+        <input type="password" id="password" placeholder="Password" v-model="password"/>
+        <button type="submit" @click="register">sign up</button>
         <a href="/login">Log in </a>
 
         <div class="button-box">
@@ -25,31 +25,31 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import {useRouter } from "vue-router";
+import {ref} from "vue";
+import {useRouter} from "vue-router";
 
-import {getAuth, createUserWithEmailAndPassword} from "firebase/auth"
+import {getAuth, createUserWithEmailAndPassword,GoogleAuthProvider, signInWithPopup} from "firebase/auth"
+
 const email = ref("");
 const password = ref("")
 const router = useRouter();
 
 const register = () => {
-  createUserWithEmailAndPassword(getAuth(), email.value, password.value)
-      .then((data) => {
-        console.log("successfully registered!")
-        router.push("/homepage")
-      })
+  createUserWithEmailAndPassword(getAuth(), email.value, password.value).then((data) => {
+    console.log("successfully registered!")
+    router.push("/homepage")
+  })
       .catch((error) => {
         console.log(error.code);
         alert(error.message);
       });
 
 
-
 }
 
 const signInWithGoogle = () => {
-
+const provider = new GoogleAuthProvider();
+signInWithPopup(getAuth(), provider);
 }
 
 
@@ -133,7 +133,7 @@ const signInWithGoogle = () => {
 
 }
 
-#loginButton{
+#loginButton {
   margin-top: 10px;
 }
 

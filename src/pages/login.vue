@@ -5,9 +5,8 @@
             <form>
                 <input type="text" id="email" placeholder="Email" v-model="email" />
                 <input type="password" id="password" placeholder="Password" v-model="password" />
-                <button type="submit">Login</button>
-                <button type="submit" id="signInButton"  @click="register" >sign up</button>
-
+                <button type="submit" @click="logIn">Login</button>
+                <a href="/signup">Sign up</a>
               <div class="button-box">
                 <a>
                   <img src="/github_logo.svg" alt="">
@@ -28,16 +27,18 @@
 import { ref } from "vue";
 import {useRouter } from "vue-router";
 
-import {getAuth, createUserWithEmailAndPassword} from "firebase/auth"
+import {getAuth, signInWithEmailAndPassword} from "firebase/auth"
 const email = ref("");
 const password = ref("")
+const errMsg = ref()
 const router = useRouter();
 
-const register = () => {
-  createUserWithEmailAndPassword(getAuth(), email.value, password.value)
+const logIn = () => {
+  signInWithEmailAndPassword(getAuth(), email.value, password.value)
       .then((data) => {
-        console.log("successfully registered!")
+        console.log("successfully loggedIn!")
         router.push("/homepage")
+        alert('loggedIn')
       })
       .catch((error) => {
         console.log(error.code);

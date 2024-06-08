@@ -6,7 +6,7 @@
     <a href="/qr-app" class="tab">
       <img src="/home.svg" alt="Book Icon">
     </a>
-    <a href="/" class="tab">
+    <a href="/homepage" class="tab">
       <img src="/qr-code.svg" alt="QR Code Icon">
     </a>
 

@@ -48,7 +48,7 @@ function imgSeeBetter() {
         <div class="gradient-overlay" id="gradient"></div>
         <div id="bottomHeader">
           <h4 class="paintingDate">{{ apiData.dating.presentingDate }}</h4>
-          <a @click="imgSeeBetter"><img src="/eye.svg" alt=""></a>
+         <img src="/eye.svg" alt="" @click="imgSeeBetter">
         </div>
       </div>
       <div class="title">
@@ -67,14 +67,11 @@ function imgSeeBetter() {
         <p>{{ apiData.principalMakers[0].dateOfDeath }}</p>
       </div>
       <p id="description">{{ apiData.label.description }}</p>
-      <div class="button-container">
-        <button>Learn More</button>
-      </div>
     </main>
-    <nav>
+    <footer>
       <img src="/arrow-back.svg" alt="back" @click="router.back()">
-      <h1>temporary</h1>
-    </nav>
+      <h2>Return</h2>
+    </footer>
   </div>
 </template>
 
@@ -88,26 +85,32 @@ export default {
 </script>
 
 <style scoped>
-nav {
+footer {
   background-color: var(--tertiary-background-color);
   display: flex;
   justify-content: space-between;
   padding: 1rem;
   align-items: center;
+  width: 100%;
 }
 
-main {
-  background-color: var(--primary-background-color);
-}
 
-nav img {
+
+footer img {
   width: 38px;
   height: 38px;
 }
 
 
+main{
+  background-color: var(--primary-background-color);
+
+}
+
 .base-container {
   color: var(--primary-text-color);
+  height: 100vh;
+  background-color: var(--primary-background-color);
 
 }
 
@@ -118,6 +121,7 @@ nav img {
 .title {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 15px 20px;
   position: absolute;
   z-index: 1;
@@ -138,14 +142,6 @@ nav img {
 }
 
 
-#backgroundDisappear {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-  background-color: var(--primary-background-color);
-  display: none;
-}
 
 .gradient-overlay {
   position: absolute;
@@ -170,12 +166,17 @@ nav img {
   font-weight: 400;
 }
 
+#bottomHeader a{
+  display: flex;
+  justify-content: center;
+}
+
 main {
   padding: 20px;
 }
 
 .dateOfPainter {
-  float: right;
+  float: left;
   display: flex;
   gap: 10px;
 }
@@ -190,10 +191,6 @@ main {
   padding: 3rem 0 3rem;
 }
 
-.button-container {
-  display: flex;
-  justify-content: center;
-}
 
 button {
   align-self: center;
@@ -216,6 +213,7 @@ button:hover {
 
 #Heart {
   cursor: pointer;
+  width: 40px;
 }
 
 #dropdownContent {
@@ -229,6 +227,7 @@ button:hover {
   transition: all ease-in 0.6s;
   flex-direction: column;
   gap: 5px;
+
 
 }
 

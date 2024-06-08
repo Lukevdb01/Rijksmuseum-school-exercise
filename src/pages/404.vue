@@ -2,7 +2,7 @@
     <main>
         <div class="content">
             <h1>404, <span>not found</span></h1>
-            <button @click="router.push('/')">Go to Homepage</button>
+            <button @click="router.push('/homepage')">Go to Homepage</button>
         </div>
     </main>
 </template>

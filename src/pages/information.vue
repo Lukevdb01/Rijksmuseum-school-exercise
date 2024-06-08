@@ -69,8 +69,8 @@ function imgSeeBetter() {
       <p id="description">{{ apiData.label.description }}</p>
     </main>
     <footer>
-      <img src="/arrow-back.svg" alt="back" @click="router.back()">
-      <h2>Return</h2>
+      <img src="/arrow-back.svg" alt="back" id="return" @click="router.back()">
+      <p>Return</p>
     </footer>
   </div>
 </template>
@@ -85,13 +85,21 @@ export default {
 </script>
 
 <style scoped>
+#return{
+  transform: scaleX(-1);
+}
+
 footer {
   background-color: var(--tertiary-background-color);
   display: flex;
-  justify-content: space-between;
+  gap: 40px;
   padding: 1rem;
   align-items: center;
   width: 100%;
+  position: fixed;
+  bottom: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 
 
@@ -182,13 +190,13 @@ main {
 }
 
 .title-main {
-  display: inline;
 }
 
 #description {
   font-weight: 500;
   font-size: 1rem;
   padding: 3rem 0 3rem;
+  margin-bottom: 50px;
 }
 
 
@@ -237,4 +245,6 @@ button:hover {
   width: 30px;
   height: 30px;
 }
+
+
 </style>

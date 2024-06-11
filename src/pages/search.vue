@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUpdated } from 'vue';
+import { ref, onBeforeMounted, onUpdated } from 'vue';
 import { useRouter } from 'vue-router';
 import { apiProvider } from '../providers/api';
 import { helper } from '../providers/helper';
@@ -41,7 +41,7 @@ const handleSearch = () => {
   });
 };
 
-onMounted(async () => {
+onBeforeMounted(async () => {
   objects.value = await getPaintingInformation(router.currentRoute.value.query.keyword);
 });
 

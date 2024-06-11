@@ -1,7 +1,7 @@
 // Vue imports
 import { createApp } from 'vue';
 import App from './App.vue';
-import router from './services/routing';
+import router from './providers/routing';
 import { createHead } from '@vueuse/head';
 
 // Firebase imports

@@ -1,13 +1,13 @@
 <script setup>
 import { useRouter } from "vue-router";
-import { onMounted, ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 import TabBar from '../components/TabBar.vue';
 import { helper } from "../providers/helper";
 
 const router = useRouter();
 const objects = ref([]);
 
-onMounted(async () => {
+onBeforeMount(async () => {
     JSON.parse(localStorage.getItem('favorite')).forEach(async (object) => {
         objects.value.push(await helper.fetchData(object.id));
     });

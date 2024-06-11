@@ -1,22 +1,21 @@
 <template>
   <div class="base base-container">
-    <img src="/public/background.webp" alt="background image" id="backgroundImg">
+    <div id="container" >
+      <div class="base flex-image-qr">
+        <qrcode-stream @error="onError" @detect="onDetect" class="qr-stream"></qrcode-stream>
+      </div>
+    </div>
     <div id="navbarHome">
 
-      <img src="/public/camera.svg" alt="Camera Icon" class="iconsForLogo" @click="toggleCamera">
       <div>
         <img src="/public/rijksmuseum-logo.webp" class="logoRijksmuseum" alt="Logo rijksmuseum">
       </div>
-      <a href="/search"> <img src="/public/search.svg" alt="search icon" class="iconsForLogo" > </a>
+      <a href="/search"> <img src="/public/search.svg" alt="search icon" class="iconsForLogo"> </a>
     </div>
 
     <TabBar/>
 
-    <div id="container" v-show="isCameraActive">
-      <div class="base flex-image-qr">
-        <qrcode-stream v-if="isCameraActive" @error="onError" @detect="onDetect" class="qr-stream"></qrcode-stream>
-      </div>
-    </div>
+
 
   </div>
 
@@ -33,15 +32,7 @@ const router = useRouter();
 const route = useRoute();
 const isCameraActive = ref(false);
 
-function toggleCamera() {
-  isCameraActive.value = !isCameraActive.value;
-  updateCameraStateInUrl(isCameraActive.value);
-}
 
-function updateCameraStateInUrl(isActive) {
-  const query = { ...route.query, camera: isActive ? 'active' : undefined };
-  router.push({ query });
-}
 
 const onError = async (error) => {
   console.error('QR Code Scanner Error:', error);
@@ -96,7 +87,7 @@ export default {
   align-items: center;
   padding: 10px 20px;
   justify-content: space-between;
-
+  background-color: var(--secondary-background-color);
 
 }
 
@@ -124,9 +115,9 @@ position: absolute;
   position: absolute;
   margin: auto;
   width: 100%;
-  height: 80%;
-  padding: calc(0.5rem + 0.5vw);
+  height: 100%;
   color: black;
+  z-index: -10;
 }
 
 .flex-image-qr {

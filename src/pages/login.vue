@@ -12,9 +12,9 @@
             <img src="/github_logo.svg" alt="">
             <p>Sign in with github</p>
           </a>
-          <a>
+          <a @click="signInWithGoogle">
 
-            <img src="/google_logo.svg" @click="signInWithGoogle" alt="">
+            <img src="/google_logo.svg"  alt="">
             <p>Sign in with google</p>
           </a>
         </div>

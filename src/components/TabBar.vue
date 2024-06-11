@@ -59,7 +59,7 @@ nav {
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 10%;
+  height: 7%;
   position: fixed;
   bottom: 0;
   background: #2A2A2A;
@@ -78,7 +78,7 @@ nav {
 }
 
 .tab img {
-  width: 40%;
+  width: 30%;
   height: auto;
 }
 </style>

@@ -5,7 +5,8 @@
                 <a class="head-button" href="/qr-app">Probeer de app!</a>
                 <div class="nav-button-box">
                     <a href="/">Language</a>
-                    <a href="/login">Inloggen</a>
+                    <a v-if="isAuthenticated" @click="signOut(auth)">Uitloggen</a>
+                    <a v-else href="/login">Inloggen</a>
                 </div>
             </nav>
             <div class="hero-content margin-lr">
@@ -70,6 +71,14 @@
 
 <script setup>
 import { useHead } from '@vueuse/head';
+import { onBeforeMount } from 'vue';
+import { ref } from 'vue';
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const auth = getAuth();
+const isAuthenticated = ref(false);
 
 useHead({
     title: 'Homepage',
@@ -103,6 +112,18 @@ useHead({
             content: 'https://www.awesomewebdevelopment.com/images/og-image.jpg'
         }
     ]
+});
+
+onBeforeMount(() => {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            isAuthenticated.value = true;
+            console.log("User is logged in!");
+        } else {
+            isAuthenticated.value = false;
+            console.log("User is logged out!");
+        }
+    });
 });
 </script>
 

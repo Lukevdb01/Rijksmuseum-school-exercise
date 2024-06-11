@@ -22,7 +22,10 @@ const router = createRouter({
         },
         {
             path: '/favorites',
-            component: () => import('../pages/favorite.vue')
+            component: () => import('../pages/favorite.vue'),
+            meta: {
+                requiresAuth: true
+            }
         },
         {
             path: '/:pathMatch(.*)*',

@@ -17,6 +17,8 @@ if(localStorage.getItem('language') === null) {
 if(onAuthStateChanged(auth, (user) => {
   if (!user && router.currentRoute.value.path == "/favorites") {
     router.push("/login");
+  } else if (user && router.currentRoute.value.path == "/login") {
+    router.back();
   }
 }));
 </script>

@@ -43,17 +43,20 @@ import { ref, onBeforeMount } from "vue";
 import { useRouter } from "vue-router";
 import DropDown from "../components/DropDown.vue";
 import { helper } from "../providers/helper.js";
+import { dbProvider } from "../providers/database.js";
+import {auth} from "../firebase";
 
 const router = useRouter();
 const collection = ref([]);
 const apiData = ref(null);
 
 const favorItem = async (data) => {
-  let object = {
-    id: data.id
+  if(auth.currentUser) {
+    dbProvider.set('favorite/', auth.currentUser.displayName, { id: data.id }); 
+    console.log('added to favorite'); 
+  } else {
+    alert('You need to be logged in to add a favorite');
   }
-  collection.value.push(object);
-  localStorage.setItem('favorite', JSON.stringify(collection.value));
 }
 
 const handleLanguageChange = async (newLanguage) => {

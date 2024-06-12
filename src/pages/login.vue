@@ -27,7 +27,8 @@
 import {ref} from "vue";
 import {useRouter} from "vue-router";
 
-import {getAuth, signInWithEmailAndPassword,GoogleAuthProvider, signInWithPopup} from "firebase/auth"
+import {signInWithEmailAndPassword,GoogleAuthProvider, signInWithPopup} from "firebase/auth"
+import { auth } from "../firebase";
 
 const email = ref("");
 const password = ref("")
@@ -35,7 +36,7 @@ const errMsg = ref()
 const router = useRouter();
 
 const logIn = () => {
-  signInWithEmailAndPassword(getAuth(), email.value, password.value).then((data) => {
+  signInWithEmailAndPassword(auth, email.value, password.value).then((data) => {
     console.log("successfully loggedIn!")
     router.push("/homepage")
     alert('loggedIn')
@@ -50,7 +51,7 @@ const logIn = () => {
 
 const signInWithGoogle = () => {
   const provider = new GoogleAuthProvider();
-  signInWithPopup(getAuth(), provider);
+  signInWithPopup(auth, provider);
 }
 
 

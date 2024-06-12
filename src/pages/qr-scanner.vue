@@ -76,6 +76,8 @@ export default {
   overflow: hidden;
 }
 
+
+
 .logoRijksmuseum {
   width: 50vw;
 

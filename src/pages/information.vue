@@ -1,3 +1,42 @@
+<template>
+  <div class="base base-container">
+
+    <div id="loader">
+
+    </div>
+    <header>
+      <div class="image-container">
+        <img class="paintingImg" :src="apiData.webImage.url" alt="" id="paintingImg" @load="onImageLoad">
+        <div class="gradient-overlay" id="gradient"></div>
+        <div id="bottomHeader">
+          <h4 class="paintingDate">{{ apiData.dating.presentingDate }}</h4>
+         <img src="/eye.svg" alt="" @click="imgSeeBetter">
+        </div>
+      </div>
+      <div class="title">
+        <img id="Heart" src="/heart.svg" @click="favorItem(router.currentRoute.value.query)" alt="Favorite icon">
+        <h3>{{ apiData.title }}</h3>
+        <DropDown @languageChanged="handleLanguageChange" :head_title="apiData.title"
+          :namePainter="apiData.principalMakers[0].name" :description="apiData.label.description"
+          :date="apiData.dating.presentingDate" />
+      </div>
+    </header>
+    <main>
+      <h4 class="title-main">{{ apiData.principalMakers[0].name }}</h4>
+      <div class="dateOfPainter">
+        <p>{{ apiData.principalMakers[0].dateOfBirth }}</p>
+        <p>-</p>
+        <p>{{ apiData.principalMakers[0].dateOfDeath }}</p>
+      </div>
+      <p id="description">{{ apiData.label.description }}</p>
+    </main>
+    <footer>
+      <img src="/arrow-back.svg" alt="back" id="return" @click="router.back()">
+      <p>Return</p>
+    </footer>
+  </div>
+</template>
+
 <script setup>
 
 import { ref, onBeforeMount } from "vue";
@@ -37,43 +76,22 @@ function imgSeeBetter() {
   }
 }
 
+
+
+ const onImageLoad = () => {
+   const loader = document.getElementById('loader');
+
+   loader.style.opacity = '0';
+
+   loader.addEventListener('transitionend', () => {
+     loader.style.display = 'none';
+   }, { once: true }); 
+ }
+
+
+
 </script>
 
-
-<template>
-  <div class="base base-container">
-    <header>
-      <div class="image-container">
-        <img class="paintingImg" :src="apiData.webImage.url" alt="" id="paintingImg">
-        <div class="gradient-overlay" id="gradient"></div>
-        <div id="bottomHeader">
-          <h4 class="paintingDate">{{ apiData.dating.presentingDate }}</h4>
-         <img src="/eye.svg" alt="" @click="imgSeeBetter">
-        </div>
-      </div>
-      <div class="title">
-        <img id="Heart" src="/heart.svg" @click="favorItem(router.currentRoute.value.query)" alt="Favorite icon">
-        <h3>{{ apiData.title }}</h3>
-        <DropDown @languageChanged="handleLanguageChange" :head_title="apiData.title"
-          :namePainter="apiData.principalMakers[0].name" :description="apiData.label.description"
-          :date="apiData.dating.presentingDate" />
-      </div>
-    </header>
-    <main>
-      <h4 class="title-main">{{ apiData.principalMakers[0].name }}</h4>
-      <div class="dateOfPainter">
-        <p>{{ apiData.principalMakers[0].dateOfBirth }}</p>
-        <p>-</p>
-        <p>{{ apiData.principalMakers[0].dateOfDeath }}</p>
-      </div>
-      <p id="description">{{ apiData.label.description }}</p>
-    </main>
-    <footer>
-      <img src="/arrow-back.svg" alt="back" id="return" @click="router.back()">
-      <p>Return</p>
-    </footer>
-  </div>
-</template>
 
 <script>
 export default {
@@ -85,8 +103,28 @@ export default {
 </script>
 
 <style scoped>
+
+
+
+
 #return{
   transform: scaleX(-1);
+}
+
+#loader{
+  background-color: var(--secondary-background-color);
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  display: flex;
+  transition: opacity 2s ease; /* Add transition for opacity */
+  opacity: 1; /* Initial opacity */
+}
+
+
+#loader img{
+  width: 50%;
 }
 
 footer {

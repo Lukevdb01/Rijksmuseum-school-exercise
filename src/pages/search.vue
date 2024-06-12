@@ -54,7 +54,7 @@ onUpdated(async () => {
 <template>
   <div class="base base-container">
   <nav>
-   <a href="/qr-app?camera=active"> <img src="/camera.svg" alt="back"></a>
+   <a href="/favorites"> <img src="/heart.svg" alt="back"></a>
     <h1>SEARCH</h1>
     <a href="/qr-app"><img id="homeButton" src="/home.svg" alt="" ></a>
   </nav>
@@ -87,7 +87,7 @@ nav {
 
 nav img {
   width: auto;
-  height: 30px;
+  height: 33px;
   background-color: var(--primary-background-color);
 
 }
@@ -98,7 +98,7 @@ nav a{
 }
 
 #homeButton{
-  height: 29px;
+  height: 30px;
 }
 
 ul {

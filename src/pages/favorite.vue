@@ -1,15 +1,21 @@
 <script setup>
 import { useRouter } from "vue-router";
-import { onMounted, ref } from "vue";
+import { onBeforeMount, onMounted, ref } from "vue";
 import TabBar from '../components/TabBar.vue';
 import { helper } from "../providers/helper";
+import { dbProvider } from "../providers/database";
+import { getAuth } from "firebase/auth";
 
 const router = useRouter();
 const objects = ref([]);
+const auth = getAuth();
 
 onMounted(async () => {
-    JSON.parse(localStorage.getItem('favorite')).forEach(async (object) => {
-        objects.value.push(await helper.fetchData(object.id));
+    dbProvider.get(`favorite/${auth.currentUser.displayName}`).then(async (data) => {
+        objects.value = [];
+        data.forEach(async (object) => {
+            objects.value.push(await helper.fetchData(object.id));
+        });
     });
 });
 </script>

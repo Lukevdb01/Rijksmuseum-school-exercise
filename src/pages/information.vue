@@ -85,7 +85,7 @@ function imgSeeBetter() {
 
    loader.addEventListener('transitionend', () => {
      loader.style.display = 'none';
-   }, { once: true }); 
+   }, { once: true });
  }
 
 

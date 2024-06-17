@@ -3,12 +3,11 @@
 </template>
 
 <script setup>
-import { getAuth } from "firebase/auth";
+import { auth } from "./firebase";
 import { useRouter } from "vue-router";
 import { onAuthStateChanged } from "firebase/auth";
 
 const router = useRouter();
-const auth = getAuth();
 
 if(localStorage.getItem('language') === null) {
   localStorage.setItem('language', 'en');

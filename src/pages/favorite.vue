@@ -4,17 +4,18 @@ import { onBeforeMount, onMounted, ref } from "vue";
 import TabBar from '../components/TabBar.vue';
 import { helper } from "../providers/helper";
 import { dbProvider } from "../providers/database";
-import { getAuth } from "firebase/auth";
+import { auth } from "../firebase";
 
 const router = useRouter();
 const objects = ref([]);
-const auth = getAuth();
 
 onMounted(async () => {
-    dbProvider.get(`favorite/${auth.currentUser.displayName}`).then(async (data) => {
+    dbProvider.get(`favorite`).then(async (data) => {
         objects.value = [];
         data.forEach(async (object) => {
-            objects.value.push(await helper.fetchData(object.id));
+            if(object.id === auth.currentUser.displayName) {
+                objects.value.push(await helper.fetchData(object.data.id));
+            }
         });
     });
 });

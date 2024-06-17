@@ -1,8 +1,9 @@
 import { doc, getFirestore, setDoc, collection, getDocs, deleteDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 const dbProvider = {
     async get(map) {
-        const snapshot = await getDocs(collection(getFirestore(), map));
+        const snapshot = await getDocs(collection(db, map));
         let data = [];
         snapshot.forEach(doc => {
             data.push({id:doc.id, data: doc.data()});
@@ -12,11 +13,11 @@ const dbProvider = {
     },
 
     async set(map, id, data) {
-        return await setDoc(doc(getFirestore(), map, id), data);
+        return await setDoc(doc(db, map, id), data);
     },
 
     async remove(map, id) {
-        return await deleteDoc(doc(getFirestore(), map, id));
+        return await deleteDoc(doc(db, map, id));
     },
 }
 

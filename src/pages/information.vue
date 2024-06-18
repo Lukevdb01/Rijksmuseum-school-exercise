@@ -31,7 +31,7 @@
       <p id="description">{{ apiData.label.description }}</p>
     </main>
     <footer>
-      <img src="/arrow-back.svg" alt="back" id="return" @click="router.back()">
+      <img src="/arrow-back.svg" alt="back" id="return" @click="handlePushback()">
       <p>Return</p>
     </footer>
   </div>
@@ -56,6 +56,12 @@ const favorItem = async (data) => {
     console.log('added to favorite'); 
   } else {
     alert('You need to be logged in to add a favorite');
+  }
+}
+
+const handlePushback = () => {
+  if(!router.back()) {
+    router.push({ path: '/homepage' });
   }
 }
 

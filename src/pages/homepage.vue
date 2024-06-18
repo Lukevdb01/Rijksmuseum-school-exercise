@@ -11,7 +11,7 @@
                     <h1>gebruik de app</h1>
                     <p>Gemaakt door Luke van den Broek & Samed Bozaslan</p>
                 </div>
-                <h1 class="sponsor">s<span>i</span>ntlucas</h1>
+                <a href="https://www.sintlucas.nl/"><h1 class="sponsor">s<span>i</span>ntlucas</h1></a>
             </div>
         </section>
         <section class="card-page">
@@ -25,7 +25,10 @@
                     <div class="card-is-hovered">
                         <div class="hovered-head-content">
                             <h1>De opdracht</h1>
-                            <p>De opdracht was om een innovatieve web-app te maken voor het Rijksmuseum. waarmee mensen een QR code moesten scannen zodat ze alle informatie over dat schilderij konden zien. Dit was het afsluitende schoolproject voor leerjaar 2 software development op het SintLucas</p>
+                            <p>De opdracht was om een innovatieve web-app te maken voor het Rijksmuseum. waarmee mensen
+                                een QR code moesten scannen zodat ze alle informatie over dat schilderij konden zien.
+                                Dit was het afsluitende schoolproject voor leerjaar 2 software development op het
+                                SintLucas</p>
                         </div>
                     </div> <!-- Add this line -->
                     <img src="/head_img_card_one.webp" alt="head_img_card_one" />
@@ -39,7 +42,9 @@
                     <div class="card-is-hovered">
                         <div class="hovered-head-content">
                             <h1>De technologie</h1>
-                            <p>De technologie die we hebben gebruikt is Vue.js, Firebase, Rijksdata API, native browser APIs en nog veel meer. We hebben deze technologieën gebruikt om een web-app te maken die mensen kunnen gebruiken om de kunst in het Rijksmuseum te ontdekken.</p>
+                            <p>De technologie die we hebben gebruikt is Vue.js, Firebase, Rijksdata API, native browser
+                                APIs en nog veel meer. We hebben deze technologieën gebruikt om een web-app te maken die
+                                mensen kunnen gebruiken om de kunst in het Rijksmuseum te ontdekken.</p>
                         </div>
                     </div> <!-- Add this line -->
                     <img src="/head_img_card_two.webp" alt="head_img_card_two" />
@@ -55,7 +60,9 @@
                     <div class="card-is-hovered">
                         <div class="hovered-head-content">
                             <h1>Het process</h1>
-                            <p>Het process was een lange en leerzaam project. We hebben veel geleerd over Vue.js, Firebase, Rijksdata API en nog veel meer. We hebben veel fouten gemaakt, maar we hebben er ook veel van geleerd. We zijn erg trots op het eindresultaat.</p>
+                            <p>Het process was een lange en leerzaam project. We hebben veel geleerd over Vue.js,
+                                Firebase, Rijksdata API en nog veel meer. We hebben veel fouten gemaakt, maar we hebben
+                                er ook veel van geleerd. We zijn erg trots op het eindresultaat.</p>
                         </div>
                     </div> <!-- Add this line -->
                     <img src="/head_img_card_three.webp" alt="head_img_card_three" />
@@ -69,7 +76,9 @@
                     <div class="card-is-hovered">
                         <div class="hovered-head-content">
                             <h1>Het leermoment</h1>
-                            <p>We hebben veel geleerd tijdens dit project. We hebben geleerd hoe we een web-app moeten maken, hoe we een API moeten gebruiken, hoe we een database moeten gebruiken en nog veel meer.</p>
+                            <p>We hebben veel geleerd tijdens dit project. We hebben geleerd hoe we een web-app moeten
+                                maken, hoe we een API moeten gebruiken, hoe we een database moeten gebruiken en nog veel
+                                meer.</p>
                         </div>
                     </div> <!-- Add this line -->
                     <img src="/head_img_card_four.webp" alt="head_img_card_four" />
@@ -79,6 +88,7 @@
         <section class="featured-page">
             <h1>wie hebben het project gemaakt</h1>
             <img src="/bottom_img_one.webp" alt="head_img_card_three" />
+            
         </section>
         <footer>
             <p>© 2024 LNME Media & Design | Samed Bozaslan</p>
@@ -179,6 +189,10 @@ main {
     padding: calc(2.5rem + 3.5vw) calc(2.5rem + 3.5vw) 0 calc(2.5rem + 3.5vw);
     margin-bottom: calc(1.75rem + 1.75vw);
     justify-content: space-between;
+}
+
+.page-overlay a {
+    text-decoration: none;
 }
 
 .page-overlay h1 {
@@ -352,6 +366,11 @@ main {
     overflow: hidden;
 }
 
+.featured-page h1 {
+    opacity: 1;
+    transition: opacity 0.6s ease-in-out;
+}
+
 .featured-page img {
     width: 100%;
     height: 100%;
@@ -365,6 +384,10 @@ main {
 .featured-page:hover img {
     transform: scale(1.05);
     filter: grayscale(100%);
+}
+
+.featured-page:hover h1 {
+    opacity: 0;
 }
 
 footer {
@@ -409,13 +432,13 @@ footer {
     }
 
     .head-button {
-    font-size: 15px;
-    padding: calc(1.25rem - 0.5rem) 20px;
-}
+        font-size: 15px;
+        padding: calc(1.25rem - 0.5rem) 20px;
+    }
 
-.hero-content h2 {
-    font-size: 1.25rem;
-}
+    .hero-content h2 {
+        font-size: 1.25rem;
+    }
 }
 
 @media (max-width: 1024px) {
@@ -450,33 +473,35 @@ footer {
 
     .margin-lr {
         margin: 0 calc(1rem + 1vw);
-}
+    }
 
 
-.padding-lrt {
-    padding: calc(0.5rem + 0.5vw) calc(2rem + 3vw) 0;
-}
+    .padding-lrt {
+        padding: calc(0.5rem + 0.5vw) calc(2rem + 3vw) 0;
+    }
 
-.padding-lr {
-    padding: 0 calc(1.5rem + 2.5vw);
-}
+    .padding-lr {
+        padding: 0 calc(1.5rem + 2.5vw);
+    }
 
-.padding-lrtb {
-    padding: calc(1.5rem + 2.5vw);
-}
-.landing-page .nav {
-    padding: 0 calc(1rem + 1vw);
-}
-.content {
-    padding: 0;
-    padding-left: calc(1rem + 1vw);
-    padding-bottom: calc(1rem + 1vw);
-}
+    .padding-lrtb {
+        padding: calc(1.5rem + 2.5vw);
+    }
 
-.page-overlay {
-    padding: calc(1rem + 1vw);
-    padding-left: calc(1rem + 1vw);
-    padding-bottom: calc(0.5rem + 0.5vw);
-}
+    .landing-page .nav {
+        padding: 0 calc(1rem + 1vw);
+    }
+
+    .content {
+        padding: 0;
+        padding-left: calc(1rem + 1vw);
+        padding-bottom: calc(1rem + 1vw);
+    }
+
+    .page-overlay {
+        padding: calc(1rem + 1vw);
+        padding-left: calc(1rem + 1vw);
+        padding-bottom: calc(0.5rem + 0.5vw);
+    }
 }
 </style>

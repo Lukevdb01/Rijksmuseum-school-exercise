@@ -7,9 +7,10 @@ import { helper } from '../providers/helper';
 const router = useRouter();
 const objects = ref([]);
 const search = ref('');
+const language = ref(localStorage.getItem('language') || 'en'); // Get language from local storage, default to English
 
 const getPaintingInformation = async (input) => {
-  const base_url = `https://www.rijksmuseum.nl/api/${localStorage.getItem('language')}/collection?key=` + import.meta.env.VITE_RIJKSDATA_API_KEY + "&q=" + input;
+  const base_url = `https://www.rijksmuseum.nl/api/${language.value}/collection?key=` + import.meta.env.VITE_RIJKSDATA_API_KEY + "&q=" + input;
   const response = await apiProvider.get(base_url);
   if (response.artObjects.length === 0) {
     alert("No painting found with that name");
@@ -41,17 +42,17 @@ const handleSearch = () => {
     window.location.reload();
     search.value = '';
   });
-  
+
 };
 
 onBeforeMount(async () => {
   let keyword = '';
-  if(localStorage.getItem('language') === 'nl') {
+  if(language.value === 'nl') {
     keyword = 'De Nachtwacht';
-  } else if(localStorage.getItem('language') === 'en') {
+  } else if(language.value === 'en') {
     keyword = 'The Night Watch';
   }
-  router.push({ path: '/search', query: { keyword: keyword} });
+  router.push({ path: '/search', query: { keyword: keyword } });
   objects.value = await getPaintingInformation(router.currentRoute.value.query.keyword);
   console.log(objects.value);
 });
@@ -61,12 +62,11 @@ onUpdated(async () => {
 });
 </script>
 
-
 <template>
   <div class="base base-container">
     <nav>
       <a href="/favorites"> <img src="/heart.svg" alt="back"></a>
-      <h1>SEARCH</h1>
+      <h1>{{ language === 'nl' ? 'ZOEKEN' : 'SEARCH' }}</h1>
       <a href="/qr-app"><img id="homeButton" src="/home.svg" alt=""></a>
     </nav>
     <ul>
@@ -78,7 +78,7 @@ onUpdated(async () => {
       </li>
     </ul>
     <div class="search">
-      <input type="text" v-model="search" placeholder="Search for a painting" @keyup.enter="handleSearch">
+      <input type="text" v-model="search" :placeholder="language === 'nl' ? 'Zoek naar een schilderij' : 'Search for a painting'" @keyup.enter="handleSearch">
     </div>
   </div>
 </template>

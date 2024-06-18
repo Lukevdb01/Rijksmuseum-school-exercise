@@ -1,14 +1,7 @@
 <template>
     <main>
         <section class="landing-page">
-            <nav>
-                <a class="head-button" href="/qr-app">Probeer de app!</a>
-                <div class="nav-button-box">
-                    <a href="/">Language</a>
-                    <a v-if="isAuthenticated" @click="signOut(auth)">Uitloggen</a>
-                    <a v-else href="/login">Inloggen</a>
-                </div>
-            </nav>
+            <Header class="nav" />
             <div class="hero-content margin-lr">
                 <img src="/rijksmuseum-logo.webp" alt="Logo" />
                 <h2>Ontdek de kunst met onze innovatieve web-app!</h2>
@@ -75,6 +68,7 @@ import { onBeforeMount } from 'vue';
 import { ref } from 'vue';
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { useRouter } from "vue-router";
+import Header from '../components/Header.vue';
 
 const router = useRouter();
 const auth = getAuth();
@@ -128,41 +122,17 @@ onBeforeMount(() => {
 </script>
 
 <style scoped>
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: transparent;
-    color: white;
-    width: 100%;
-}
-
-.head-button {
-    border-radius: 2px;
-    color: white;
-    text-decoration: none;
-    font-size: 17px;
-    padding: calc(1.563rem - 0.5rem) 20px;
-    font-weight: bold;
-    background-color: #D55140;
-}
-
-.nav-button-box {
-    display: flex;
-    gap: 3rem;
-}
-
-.nav-button-box a {
-    color: white;
-    text-decoration: none;
-    font-size: 1rem;
-}
-
 main {
     height: 100vh;
 }
 
+.nav {
+    padding-bottom: calc(0.5rem + 0.5vw);
+}
+
 .landing-page {
+    display: flex;
+    flex-direction: column;
     position: relative;
     /* Add this line */
     background-image: url('/background.webp');
@@ -172,10 +142,6 @@ main {
     background-blend-mode: darken;
     background-color: rgba(0, 0, 0, 0.1);
     /* Adjust the opacity as needed */
-}
-
-.landing-page nav {
-    padding: calc(0.5rem + 0.5vw) calc(2.5rem + 3.5vw) calc(0.15rem + 0.15rem) calc(2.5rem + 3.5vw);
 }
 
 .page-overlay {
@@ -433,9 +399,8 @@ footer {
 .padding-lrtb {
     padding: calc(1.5rem + 2.5vw);
 }
-.landing-page nav {
-    padding-left: calc(1rem + 1vw);
-    padding-bottom: calc(0.5rem + 0.5vw);
+.landing-page .nav {
+    padding: 0 calc(1rem + 1vw);
 }
 .content {
     padding: 0;

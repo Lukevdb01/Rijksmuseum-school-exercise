@@ -1,14 +1,7 @@
 <template>
     <main>
         <section class="landing-page">
-            <nav>
-                <a class="head-button" href="/qr-app">Probeer de app!</a>
-                <div class="nav-button-box">
-                    <a href="/">Language</a>
-                    <a v-if="isAuthenticated" @click="signOut(auth)">Uitloggen</a>
-                    <a v-else href="/login">Inloggen</a>
-                </div>
-            </nav>
+            <Header class="nav" />
             <div class="hero-content margin-lr">
                 <img src="/rijksmuseum-logo.webp" alt="Logo" />
                 <h2>Ontdek de kunst met onze innovatieve web-app!</h2>
@@ -29,6 +22,12 @@
                         <h2>de opdracht</h2>
                         <p>wat was de opdracht precies</p>
                     </div>
+                    <div class="card-is-hovered">
+                        <div class="hovered-head-content">
+                            <h1>De opdracht</h1>
+                            <p>De opdracht was om een innovatieve web-app te maken voor het Rijksmuseum. waarmee mensen een QR code moesten scannen zodat ze alle informatie over dat schilderij konden zien. Dit was het afsluitende schoolproject voor leerjaar 2 software development op het SintLucas</p>
+                        </div>
+                    </div> <!-- Add this line -->
                     <img src="/head_img_card_one.webp" alt="head_img_card_one" />
                 </div>
                 <div class="card">
@@ -37,6 +36,12 @@
                         <h2>de technologie</h2>
                         <p>wat hebben we allemaal gebruikt</p>
                     </div>
+                    <div class="card-is-hovered">
+                        <div class="hovered-head-content">
+                            <h1>De technologie</h1>
+                            <p>De technologie die we hebben gebruikt is Vue.js, Firebase, Rijksdata API, native browser APIs en nog veel meer. We hebben deze technologieën gebruikt om een web-app te maken die mensen kunnen gebruiken om de kunst in het Rijksmuseum te ontdekken.</p>
+                        </div>
+                    </div> <!-- Add this line -->
                     <img src="/head_img_card_two.webp" alt="head_img_card_two" />
                 </div>
             </div>
@@ -47,6 +52,12 @@
                         <h2>het process</h2>
                         <p>De stappen die we hebben gemaakt</p>
                     </div>
+                    <div class="card-is-hovered">
+                        <div class="hovered-head-content">
+                            <h1>Het process</h1>
+                            <p>Het process was een lange en leerzaam project. We hebben veel geleerd over Vue.js, Firebase, Rijksdata API en nog veel meer. We hebben veel fouten gemaakt, maar we hebben er ook veel van geleerd. We zijn erg trots op het eindresultaat.</p>
+                        </div>
+                    </div> <!-- Add this line -->
                     <img src="/head_img_card_three.webp" alt="head_img_card_three" />
                 </div>
                 <div class="card">
@@ -55,6 +66,12 @@
                         <h2>Het leermoment</h2>
                         <p>wat hebben we precies geleerd</p>
                     </div>
+                    <div class="card-is-hovered">
+                        <div class="hovered-head-content">
+                            <h1>Het leermoment</h1>
+                            <p>We hebben veel geleerd tijdens dit project. We hebben geleerd hoe we een web-app moeten maken, hoe we een API moeten gebruiken, hoe we een database moeten gebruiken en nog veel meer.</p>
+                        </div>
+                    </div> <!-- Add this line -->
                     <img src="/head_img_card_four.webp" alt="head_img_card_four" />
                 </div>
             </div>
@@ -75,6 +92,7 @@ import { onBeforeMount } from 'vue';
 import { ref } from 'vue';
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { useRouter } from "vue-router";
+import Header from '../components/Header.vue';
 
 const router = useRouter();
 const auth = getAuth();
@@ -128,41 +146,17 @@ onBeforeMount(() => {
 </script>
 
 <style scoped>
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: transparent;
-    color: white;
-    width: 100%;
-}
-
-.head-button {
-    border-radius: 2px;
-    color: white;
-    text-decoration: none;
-    font-size: 17px;
-    padding: calc(1.563rem - 0.5rem) 20px;
-    font-weight: bold;
-    background-color: #D55140;
-}
-
-.nav-button-box {
-    display: flex;
-    gap: 3rem;
-}
-
-.nav-button-box a {
-    color: white;
-    text-decoration: none;
-    font-size: 1rem;
-}
-
 main {
     height: 100vh;
 }
 
+.nav {
+    padding-bottom: calc(0.5rem + 0.5vw);
+}
+
 .landing-page {
+    display: flex;
+    flex-direction: column;
     position: relative;
     /* Add this line */
     background-image: url('/background.webp');
@@ -172,10 +166,6 @@ main {
     background-blend-mode: darken;
     background-color: rgba(0, 0, 0, 0.1);
     /* Adjust the opacity as needed */
-}
-
-.landing-page nav {
-    padding: calc(0.5rem + 0.5vw) calc(2.5rem + 3.5vw) calc(0.15rem + 0.15rem) calc(2.5rem + 3.5vw);
 }
 
 .page-overlay {
@@ -275,21 +265,61 @@ main {
     object-position: center;
     position: absolute;
     z-index: -1;
-    transition: transform 0.6s ease-in-out;
+    transition: all 0.6s ease-in-out;
+}
+
+
+
+.card-is-hovered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.hovered-head-content {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.25);
+    text-align: center;
+    color: white;
+    width: 100%;
+    height: 100%;
+}
+
+.hovered-head-content p {
+    width: 80%;
 }
 
 .card:hover img {
-    transform: scale(1.05)
+    transform: scale(1.05);
+    filter: grayscale(100%);
+}
 
+.card:hover .card-is-hovered {
+    opacity: 1;
+}
+
+.card:hover .content {
+    opacity: 0;
 }
 
 .content {
     display: flex;
     flex-direction: column;
+    opacity: 1;
     padding: calc(1rem + 1vw) calc(2.5rem + 3.5vw) calc(1.75rem + 1.75vw);
     color: white;
     width: 100%;
     height: 100%;
+    transition: all 0.6s ease-in-out;
     justify-content: end;
     align-items: start;
     text-align: start;
@@ -329,11 +359,12 @@ main {
     object-position: center;
     position: absolute;
     z-index: -1;
-    transition: transform 0.6s ease-in-out;
+    transition: all 0.6s ease-in-out;
 }
 
 .featured-page:hover img {
-    transform: scale(1.05)
+    transform: scale(1.05);
+    filter: grayscale(100%);
 }
 
 footer {
@@ -433,9 +464,8 @@ footer {
 .padding-lrtb {
     padding: calc(1.5rem + 2.5vw);
 }
-.landing-page nav {
-    padding-left: calc(1rem + 1vw);
-    padding-bottom: calc(0.5rem + 0.5vw);
+.landing-page .nav {
+    padding: 0 calc(1rem + 1vw);
 }
 .content {
     padding: 0;

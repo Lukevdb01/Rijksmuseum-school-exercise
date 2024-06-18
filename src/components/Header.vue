@@ -1,38 +1,69 @@
 <template>
-    <nav class="navbar">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="#">Rijksmuseum schoolopdracht</a>
-            <div class="navbar-burger" @click="toggleMenu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a v-if="language === 'nl'" class="navbar-item" href="#">Rijksmuseum school opdracht</a>
+      <a v-else class="navbar-item" href="#">Rijksmuseum school assignment</a>
+      <div class="navbar-burger" @click="toggleMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
 
-        <div :class="['navbar-menu', { 'is-active': isActive }]">
-            <div class="navbar-start">
-                <a class="navbar-list-item" href="#">Technologie</a>
-                <a class="navbar-list-item" href="#">Credits</a>
-                <a class="navbar-list-item" href="/login">Inloggen</a>
-                <a class="navbar-list-item special" href="/qr-app">Probeer de app</a>
-                <button class="close-button navbar-list-item" @click="toggleMenu">Close</button>
-            </div>
-        </div>
-    </nav>
+    <div :class="['navbar-menu', { 'is-active': isActive }]">
+      <div class="navbar-start">
+        <a v-if="language === 'nl'" class="navbar-list-item" href="#">Technologie</a>
+        <a v-else class="navbar-list-item" href="#">Technology</a>
+
+        <a v-if="language === 'nl'" class="navbar-list-item" href="#">Credits</a>
+        <a v-else class="navbar-list-item" href="#">Credits</a>
+
+        <a v-if="language === 'nl'" class="navbar-list-item" href="/login">Inloggen</a>
+        <a v-else class="navbar-list-item" href="/login">Login</a>
+
+        <Dropdown @languageChanged="updateLanguage" />
+
+        <a v-if="language === 'nl'" class="navbar-list-item special" href="/qr-app">Probeer de app</a>
+        <a v-else class="navbar-list-item special" href="/qr-app">Try the app</a>
+
+        <button class="close-button navbar-list-item" @click="toggleMenu">Sluiten</button>
+      </div>
+    </div>
+  </nav>
 </template>
 
 <script>
+
+import Dropdown from "./DropDown.vue";
+
 export default {
-    data() {
-        return {
-            isActive: false,
-        };
+  components: { Dropdown },
+
+  data() {
+    return {
+      isActive: false,
+      language: 'en'  // Default language set to English
+    };
+  },
+
+  methods: {
+    toggleMenu() {
+      this.isActive = !this.isActive;
     },
-    methods: {
-        toggleMenu() {
-            this.isActive = !this.isActive;
-        },
-    },
+
+    updateLanguage(newLanguage) {
+      this.language = newLanguage;
+      localStorage.setItem('language', newLanguage);
+    }
+  },
+
+  mounted() {
+    // Check local storage for saved language preference on component mount
+    const storedLanguage = localStorage.getItem('language');
+    if (storedLanguage) {
+      this.language = storedLanguage;
+    }
+  }
 };
 </script>
 

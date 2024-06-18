@@ -46,7 +46,7 @@ function speechTalk() {
 
 <script>
 export default {
-  name: 'Dropdown',
+  name: 'DropdownInfoPage',
   methods: {
     switchLanguage(newLanguage) {
       localStorage.setItem('language', newLanguage);

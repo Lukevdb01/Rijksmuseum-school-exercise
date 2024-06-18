@@ -16,7 +16,7 @@
       <div class="title">
         <img id="Heart" src="/heart.svg" @click="favorItem(router.currentRoute.value.query)" alt="Favorite icon">
         <h3>{{ apiData.title }}</h3>
-        <DropDown @languageChanged="handleLanguageChange" :head_title="apiData.title"
+        <DropDownInfoPage @languageChanged="handleLanguageChange" :head_title="apiData.title"
           :namePainter="apiData.principalMakers[0].name" :description="apiData.label.description"
           :date="apiData.dating.presentingDate" />
       </div>
@@ -41,7 +41,7 @@
 
 import { ref, onBeforeMount } from "vue";
 import { useRouter } from "vue-router";
-import DropDown from "../components/DropDown.vue";
+import DropDownInfoPage from "../components/DropDownInfoPage.vue";
 import { helper } from "../providers/helper.js";
 import { dbProvider } from "../providers/database.js";
 import {auth} from "../firebase";
@@ -100,7 +100,7 @@ function imgSeeBetter() {
 export default {
   name: "info-page",
   components: {
-    DropDown,
+    DropDownInfoPage,
   },
 }
 </script>

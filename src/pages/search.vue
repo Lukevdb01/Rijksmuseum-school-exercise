@@ -11,15 +11,16 @@ const search = ref('');
 const getPaintingInformation = async (input) => {
   const base_url = `https://www.rijksmuseum.nl/api/${localStorage.getItem('language')}/collection?key=` + import.meta.env.VITE_RIJKSDATA_API_KEY + "&q=" + input;
   const response = await apiProvider.get(base_url);
-  if (response.length === 0) {
+  if (response.artObjects.length === 0) {
     alert("No painting found with that name");
   } else {
-    return response.artObjects;
+    return response.artObjects.filter(obj => obj.hasOwnProperty('headerImage') && obj.headerImage.url);
   }
 }
 
 const imageItemPressed = async (object) => {
   const response = await helper.fetchData(object.objectNumber);
+  console.log(response);
   router.push({
     path: '/info-page',
     query: {
@@ -38,11 +39,21 @@ const imageItemPressed = async (object) => {
 const handleSearch = () => {
   router.push({ path: '/search', query: { keyword: search.value } }).then(() => {
     window.location.reload();
+    search.value = '';
   });
+  
 };
 
 onBeforeMount(async () => {
+  let keyword = '';
+  if(localStorage.getItem('language') === 'nl') {
+    keyword = 'De Nachtwacht';
+  } else if(localStorage.getItem('language') === 'en') {
+    keyword = 'The Night Watch';
+  }
+  router.push({ path: '/search', query: { keyword: keyword} });
   objects.value = await getPaintingInformation(router.currentRoute.value.query.keyword);
+  console.log(objects.value);
 });
 
 onUpdated(async () => {
@@ -60,7 +71,7 @@ onUpdated(async () => {
     </nav>
     <ul>
       <li v-for="(object, index) in objects" :key="index" @click="imageItemPressed(object)">
-        <img :src="object.webImage.url" alt="painting">
+        <img :src="object.headerImage.url" alt="painting">
         <div class="hero-text">
           <h3>{{ object.title }}</h3>
         </div>

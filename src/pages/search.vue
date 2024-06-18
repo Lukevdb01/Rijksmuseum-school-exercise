@@ -53,28 +53,27 @@ onUpdated(async () => {
 
 <template>
   <div class="base base-container">
-  <nav>
-   <a href="/favorites"> <img src="/heart.svg" alt="back"></a>
-    <h1>SEARCH</h1>
-    <a href="/qr-app"><img id="homeButton" src="/home.svg" alt="" ></a>
-  </nav>
-  <ul>
-    <li v-for="(object, index) in objects" :key="index" @click="imageItemPressed(object)">
-      <img :src="object.webImage.url" alt="painting">
-      <div class="hero-text">
-        <h3>{{ object.title }}</h3>
-      </div>
-    </li>
-  </ul>
+    <nav>
+      <a href="/favorites"> <img src="/heart.svg" alt="back"></a>
+      <h1>SEARCH</h1>
+      <a href="/qr-app"><img id="homeButton" src="/home.svg" alt=""></a>
+    </nav>
+    <ul>
+      <li v-for="(object, index) in objects" :key="index" @click="imageItemPressed(object)">
+        <img :src="object.webImage.url" alt="painting">
+        <div class="hero-text">
+          <h3>{{ object.title }}</h3>
+        </div>
+      </li>
+    </ul>
     <div class="search">
-    <input type="text" v-model="search" placeholder="Search for a painting"
-           @keyup.enter="handleSearch">
+      <input type="text" v-model="search" placeholder="Search for a painting" @keyup.enter="handleSearch">
     </div>
   </div>
 </template>
 
 <style scoped>
-.base-container{
+.base-container {
   background-color: var(--primary-background-color);
 }
 
@@ -92,12 +91,12 @@ nav img {
 
 }
 
-nav a{
+nav a {
   background-color: var(--primary-background-color);
 
 }
 
-#homeButton{
+#homeButton {
   height: 30px;
 }
 
@@ -124,7 +123,8 @@ img {
   width: 85vw;
   height: 20vh;
   object-fit: cover;
-  box-shadow: 0 4px 20px 0 rgba(255, 255, 255, 0.11);}
+  box-shadow: 0 4px 20px 0 rgba(255, 255, 255, 0.11);
+}
 
 h3 {
   margin: 0.5rem 0 0 0;

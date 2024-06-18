@@ -156,5 +156,11 @@ export default {
     .close-button {
         display: block;
     }
+
+    .navbar-brand .navbar-item {
+        color: white;
+        text-decoration: none;
+        font-size: calc(1rem + 1vw);
+    }
 }
 </style>

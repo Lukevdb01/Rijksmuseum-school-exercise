@@ -82,15 +82,20 @@
       <h1>{{ language === 'nl' ? 'wie hebben het project gemaakt' : 'who made the project' }}</h1>
       <img src="/bottom_img_one.webp" alt="head_img_card_three" />
       <div class="featured-page-hover">
-        <h2>Authors</h2>
-        <p>This project was made by Luke van den Broek and Samed Bozaslan. We are students at SintLucas in the Netherlands. We made this project as part of our second year software development course. We are very proud of the result and we hope you enjoy using our web app!</p>
+        <h2>{{ language === 'nl' ? 'Auteurs' : 'Authors' }}</h2>
+        <p>
+          {{ language === 'nl'
+            ? 'Dit project is gemaakt door Luke van den Broek en Samed Bozaslan. We zijn studenten aan het SintLucas in Nederland. We hebben dit project gemaakt als onderdeel van ons tweede jaar softwareontwikkeling. We zijn erg trots op het resultaat en we hopen dat je plezier hebt met het gebruik van onze web-app!'
+            : 'This project was made by Luke van den Broek and Samed Bozaslan. We are students at SintLucas in the Netherlands. We made this project as part of our second year software development course. We are very proud of the result and we hope you enjoy using our web app!'
+          }}
+        </p>
         <div class="links">
-            <a href="https://www.linkedin.com/in/luke-vd-broek/">
-          Luke van den Broek
-        </a>
-        <a href="https://www.linkedin.com/in/samed-bozaslan/">
-          Samed Bozaslan
-        </a>
+          <a href="https://www.linkedin.com/in/luke-vd-broek/">
+            {{ language === 'nl' ? 'Luke van den Broek' : 'Luke van den Broek' }}
+          </a>
+          <a href="https://www.linkedin.com/in/samed-bozaslan/">
+            {{ language === 'nl' ? 'Samed Bozaslan' : 'Samed Bozaslan' }}
+          </a>
         </div>
       </div>
     </section>

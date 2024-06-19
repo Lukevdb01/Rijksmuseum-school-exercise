@@ -158,9 +158,6 @@ footer {
 }
 
 
-#eye{
-
-}
 
 
 footer img {

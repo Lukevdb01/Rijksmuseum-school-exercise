@@ -100,6 +100,18 @@
       <h1 v-if="language === 'nl'">wie hebben het project gemaakt</h1>
       <h1 v-else>who made the project</h1>
       <img src="/bottom_img_one.webp" alt="head_img_card_three" />
+      <div class="featured-page-hover">
+        <h2>Authors</h2>
+        <p>This project was made by Luke van den Broek and Samed Bozaslan. We are students at SintLucas in the Netherlands. We made this project as part of our second year software development course. We are very proud of the result and we hope you enjoy using our web app!</p>
+        <div class="links">
+            <a href="https://www.linkedin.com/in/luke-vd-broek/">
+          Luke van den Broek
+        </a>
+        <a href="https://www.linkedin.com/in/samed-bozaslan/">
+          Samed Bozaslan
+        </a>
+        </div>
+      </div>
     </section>
     <footer>
       <p>© 2024 LNME Media & Design | Samed Bozaslan</p>
@@ -159,6 +171,10 @@ function updateLanguage(newLanguage) {
 <style scoped>
 main {
     height: 100vh;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .nav {
@@ -354,6 +370,22 @@ main {
     background-color: white;
 }
 
+.featured-page-hover {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    text-transform: none;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
 .featured-page {
     position: relative;
     display: flex;
@@ -382,9 +414,26 @@ main {
     transition: all 0.6s ease-in-out;
 }
 
+.links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    border-top: solid 4px white;
+}
+
+.links a {
+    margin-top: 10px;
+    font-size: x-medium;
+    color: rgb(129, 129, 255);
+}
+
 .featured-page:hover img {
     transform: scale(1.05);
     filter: grayscale(100%);
+}
+
+.featured-page:hover .featured-page-hover {
+    opacity: 1;
 }
 
 .featured-page:hover h1 {
@@ -418,7 +467,7 @@ footer {
         font-size: 1.15rem;
         text-align: center;
     }
-
+    
     .creators p {
         text-align: center;
         font-size: 0.85rem;
@@ -438,6 +487,15 @@ footer {
     }
 
     .hero-content h2 {
+        font-size: 1.25rem;
+    }
+
+    .links a {
+        font-size: 1.25rem;
+    }
+
+    .featured-page-hover p {
+        width: 90%;
         font-size: 1.25rem;
     }
 }

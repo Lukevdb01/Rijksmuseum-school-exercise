@@ -21,7 +21,7 @@
         <a v-if="language === 'nl'" class="navbar-list-item" href="/login">Inloggen</a>
         <a v-else class="navbar-list-item" href="/login">Login</a>
 
-        <Dropdown @languageChanged="updateLanguage" />
+        <Dropdown @languageChanged="updateLanguage"/>
 
         <a v-if="language === 'nl'" class="navbar-list-item special" href="/qr-app">Probeer de app</a>
         <a v-else class="navbar-list-item special" href="/qr-app">Try the app</a>

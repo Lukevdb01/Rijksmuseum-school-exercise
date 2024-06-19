@@ -4,13 +4,11 @@
       <Header class="nav" />
       <div class="hero-content margin-lr">
         <img src="/rijksmuseum-logo.webp" alt="Logo" />
-        <h2 v-if="language === 'nl'">Ontdek de kunst met onze innovatieve web-app!</h2>
-        <h2 v-else>Discover art with our innovative web app!</h2>
+        <h2>{{ language === 'nl' ? 'Ontdek de kunst met onze innovatieve web-app!' : 'Discover art with our innovative web app!' }}</h2>
       </div>
       <div class="page-overlay">
         <div class="creators">
-          <h1 v-if="language === 'nl'">gebruik de app</h1>
-          <h1 v-else>use the app</h1>
+          <h1>{{ language === 'nl' ? 'gebruik de app' : 'use the app' }}</h1>
           <p>Gemaakt door Luke van den Broek & Samed Bozaslan</p>
         </div>
         <a href="https://www.sintlucas.nl/">
@@ -23,17 +21,13 @@
         <div class="card">
           <div class="content">
             <p class="category">project</p>
-            <h2 v-if="language === 'nl'">de opdracht</h2>
-            <h2 v-else>the assignment</h2>
-            <p v-if="language === 'nl'">wat was de opdracht precies</p>
-            <p v-else>what exactly was the assignment</p>
+            <h2>{{ language === 'nl' ? 'de opdracht' : 'the assignment' }}</h2>
+            <p>{{ language === 'nl' ? 'wat was de opdracht precies' : 'what exactly was the assignment' }}</p>
           </div>
           <div class="card-is-hovered">
             <div class="hovered-head-content">
-              <h1 v-if="language === 'nl'">De opdracht</h1>
-              <h1 v-else>The assignment</h1>
-              <p v-if="language === 'nl'">De opdracht was om een innovatieve web-app te maken voor het Rijksmuseum. waarmee mensen een QR code moesten scannen zodat ze alle informatie over dat schilderij konden zien. Dit was het afsluitende schoolproject voor leerjaar 2 software development op het SintLucas</p>
-              <p v-else>The assignment was to create an innovative web app for the Rijksmuseum. where people had to scan a QR code so they could see all the information about that painting. This was the final school project for the second year of software development at SintLucas</p>
+              <h1>{{ language === 'nl' ? 'De opdracht' : 'The assignment' }}</h1>
+              <p>{{ language === 'nl' ? 'De opdracht was om een innovatieve web-app te maken voor het Rijksmuseum. waarmee mensen een QR code moesten scannen zodat ze alle informatie over dat schilderij konden zien. Dit was het afsluitende schoolproject voor leerjaar 2 software development op het SintLucas' : 'The assignment was to create an innovative web app for the Rijksmuseum. where people had to scan a QR code so they could see all the information about that painting. This was the final school project for the second year of software development at SintLucas' }}</p>
             </div>
           </div>
           <img src="/head_img_card_one.webp" alt="head_img_card_one" />
@@ -41,17 +35,13 @@
         <div class="card">
           <div class="content">
             <p class="category">fancy frameworks</p>
-            <h2 v-if="language === 'nl'">de technologie</h2>
-            <h2 v-else>the technology</h2>
-            <p v-if="language === 'nl'">wat hebben we allemaal gebruikt</p>
-            <p v-else>what did we use</p>
+            <h2>{{ language === 'nl' ? 'de technologie' : 'the technology' }}</h2>
+            <p>{{ language === 'nl' ? 'wat hebben we allemaal gebruikt' : 'what did we use' }}</p>
           </div>
           <div class="card-is-hovered">
             <div class="hovered-head-content">
-              <h1 v-if="language === 'nl'">De technologie</h1>
-              <h1 v-else>The technology</h1>
-              <p v-if="language === 'nl'">De technologie die we hebben gebruikt is Vue.js, Firebase, Rijksdata API, native browser APIs en nog veel meer. We hebben deze technologieën gebruikt om een web-app te maken die mensen kunnen gebruiken om de kunst in het Rijksmuseum te ontdekken.</p>
-              <p v-else>The technology we used includes Vue.js, Firebase, Rijksdata API, native browser APIs and much more. We used these technologies to create a web app that people can use to discover art in the Rijksmuseum.</p>
+              <h1>{{ language === 'nl' ? 'De technologie' : 'The technology' }}</h1>
+              <p>{{ language === 'nl' ? 'De technologie die we hebben gebruikt is Vue.js, Firebase, Rijksdata API, native browser APIs en nog veel meer. We hebben deze technologieën gebruikt om een web-app te maken die mensen kunnen gebruiken om de kunst in het Rijksmuseum te ontdekken.' : 'The technology we used includes Vue.js, Firebase, Rijksdata API, native browser APIs and much more. We used these technologies to create a web app that people can use to discover art in the Rijksmuseum.' }}</p>
             </div>
           </div>
           <img src="/head_img_card_two.webp" alt="head_img_card_two" />
@@ -61,17 +51,13 @@
         <div class="card">
           <div class="content">
             <p class="category">project groei</p>
-            <h2 v-if="language === 'nl'">het process</h2>
-            <h2 v-else>the process</h2>
-            <p v-if="language === 'nl'">De stappen die we hebben gemaakt</p>
-            <p v-else>The steps we took</p>
+            <h2>{{ language === 'nl' ? 'het process' : 'the process' }}</h2>
+            <p>{{ language === 'nl' ? 'De stappen die we hebben gemaakt' : 'The steps we took' }}</p>
           </div>
           <div class="card-is-hovered">
             <div class="hovered-head-content">
-              <h1 v-if="language === 'nl'">Het process</h1>
-              <h1 v-else>The process</h1>
-              <p v-if="language === 'nl'">Het process was een lange en leerzaam project. We hebben veel geleerd over Vue.js, Firebase, Rijksdata API en nog veel meer. We hebben veel fouten gemaakt, maar we hebben er ook veel van geleerd. We zijn erg trots op het eindresultaat.</p>
-              <p v-else>The process was a long and educational project. We learned a lot about Vue.js, Firebase, Rijksdata API, and much more. We made many mistakes, but we also learned a lot from them. We are very proud of the final result.</p>
+              <h1>{{ language === 'nl' ? 'Het process' : 'The process' }}</h1>
+              <p>{{ language === 'nl' ? 'Het process was een lange en leerzaam project. We hebben veel geleerd over Vue.js, Firebase, Rijksdata API en nog veel meer. We hebben veel fouten gemaakt, maar we hebben er ook veel van geleerd. We zijn erg trots op het eindresultaat.' : 'The process was a long and educational project. We learned a lot about Vue.js, Firebase, Rijksdata API, and much more. We made many mistakes, but we also learned a lot from them. We are very proud of the final result.' }}</p>
             </div>
           </div>
           <img src="/head_img_card_three.webp" alt="head_img_card_three" />
@@ -79,17 +65,13 @@
         <div class="card">
           <div class="content">
             <p class="category">school</p>
-            <h2 v-if="language === 'nl'">Het leermoment</h2>
-            <h2 v-else>The learning moment</h2>
-            <p v-if="language === 'nl'">wat hebben we precies geleerd</p>
-            <p v-else>what exactly did we learn</p>
+            <h2>{{ language === 'nl' ? 'Het leermoment' : 'The learning moment' }}</h2>
+            <p>{{ language === 'nl' ? 'wat hebben we precies geleerd' : 'what exactly did we learn' }}</p>
           </div>
           <div class="card-is-hovered">
             <div class="hovered-head-content">
-              <h1 v-if="language === 'nl'">Het leermoment</h1>
-              <h1 v-else>The learning moment</h1>
-              <p v-if="language === 'nl'">We hebben veel geleerd tijdens dit project. We hebben geleerd hoe we een web-app moeten maken, hoe we een API moeten gebruiken, hoe we een database moeten gebruiken en nog veel meer.</p>
-              <p v-else>We learned a lot during this project. We learned how to create a web app, how to use an API, how to use a database, and much more.</p>
+              <h1>{{ language === 'nl' ? 'Het leermoment' : 'The learning moment' }}</h1>
+              <p>{{ language === 'nl' ? 'We hebben veel geleerd tijdens dit project. We hebben geleerd hoe we een web-app moeten maken, hoe we een API moeten gebruiken, hoe we een database moeten gebruiken en nog veel meer.' : 'We learned a lot during this project. We learned how to create a web app, how to use an API, how to use a database, and much more.' }}</p>
             </div>
           </div>
           <img src="/head_img_card_four.webp" alt="head_img_card_four" />
@@ -97,8 +79,7 @@
       </div>
     </section>
     <section class="featured-page">
-      <h1 v-if="language === 'nl'">wie hebben het project gemaakt</h1>
-      <h1 v-else>who made the project</h1>
+      <h1>{{ language === 'nl' ? 'wie hebben het project gemaakt' : 'who made the project' }}</h1>
       <img src="/bottom_img_one.webp" alt="head_img_card_three" />
       <div class="featured-page-hover">
         <h2>Authors</h2>
@@ -165,6 +146,7 @@ onBeforeMount(() => {
 function updateLanguage(newLanguage) {
   language.value = newLanguage;
 }
+
 
 </script>
 

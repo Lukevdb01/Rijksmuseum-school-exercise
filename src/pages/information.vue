@@ -78,10 +78,18 @@ onBeforeMount(async () => {
 
 function imgSeeBetter() {
   const gradientElement = document.getElementById('gradient');
+
   if (gradientElement.style.display === 'none' || gradientElement.style.display === '') {
     gradientElement.style.display = 'block';
+    gradientElement.style.opacity = '0';
+    requestAnimationFrame(() => {
+      gradientElement.style.opacity = '1';
+    });
   } else {
-    gradientElement.style.display = 'none';
+    gradientElement.style.opacity = '0';
+    gradientElement.addEventListener('transitionend', () => {
+      gradientElement.style.display = 'none';
+    }, { once: true });
   }
 }
 
@@ -150,6 +158,10 @@ footer {
 }
 
 
+#eye{
+
+}
+
 
 footer img {
   width: 38px;
@@ -169,9 +181,33 @@ main{
 
 }
 
-#gradient {
-  animation: ease-in 1s;
+/* Define the fade-in keyframes */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
+
+#gradient {
+  display: block;
+  opacity: 10;
+  transition: opacity 0.5s ease-in;
+}
+
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(180deg, rgba(11, 11, 11, 0.00) 0%, #0B0B0B 100%);
+}
+
+
+
 
 .title {
   display: flex;
@@ -198,14 +234,6 @@ main{
 
 
 
-.gradient-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(180deg, rgba(11, 11, 11, 0.00) 0%, #0B0B0B 100%);
-}
 
 
 

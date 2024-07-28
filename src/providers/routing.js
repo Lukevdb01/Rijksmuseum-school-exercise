@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import * as path from "path";
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: '/',
+            path: '/homepage',
             component: () => import('../pages/homepage.vue')
         },
         {
@@ -21,11 +22,26 @@ const router = createRouter({
         },
         {
             path: '/favorites',
-            component: () => import('../pages/favorite.vue')
+            component: () => import('../pages/favorite.vue'),
+            meta: {
+                requiresAuth: true
+            }
         },
         {
             path: '/:pathMatch(.*)*',
             component: () => import('../pages/404.vue')
+        },
+        {
+            path: '/camera',
+            component: () => import('../pages/camera.vue')
+        },
+        {
+            path: '/login',
+            component: () => import('../pages/login.vue')
+        },
+        {
+            path: '/signup',
+            component: () => import('../pages/signup.vue')
         }
     ],
 });

@@ -1,27 +1,75 @@
+<template>
+  <div class="base base-container">
+
+    <div id="loader">
+
+    </div>
+    <header>
+      <div class="image-container">
+        <img class="paintingImg" :src="apiData.webImage.url" alt="" id="paintingImg" @load="onImageLoad">
+        <div class="gradient-overlay" id="gradient"></div>
+        <div id="bottomHeader">
+          <h4 class="paintingDate">{{ apiData.dating.presentingDate }}</h4>
+         <img src="/eye.svg" alt="" @click="imgSeeBetter">
+        </div>
+      </div>
+      <div class="title">
+        <img id="Heart" src="/heart.svg" @click="favorItem(router.currentRoute.value.query)" alt="Favorite icon">
+        <h3>{{ apiData.title }}</h3>
+        <DropDownInfoPage @languageChanged="handleLanguageChange" :head_title="apiData.title"
+          :namePainter="apiData.principalMakers[0].name" :description="apiData.label.description"
+          :date="apiData.dating.presentingDate" />
+      </div>
+    </header>
+    <main>
+      <h4 class="title-main">{{ apiData.principalMakers[0].name }}</h4>
+      <div class="dateOfPainter">
+        <p>{{ apiData.principalMakers[0].dateOfBirth }}</p>
+        <p>-</p>
+        <p>{{ apiData.principalMakers[0].dateOfDeath }}</p>
+      </div>
+      <p id="description">{{ apiData.label.description }}</p>
+    </main>
+    <footer>
+      <img src="/arrow-back.svg" alt="back" id="return" @click="handlePushback()">
+      <p>Return</p>
+    </footer>
+  </div>
+</template>
+
 <script setup>
 
-import {ref, onMounted} from "vue";
-import {useRouter} from "vue-router";
-import DropDown from "../components/DropDown.vue";
-import {helper} from "../providers/helper.js";
+import { ref, onBeforeMount } from "vue";
+import { useRouter } from "vue-router";
+import DropDownInfoPage from "../components/DropDownInfoPage.vue";
+import { helper } from "../providers/helper.js";
+import { dbProvider } from "../providers/database.js";
+import {auth} from "../firebase";
 
 const router = useRouter();
 const collection = ref([]);
 const apiData = ref(null);
 
 const favorItem = async (data) => {
-  let object = {
-    id: data.id
+  if(auth.currentUser) {
+    dbProvider.set('favorite/', auth.currentUser.displayName, { id: data.id }); 
+    console.log('added to favorite'); 
+  } else {
+    alert('You need to be logged in to add a favorite');
   }
-  collection.value.push(object);
-  localStorage.setItem('favorite', JSON.stringify(collection.value));
+}
+
+const handlePushback = () => {
+  if(!router.back()) {
+    router.push({ path: '/homepage' });
+  }
 }
 
 const handleLanguageChange = async (newLanguage) => {
   apiData.value = await helper.fetchData(router.currentRoute.value.query.id);
 }
 
-onMounted(async () => {
+onBeforeMount(async () => {
   apiData.value = await helper.fetchData(router.currentRoute.value.query.id);
   collection.value = JSON.parse(localStorage.getItem('favorite')) || [];
 });
@@ -30,91 +78,138 @@ onMounted(async () => {
 
 function imgSeeBetter() {
   const gradientElement = document.getElementById('gradient');
+
   if (gradientElement.style.display === 'none' || gradientElement.style.display === '') {
     gradientElement.style.display = 'block';
+    gradientElement.style.opacity = '0';
+    requestAnimationFrame(() => {
+      gradientElement.style.opacity = '1';
+    });
   } else {
-    gradientElement.style.display = 'none';
+    gradientElement.style.opacity = '0';
+    gradientElement.addEventListener('transitionend', () => {
+      gradientElement.style.display = 'none';
+    }, { once: true });
   }
 }
 
+
+
+ const onImageLoad = () => {
+   const loader = document.getElementById('loader');
+
+   loader.style.opacity = '0';
+
+   loader.addEventListener('transitionend', () => {
+     loader.style.display = 'none';
+   }, { once: true });
+ }
+
+
+
 </script>
 
-
-<template>
-  <div class="base base-container">
-    <header>
-      <div class="image-container">
-        <img class="paintingImg" :src="apiData ? apiData.webImage.url : ''" alt="" id="paintingImg" >
-        <div class="gradient-overlay" id="gradient"></div>
-        <div id="bottomHeader">
-          <h4 class="paintingDate">{{ apiData ? apiData.dating.presentingDate : '' }}</h4>
-          <a @click="imgSeeBetter"><img src="/eye.svg" alt=""></a>
-        </div>
-      </div>
-      <div class="title">
-        <img id="Heart" src="/heart.svg" @click="favorItem(router.currentRoute.value.query)"
-             alt="Favorite icon">
-        <h3>{{ apiData?.title || '' }}</h3>
-        <DropDown @languageChanged="handleLanguageChange" :head_title="apiData?.title || ''"
-                  :namePainter="apiData?.principalMakers[0]?.name || ''"
-                  :description="apiData?.label?.description || ''"
-                  :date="apiData?.dating?.presentingDate || ''"/>
-      </div>
-    </header>
-    <main>
-      <h4 class="title-main">{{ apiData?.principalMakers[0]?.name || '' }}</h4>
-      <div class="dateOfPainter">
-        <p>{{ apiData?.principalMakers[0]?.dateOfBirth || '' }}</p>
-        <p>-</p>
-        <p>{{ apiData?.principalMakers[0]?.dateOfDeath || '' }}</p>
-      </div>
-      <p id="description">{{ apiData?.label?.description || '' }}</p>
-      <div class="button-container">
-        <button>Learn More</button>
-      </div>
-    </main>
-    <nav>
-      <img src="/arrow-back.svg" alt="back" @click="router.back()">
-      <h1>temporary</h1>
-    </nav>
-  </div>
-</template>
 
 <script>
 export default {
   name: "info-page",
   components: {
-    DropDown,
+    DropDownInfoPage,
   },
 }
 </script>
 
 <style scoped>
-nav {
-  background-color: var(--tertiary-background-color);
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
-  align-items: center;
+
+
+
+
+#return{
+  transform: scaleX(-1);
 }
 
-nav img {
+#loader{
+  background-color: var(--secondary-background-color);
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  display: flex;
+  transition: opacity 2s ease; /* Add transition for opacity */
+  opacity: 1; /* Initial opacity */
+}
+
+
+#loader img{
+  width: 50%;
+}
+
+footer {
+  background-color: var(--tertiary-background-color);
+  display: flex;
+  gap: 40px;
+  padding: 1rem;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+
+
+
+footer img {
   width: 38px;
   height: 38px;
 }
 
 
+main{
+  background-color: var(--primary-background-color);
+
+}
+
 .base-container {
   color: var(--primary-text-color);
+  height: 100vh;
+  background-color: var(--primary-background-color);
 
 }
 
-#gradient{
-  animation: ease-in 1s;
+/* Define the fade-in keyframes */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
+
+#gradient {
+  display: block;
+  opacity: 10;
+  transition: opacity 0.5s ease-in;
+}
+
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(180deg, rgba(11, 11, 11, 0.00) 0%, #0B0B0B 100%);
+}
+
+
+
+
 .title {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 15px 20px;
   position: absolute;
   z-index: 1;
@@ -135,27 +230,11 @@ nav img {
 }
 
 
-#backgroundDisappear{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-  background-color: var(--primary-background-color);
-  display: none;
-}
-
-.gradient-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(180deg, rgba(11, 11, 11, 0.00) 0%, #0B0B0B 100%);
-}
 
 
 
-#bottomHeader{
+
+#bottomHeader {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
@@ -167,30 +246,31 @@ nav img {
   font-weight: 400;
 }
 
+#bottomHeader a{
+  display: flex;
+  justify-content: center;
+}
+
 main {
   padding: 20px;
 }
 
 .dateOfPainter {
-  float: right;
+  float: left;
   display: flex;
   gap: 10px;
 }
 
 .title-main {
-  display: inline;
 }
 
 #description {
   font-weight: 500;
   font-size: 1rem;
   padding: 3rem 0 3rem;
+  margin-bottom: 50px;
 }
 
-.button-container {
-  display: flex;
-  justify-content: center;
-}
 
 button {
   align-self: center;
@@ -213,6 +293,7 @@ button:hover {
 
 #Heart {
   cursor: pointer;
+  width: 40px;
 }
 
 #dropdownContent {
@@ -227,6 +308,7 @@ button:hover {
   flex-direction: column;
   gap: 5px;
 
+
 }
 
 #dropdownContent img {
@@ -235,4 +317,6 @@ button:hover {
   width: 30px;
   height: 30px;
 }
+
+
 </style>

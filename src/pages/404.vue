@@ -1,9 +1,9 @@
 <template>
     <main>
-        <div class="content">
-            <h1>404, <span>not found</span></h1>
-            <button @click="router.push('/')">Go to Homepage</button>
-        </div>
+
+            <h1>404, not found</h1>
+            <button @click="router.push('/homepage')">Go to Homepage</button>
+
     </main>
 </template>
 
@@ -15,13 +15,28 @@ const router = useRouter();
 <style scoped>
 main {
     display: flex;
-    justify-content: center;
     align-items: center;
     height: 100vh;
+    flex-direction: column;
 }
 
-.content {
-    text-align: center;
-    color: black;
+h1{
+  margin-top: 10vh;
 }
+
+button{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  border-radius: 0.4375rem;
+  background-color: white;
+  color: black;
+  border-style: none;
+  cursor: pointer;
+}
+
+
+
 </style>

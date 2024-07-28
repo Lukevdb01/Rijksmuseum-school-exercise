@@ -3,8 +3,8 @@
 :root {
     /* To be determined */
     --primary-background-color: #0B0B0B;
-    --secondary-background-color: #262626;
-    --tertiary-background-color: #363636;
+    --secondary-background-color: #2a2a2a;
+    --tertiary-background-color: #2a2a2a;
 
     /* To be determined */
     --primary-text-color: #ffff;
@@ -32,7 +32,7 @@ body {
     color: var(--primary-text-color);
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
-    background-color: var(--primary-background-color);
+    background-color: var(--secondary-background-color);
 }
 
 .base {

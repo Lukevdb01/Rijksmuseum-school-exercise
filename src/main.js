@@ -1,8 +1,19 @@
-import { createApp } from 'vue'
-import './style.css'
+// Vue imports
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './providers/routing';
+import { createHead } from '@vueuse/head';
 
-import App from './App.vue'
-import router from './services/routing'
+// Misc imports
+import './style.css';
 
-createApp(App).use(router).mount('#app')
+// Initialize Vue application
+const vueApp = createApp(App);
+const head = createHead();
+
+// Mount Vue application
+vueApp.use(router);
+vueApp.use(head);
+
+vueApp.mount('#app');
 

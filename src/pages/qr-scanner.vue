@@ -1,29 +1,38 @@
 <template>
   <div class="base base-container">
-    <h3>scan the qr code</h3>
-    <div class="container">
+    <div id="container" >
       <div class="base flex-image-qr">
         <qrcode-stream @error="onError" @detect="onDetect" class="qr-stream"></qrcode-stream>
       </div>
-      <div class="search">
-        <p>Or enter a painting name</p>
-        <input type="text" v-model="search" placeholder="Search for a painting"
-               @keyup.enter="router.push({ path: '/search', query: { keyword: search } })">
-      </div>
     </div>
+    <div id="navbarHome">
+
+      <div>
+        <img src="/public/rijksmuseum-logo.webp" class="logoRijksmuseum" alt="Logo rijksmuseum">
+      </div>
+      <a href="/search"> <img src="/public/search.svg" alt="search icon" class="iconsForLogo"> </a>
+    </div>
+
     <TabBar/>
+
+
+
   </div>
+
 </template>
 
 <script setup>
-import {ref} from 'vue';
-import {useRouter} from "vue-router";
-import {QrcodeStream} from 'vue-qrcode-reader';
-import TabBar from '../components/TabBar.vue'
-import {helper} from "../providers/helper.js";
+import { ref, onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import { QrcodeStream } from 'vue-qrcode-reader';
+import TabBar from '../components/TabBar.vue';
+import { helper } from "../providers/helper.js";
 
 const router = useRouter();
-const search = ref('');
+const route = useRoute();
+const isCameraActive = ref(false);
+
+
 
 const onError = async (error) => {
   console.error('QR Code Scanner Error:', error);
@@ -31,7 +40,8 @@ const onError = async (error) => {
 
 const onDetect = async (codes) => {
   let response = await helper.fetchData(codes.map((code) => code.rawValue));
-  router.push({path: '/info-page',
+  router.push({
+    path: '/info-page',
     query: {
       id: response.objectNumber,
       title: response.title,
@@ -44,6 +54,12 @@ const onDetect = async (codes) => {
     }
   });
 }
+
+onMounted(() => {
+  if (route.query.camera === 'active') {
+    isCameraActive.value = true;
+  }
+});
 </script>
 
 <script>
@@ -52,28 +68,58 @@ export default {
 }
 </script>
 
+
 <style scoped>
 .base-container {
-  background: var(--primary-background-color);
-  display: flex;
   height: 100vh;
-  justify-content: center;
+  color: var(--primary-text-color);
+  overflow: hidden;
+}
+
+
+
+.logoRijksmuseum {
+  width: 50vw;
+
+}
+
+#navbarHome {
+  display: flex;
+  width: 100vw;
   align-items: center;
-  flex-direction: column;
-  padding: calc(0.5rem + 0.5vw);
+  padding: 10px 20px;
+  justify-content: space-between;
+  background-color: var(--secondary-background-color);
+
+}
+
+#navbarHome div {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+#backgroundImg{
+position: absolute;
+  z-index: -1;
+  height: 100vh;
+  object-fit: cover;
+  width: 100%;
+}
+
+.iconsForLogo {
+  width: 30px;
   color: var(--primary-text-color);
 }
 
-.container {
-  display: flex;
+#container {
+  position: absolute;
+  margin: auto;
   width: 100%;
   height: 100%;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: calc(0.5rem + 0.5vw);
-  gap: calc(1rem + 1vw);
   color: black;
+  z-index: -10;
 }
 
 .flex-image-qr {
@@ -92,23 +138,4 @@ export default {
   height: 100%;
 }
 
-.search {
-  display: flex;
-  color: white;
-  flex-direction: column;
-  justify-content: center;
-  gap: calc(0.5rem + 0.5vw);
-  width: 100%;
-}
-
-.search input {
-  width: 100%;
-  padding: calc(0.5rem + 0.5vw);
-  border-radius: calc(0.5rem + 0.5vw);
-  border: white 2px solid;
-  background-color: var(--primary-background-color);
-  color: var(--primary-text-color);
-  font-size: calc(1rem + 0.5vw);
-  text-align: center;
-}
 </style>

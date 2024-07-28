@@ -1,23 +1,37 @@
 <script setup>
 import { useRouter } from "vue-router";
-import { onMounted, ref } from "vue";
+import { onBeforeMount, onMounted, ref } from "vue";
 import TabBar from '../components/TabBar.vue';
 import { helper } from "../providers/helper";
+import { dbProvider } from "../providers/database";
+import { auth } from "../firebase";
 
 const router = useRouter();
 const objects = ref([]);
+const language = ref('en'); // Default language is English
+
 
 onMounted(async () => {
-    JSON.parse(localStorage.getItem('favorite')).forEach(async (object) => {
-        objects.value.push(await helper.fetchData(object.id));
+  const storedLanguage = localStorage.getItem('language');
+  if (storedLanguage) {
+    language.value = storedLanguage;
+  }
+
+  dbProvider.get(`favorite`).then(async (data) => {
+    objects.value = [];
+    data.forEach(async (object) => {
+      if (object.id === auth.currentUser.displayName) {
+        objects.value.push(await helper.fetchData(object.data.id));
+      }
     });
+  });
 });
 </script>
 
 <template>
     <div class="container">
-        <h1>Favorite</h1>
-        <ul>
+      <h1>{{ language === 'nl' ? 'Favorieten' : 'Favorite' }}</h1>
+      <ul>
             <li v-for="(item, index) in objects" :key="index">
                 <div class="content">
                     <div>
@@ -30,8 +44,9 @@ onMounted(async () => {
                 <img :src="item.webImage.url" alt="painting" id="imgPainting">
             </li>
         </ul>
-        <TabBar />
     </div>
+  <TabBar />
+
 </template>
 
 <style scoped>

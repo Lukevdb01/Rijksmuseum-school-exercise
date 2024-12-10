@@ -1,7 +1,24 @@
+# Rijksmuseum final project (sintlucas)
+
+For this exercise, I developed a web application for the Rijksmuseum. The main goal was to allow visitors to scan a QR code and view information about the related painting. Through this project, I learned a lot about building web applications, working within a tight schedule, and collaborating effectively with other students to create an awesome project.
+
+You can see the final product at: [Rijksmuseum application](https://rijksmuseum.lukevdbroek.nl/homepage)
+
+### Features
+- Scan QR codes to view painting information.
+- Interactive and mobile-friendly design.
+
+### How to Run
+1. Clone the repository.
+2. Install dependencies using `npm install`.
+3. Run the application using `npm run dev`.
+
+##### You can read the exercise details below here
+
 # Final Project
+
 The main purpose of this project is showing your programming skills.
 You will work alone or in a team of 2 students.
-
 
 ## Collect proof of work in the 'sintlucas' folder
 * Photo of the end result.

@@ -13,7 +13,7 @@ You can see the final product at: [Rijksmuseum application](https://rijksmuseum.
 2. Install dependencies using `npm install`.
 3. Run the application using `npm run dev`.
 
-##### You can read the exercise details below here
+#### © copyright 2024 - 2025 | Luke van den Broek
 
 # Final Project
 

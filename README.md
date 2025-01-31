@@ -1,6 +1,6 @@
 # Rijksmuseum final project (sintlucas)
 
-For this exercise, I developed a web application for the Rijksmuseum. The main goal was to allow visitors to scan a QR code and view information about the related painting. Through this project, I learned a lot about building web applications, working within a tight schedule, and collaborating effectively with other students to create an awesome project.
+For this exercise, I developed a web application for the Rijksmuseum. The main goal was to allow visitors to scan a QR code and view information about the related painting. Through this project, I learned a lot about building web applications, working within a tight schedule, and collaborating effectively with other students to create an awesome project. This project was made together [Samed](https://github.com/SamedBozaslan)
 
 You can see the final product at: [Rijksmuseum application](https://rijksmuseum.lukevdbroek.nl/homepage)
 

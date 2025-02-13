@@ -16,7 +16,7 @@
         <a v-else class="navbar-list-item" href="#">Technology</a>
 
         <a v-if="language === 'nl'" class="navbar-list-item" href="#">Credits</a>
-        <a v-else class="navbar-list-item" href="#">Credits</a>
+        <a v-else class="navbar-list-item" href="#featured">Credits</a>
 
         <a v-if="language === 'nl'" class="navbar-list-item" href="/login">Inloggen</a>
         <a v-else class="navbar-list-item" href="/login">Login</a>

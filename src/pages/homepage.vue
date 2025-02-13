@@ -21,8 +21,8 @@
         <div class="card">
           <div class="content">
             <p class="category">project</p>
-            <h2>{{ language === 'nl' ? 'de opdracht' : 'the assignment' }}</h2>
-            <p>{{ language === 'nl' ? 'wat was de opdracht precies' : 'what exactly was the assignment' }}</p>
+            <h2>{{ language === 'nl' ? 'De opdracht' : 'The assignment' }}</h2>
+            <p>{{ language === 'nl' ? 'Wat was de opdracht precies' : 'What exactly was the assignment' }}</p>
           </div>
           <div class="card-is-hovered">
             <div class="hovered-head-content">
@@ -35,8 +35,8 @@
         <div class="card">
           <div class="content">
             <p class="category">fancy frameworks</p>
-            <h2>{{ language === 'nl' ? 'de technologie' : 'the technology' }}</h2>
-            <p>{{ language === 'nl' ? 'wat hebben we allemaal gebruikt' : 'what did we use' }}</p>
+            <h2>{{ language === 'nl' ? 'De technologie' : 'The technology' }}</h2>
+            <p>{{ language === 'nl' ? 'Wat hebben we allemaal gebruikt' : 'What did we use' }}</p>
           </div>
           <div class="card-is-hovered">
             <div class="hovered-head-content">
@@ -51,7 +51,7 @@
         <div class="card">
           <div class="content">
             <p class="category">project groei</p>
-            <h2>{{ language === 'nl' ? 'het process' : 'the process' }}</h2>
+            <h2>{{ language === 'nl' ? 'Tet process' : 'The process' }}</h2>
             <p>{{ language === 'nl' ? 'De stappen die we hebben gemaakt' : 'The steps we took' }}</p>
           </div>
           <div class="card-is-hovered">
@@ -66,7 +66,7 @@
           <div class="content">
             <p class="category">school</p>
             <h2>{{ language === 'nl' ? 'Het leermoment' : 'The learning moment' }}</h2>
-            <p>{{ language === 'nl' ? 'wat hebben we precies geleerd' : 'what exactly did we learn' }}</p>
+            <p>{{ language === 'nl' ? 'Wat hebben we precies geleerd' : 'What exactly did we learn' }}</p>
           </div>
           <div class="card-is-hovered">
             <div class="hovered-head-content">
@@ -78,8 +78,8 @@
         </div>
       </div>
     </section>
-    <section class="featured-page">
-      <h1>{{ language === 'nl' ? 'wie hebben het project gemaakt' : 'who made the project' }}</h1>
+    <section class="featured-page" id="featured">
+      <h1>{{ language === 'nl' ? 'Wie hebben het project gemaakt' : 'Who made the project' }}</h1>
       <img src="/bottom_img_one.webp" alt="head_img_card_three" />
       <div class="featured-page-hover">
         <h2>{{ language === 'nl' ? 'Auteurs' : 'Authors' }}</h2>
@@ -100,7 +100,7 @@
       </div>
     </section>
     <footer>
-      <p>© 2024 LNME Media & Design | Samed Bozaslan</p>
+      <p>© {{ new Date().getFullYear() }} <span><a style="color: white; text-decoration: none;" href="https://lukevdbroek.nl/">LNME Media & Design</a></span> | Samed Bozaslan</p>
     </footer>
   </main>
 </template>

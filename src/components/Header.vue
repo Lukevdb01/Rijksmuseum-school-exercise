@@ -12,14 +12,14 @@
 
     <div :class="['navbar-menu', { 'is-active': isActive }]">
       <div class="navbar-start">
-        <a v-if="language === 'nl'" class="navbar-list-item" href="#">Technologie</a>
-        <a v-else class="navbar-list-item" href="#">Technology</a>
+        <a v-if="language === 'nl'" class="navbar-list-item" href="#technology" @click="toggleMenu">Technologie</a>
+        <a v-else class="navbar-list-item" href="#technology" @click="toggleMenu">Technology</a>
 
-        <a v-if="language === 'nl'" class="navbar-list-item" href="#">Credits</a>
-        <a v-else class="navbar-list-item" href="#featured">Credits</a>
+        <a v-if="language === 'nl'" class="navbar-list-item" href="#featured" @click="toggleMenu">Credits</a>
+        <a v-else class="navbar-list-item" href="#featured" @click="toggleMenu">Credits</a>
 
-        <a v-if="language === 'nl'" class="navbar-list-item" href="/login">Inloggen</a>
-        <a v-else class="navbar-list-item" href="/login">Login</a>
+        <a v-if="language === 'nl'" class="navbar-list-item" href="/login" @click="toggleMenu">Inloggen</a>
+        <a v-else class="navbar-list-item" href="/login" @click="toggleMenu">Login</a>
 
         <Dropdown @languageChanged="updateLanguage"/>
 
@@ -48,7 +48,9 @@ export default {
 
   methods: {
     toggleMenu() {
-      this.isActive = !this.isActive;
+      if(window.innerWidth < 768) {
+        this.isActive = !this.isActive;
+      }
     },
 
     updateLanguage(newLanguage) {
@@ -63,6 +65,12 @@ export default {
     if (storedLanguage) {
       this.language = storedLanguage;
     }
+
+    window.addEventListener('resize', () => {
+      if(window.innerWidth > 768) {
+        this.isActive = false;
+      }
+    });
   }
 };
 </script>

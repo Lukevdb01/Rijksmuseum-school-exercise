@@ -16,7 +16,7 @@
         </a>
       </div>
     </section>
-    <section class="card-page">
+    <section class="card-page" id="technology">
       <div>
         <div class="card">
           <div class="content">
